@@ -1,5 +1,5 @@
 // recording.js
-// Updated recording module without encryption/HMAC mechanisms.
+// Updated recording module without encryption/HMAC mechanisms and with OfflineAudioContext processing.
 
 function hashString(str) {
   let hash = 0;
@@ -148,6 +148,80 @@ async function encryptFileBlob(blob) {
   };
 }
 
+// --- OfflineAudioContext Processing ---
+// This function takes a Float32Array of interleaved audio samples, the original sample rate, 
+// and the number of channels. It converts the audio to mono (by averaging channels if needed),
+// resamples it to 16kHz, and applies a 0.3-second linear fade‑in and fade‑out.
+// It returns a WAV Blob.
+async function processAudioUsingOfflineContext(pcmFloat32, originalSampleRate, numChannels) {
+  const targetSampleRate = 16000;
+  
+  // Determine number of frames from interleaved data
+  const numFrames = pcmFloat32.length / numChannels;
+  
+  // Create an AudioBuffer in a temporary AudioContext
+  let tempCtx = new AudioContext();
+  let originalBuffer = tempCtx.createBuffer(numChannels, numFrames, originalSampleRate);
+  
+  // If multi-channel, deinterleave and copy data; if mono, copy directly.
+  if (numChannels === 1) {
+    originalBuffer.copyToChannel(pcmFloat32, 0);
+  } else {
+    // Deinterleave channels
+    for (let ch = 0; ch < numChannels; ch++) {
+      let channelData = new Float32Array(numFrames);
+      for (let i = 0; i < numFrames; i++) {
+        channelData[i] = pcmFloat32[i * numChannels + ch];
+      }
+      originalBuffer.copyToChannel(channelData, ch);
+    }
+  }
+  // Convert to mono by averaging channels if needed.
+  let monoBuffer;
+  if (numChannels > 1) {
+    let monoData = new Float32Array(numFrames);
+    for (let i = 0; i < numFrames; i++) {
+      let sum = 0;
+      for (let ch = 0; ch < numChannels; ch++) {
+        sum += originalBuffer.getChannelData(ch)[i];
+      }
+      monoData[i] = sum / numChannels;
+    }
+    monoBuffer = tempCtx.createBuffer(1, numFrames, originalSampleRate);
+    monoBuffer.copyToChannel(monoData, 0);
+  } else {
+    monoBuffer = originalBuffer;
+  }
+  tempCtx.close();
+  
+  // Set up OfflineAudioContext for resampling
+  const duration = monoBuffer.duration;
+  const offlineCtx = new OfflineAudioContext(1, targetSampleRate * duration, targetSampleRate);
+  
+  const source = offlineCtx.createBufferSource();
+  source.buffer = monoBuffer;
+  
+  // Create a gain node for fade‑in and fade‑out (0.3 seconds each)
+  const gainNode = offlineCtx.createGain();
+  const fadeDuration = 0.3;
+  gainNode.gain.setValueAtTime(0, 0);
+  gainNode.gain.linearRampToValueAtTime(1, fadeDuration);
+  gainNode.gain.setValueAtTime(1, duration - fadeDuration);
+  gainNode.gain.linearRampToValueAtTime(0, duration);
+  
+  source.connect(gainNode).connect(offlineCtx.destination);
+  source.start(0);
+  
+  const renderedBuffer = await offlineCtx.startRendering();
+  
+  // Get the processed audio data (mono)
+  const processedData = renderedBuffer.getChannelData(0);
+  // Convert the processed Float32Array to 16-bit PCM and encode as WAV using the existing encodeWAV function.
+  const processedInt16 = floatTo16BitPCM(processedData);
+  const wavBlob = encodeWAV(processedInt16, targetSampleRate, 1);
+  return wavBlob;
+}
+
 // --- HMAC and Request Signing ---
 // Removed: computeHMAC and signUploadRequest functions are no longer needed.
 
@@ -249,8 +323,11 @@ async function processAudioChunkInternal(force = false) {
     pcmFloat32.set(arr, offset);
     offset += arr.length;
   }
-  const pcmInt16 = floatTo16BitPCM(pcmFloat32);
-  const wavBlob = encodeWAV(pcmInt16, sampleRate, numChannels);
+  
+  // Process the raw audio samples using OfflineAudioContext:
+  // This converts the audio to mono, resamples to 16kHz, and applies 0.3s fade-in/out.
+  const wavBlob = await processAudioUsingOfflineContext(pcmFloat32, sampleRate, numChannels);
+  
   const mimeType = "audio/wav";
   const extension = "wav";
   const currentChunk = chunkNumber;
