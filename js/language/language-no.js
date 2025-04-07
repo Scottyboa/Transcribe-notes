@@ -14,16 +14,16 @@ export const indexTranslations = {
   
   securityModalHeading: "Personvern",
 securityModalText: `Personvernet ditt og sikkerheten til pasientinformasjon er vår høyeste prioritet. Vi benytter robuste tiltak for å sikre at dine data forblir konfidensielle og trygge:<br><br>
-- <strong>Datakryptering:</strong> All data som behandles av vårt system – inkludert lydopptak, transkripsjoner og notater – krypteres ved hjelp av bransjestandard metoder. Transkripsjoner og notater knyttes utelukkende til din krypterte personlige API-nøkkel og enheten du bruker for tilgang, noe som sikrer at kun du kan se det genererte innholdet.<br><br>
-- <strong>Automatisk sletting:</strong> Så snart en transkripsjon eller et notat er generert og vist på skjermen din, slettes det automatisk og irreversibelt fra våre servere innen 2 minutter. Lydfiler lagres kun midlertidig for behandling og beholdes ikke etter bruk.<br><br>
-- <strong>Beskyttelse mot uautorisert tilgang:</strong> Selv ved uautorisert tilgang til din API-nøkkel forblir dataene dine kryptert og beskyttet av enhetsspesifikke markører, noe som gjør informasjonen utilgjengelig.<br><br>
-- <strong>GDPR-kompatibel hosting:</strong> Alle backend-prosesser kjøres på dedikerte Microsoft Azure-servere lokalisert innenfor EU, i full overensstemmelse med GDPR-regelverket.<br><br>
+- <strong>Direkte og lokal behandling:</strong> All data som behandles av vårt system – inkludert lydopptak, transkripsjoner og notater – sendes direkte til OpenAI via deres sikre API. Ingen data prosesseres eller lagres på egne servere. Transkripsjoner og notater vises og lagres midlertidig kun i nettleseren din, og slettes automatisk når de erstattes eller når nettleseren lukkes.<br><br>
+- <strong>Automatisk sletting:</strong> Så snart en transkripsjon eller et notat er generert og vist på skjermen din, slettes det automatisk fra nettleserens minne når det erstattes av nytt innhold eller når du forlater siden. Lydfiler behandles kun midlertidig i nettleseren for å muliggjøre opplasting til OpenAI, og beholdes ikke etter bruk.<br><br>
+- <strong>Beskyttelse mot uautorisert tilgang:</strong> Dine data prosesseres direkte av OpenAI og vises kun lokalt i din nettleser. Det lagres ingenting på våre servere. Selv om noen skulle få tilgang til API-nøkkelen din, vil ingen data kunne hentes fra vår tjeneste.<br><br>
+- <strong>GDPR-kompatibel databehandling:</strong> All databehandling skjer gjennom OpenAI sine API-er og vises kun i din nettleser. OpenAI tilbyr databehandling i henhold til GDPR-regelverket, og benytter ikke innholdet ditt til modelltrening eller videreutvikling.<br><br>
 <strong>Ytterligere personvernpraksis:</strong><br><br>
-- <strong>Minimal datainnsamling:</strong> Vi samler kun inn den informasjonen som er nødvendig for å levere våre tjenester. Dette inkluderer din OpenAI API-nøkkel (lagret i kryptert form under økten), en enhetstoken brukt utelukkende for kryptering, og ditt språkvalg. Ingen ytterligere personopplysninger lagres.<br><br>
-- <strong>Bruk av informasjonskapsler:</strong> Informasjonskapsler på dette nettstedet brukes utelukkende til å vise personlige annonser og forbedre din brukeropplevelse. Vi bruker ikke disse informasjonskapslene til å samle inn eller lagre personopplysninger utover det som kreves for dette formålet. I tillegg benytter nettstedet informasjonskapsler for å lagre brukerpreferanser og håndtere samtykke.<br><br>
-- <strong>Databehandling og lagring:</strong> All data som behandles av vårt system – inkludert lydopptak, transkripsjoner og genererte notater – beholdes kun så lenge det er nødvendig for å fullføre transkripsjons- og notatgenereringsprosessen, og slettes automatisk kort tid etter at behandlingen er fullført. Vi lagrer eller deler ikke personlig identifiserbar informasjon utover det som er nødvendig for korrekt funksjon av tjenesten vår.<br><br>
+- <strong>Minimal datainnsamling:</strong> Vi samler kun inn den informasjonen som er nødvendig for å levere våre tjenester. Dette inkluderer ditt språkvalg og en enhetstoken som kun brukes for å lagre brukerpreferanser lokalt i nettleseren. Din OpenAI API-nøkkel lagres aldri av oss, men holdes midlertidig i din nettleser under økten. Ingen ytterligere personopplysninger lagres eller behandles.<br><br>
+- <strong>Bruk av informasjonskapsler:</strong> Informasjonskapsler på dette nettstedet brukes utelukkende til å vise personlige annonser og forbedre din brukeropplevelse. Vi bruker ikke disse informasjonskapslene til å samle inn eller lagre personopplysninger utover det som kreves for dette formålet. I tillegg benytter nettstedet informasjonskapsler for å lagre brukerpreferanser – som språkvalg og tilpassede prompts – samt for å håndtere samtykke.<br><br>
+- <strong>Databehandling og lagring:</strong> All data – inkludert lydopptak, transkripsjoner og genererte notater – behandles utelukkende i nettleseren og via OpenAI. Det lagres ingenting permanent, og alt slettes automatisk så snart prosessen er fullført eller siden lukkes. Vi lagrer eller deler ikke personlig identifiserbar informasjon.<br><br>
 - <strong>Deling av data med tredjepart og regulatorisk etterlevelse:</strong> Vi selger eller deler ikke dine personopplysninger med tredjeparter. Eventuelle data som deles med eksterne tjenester – som OpenAI for transkripsjon og notatgenerering eller Google AdSense for personaliserte annonser – er begrenset til anonymisert informasjon knyttet utelukkende til annonsetilpasning og brukerpreferanser, og inkluderer ikke dine opptak, transkripsjoner eller genererte notater. All datadeling skjer under strenge konfidensialitetsstandarder og i full overensstemmelse med gjeldende personvernregler.<br><br>
-Vennligst merk at på grunn av systemets utforming slettes all data automatisk kort tid etter behandling, og lagres ikke permanent.`,
+Vennligst merk at på grunn av systemets utforming slettes all data automatisk kort tid etter behandling, og lagres ikke permanent noe sted, med mindre du som bruker selv velger å lagre informasjonen lokalt.`,
   
   aboutModalHeading: "Om",
   aboutModalText: `Denne nettsiden ble opprettet for å gi helsepersonell og andre brukere direkte tilgang til høykvalitets tale-til-tekst transkripsjon og klinisk notatgenerering – uten unødvendige kostnader eller mellomledd.<br><br>
@@ -58,7 +58,7 @@ Når du logger inn ved å skrive inn API-nøkkelen, lagres den kun midlertidig i
   <ul>
     <li><strong>Kostnad:</strong> $0.006 per minutt. <em>Eksempel:</em> En 15-minutters konsultasjon vil koste 15 × $0.006 = <strong>$0.09</strong> per konsultasjon.</li>
   </ul>
-  <h2>Notisgenereringsprising</h2>
+  <h2>Notatgenereringsprising</h2>
   <ul>
     <li><strong>Token-basert prising:</strong></li>
     <ul>
@@ -66,7 +66,7 @@ Når du logger inn ved å skrive inn API-nøkkelen, lagres den kun midlertidig i
       <li><strong>Output (generert notat):</strong> $30 per 1 000 000 tokens (dvs. $0.00003 per token).</li>
     </ul>
   </ul>
-  <h3>Eksempelberegning for konsultasjon (kun notisgenerering)</h3>
+  <h3>Eksempelberegning for konsultasjon (kun notatgenerering)</h3>
   <ol>
     <li>
       <strong>Inputberegning:</strong>
@@ -82,7 +82,7 @@ Når du logger inn ved å skrive inn API-nøkkelen, lagres den kun midlertidig i
       Outputkostnad = 187.5 tokens × $0.00003 ≈ <strong>$0.0056</strong>.</p>
     </li>
     <li>
-      <strong>Total notisgenereringskostnad:</strong>
+      <strong>Total notatgenereringskostnad:</strong>
       <p>Kombinert kostnad ≈ $0.0055 + $0.0056 = <strong>$0.0111</strong> per konsultasjon.</p>
     </li>
   </ol>
@@ -90,18 +90,18 @@ Når du logger inn ved å skrive inn API-nøkkelen, lagres den kun midlertidig i
   <p>(for en 15-minutters konsultasjon/opptak med begge funksjoner)</p>
   <ul>
     <li><strong>Tale-til-tekst:</strong> <strong>$0.09</strong></li>
-    <li><strong>Notisgenerering:</strong> <strong>$0.0111</strong></li>
+    <li><strong>Notatgenerering:</strong> <strong>$0.0111</strong></li>
     <li><strong>Totalt:</strong> Omtrent <strong>$0.101</strong> per konsultasjon.</li>
   </ul>
   <h2>Månedlige kostnadsestimater</h2>
   <p>Dersom du gjennomfører 20 konsultasjoner per dag, 4 dager i uken, over 4 uker i måneden (20 × 4 × 4 = <strong>320 konsultasjoner</strong> per måned):</p>
   <ol>
     <li>
-      <strong>Kun tale-til-tekst</strong> (med notisgenerering via din egen ChatGPT-konto, som i praksis er gratis):<br>
+      <strong>Kun tale-til-tekst</strong> (med notatgenerering via din egen ChatGPT-konto, som i praksis er gratis):<br>
       Månedlig kostnad = 320 × $0.09 = <strong>$28.80</strong>.
     </li>
     <li>
-      <strong>Bruk av både tale-til-tekst og notisgenerering:</strong><br>
+      <strong>Bruk av både tale-til-tekst og notatgenerering:</strong><br>
       Månedlig kostnad = 320 × $0.101 ≈ <strong>$32.32</strong>.
     </li>
   </ol>
@@ -109,7 +109,7 @@ Når du logger inn ved å skrive inn API-nøkkelen, lagres den kun midlertidig i
   <p>I motsetning til leverandører som krever et månedlig abonnement, betaler du kun for faktisk bruk. Om du tar en fridag, drar på ferie eller har en periode uten aktivitet, vil kostnadene dine være null. Selv om du bruker tjenesten daglig for alle dine pasientkonsultasjoner, forblir kostnaden per oppgave betydelig lavere enn hos andre leverandører.</p>
   <hr>
   <h2>Fordel med direkte tilkobling</h2>
-  <p>Vår webapp kobler deg direkte til OpenAI API – ingen mellomledd, ingen ekstra avgifter. Denne direkte tilkoblingen betyr at du kun betaler for den faktiske AI-behandlingskostnaden, noe som gjør vår tjeneste til en av de mest prisgunstige løsningene for tale-til-tekst og notisgenerering som er tilgjengelig i dag.</p>
+  <p>Vår webapp kobler deg direkte til OpenAI API – ingen mellomledd, ingen ekstra avgifter. Denne direkte tilkoblingen betyr at du kun betaler for den faktiske AI-behandlingskostnaden, noe som gjør vår tjeneste til en av de mest prisgunstige løsningene for tale-til-tekst og notatgenerering som er tilgjengelig i dag.</p>
   `,
 };
 
