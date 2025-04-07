@@ -1,6 +1,6 @@
-// Updated recording module with API key validation, file encryption, request signing, and sending device_token.
+// recording.js
+// Updated recording module without encryption/HMAC mechanisms.
 
-// Updated hash function: now returns an unsigned 32-bit integer string.
 function hashString(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -124,161 +124,56 @@ function getDeviceToken() {
   return token;
 }
 
-// --- API Key Encryption/Decryption Helpers ---
-// These functions assume that the API key is stored in sessionStorage as an encrypted JSON object.
-async function deriveKey(password, salt) {
-  const encoder = new TextEncoder();
-  const keyMaterial = await crypto.subtle.importKey(
-    "raw",
-    encoder.encode(password),
-    "PBKDF2",
-    false,
-    ["deriveKey"]
-  );
-  return crypto.subtle.deriveKey(
-    {
-      name: "PBKDF2",
-      salt: salt,
-      iterations: 100000,
-      hash: "SHA-256"
-    },
-    keyMaterial,
-    { name: "AES-GCM", length: 256 },
-    false,
-    ["decrypt"]
-  );
+// --- API Key Retrieval ---
+// With encryption removed, we now simply get the API key from sessionStorage.
+function getAPIKey() {
+  return sessionStorage.getItem("user_api_key");
 }
 
-async function decryptAPIKey(encryptedData) {
-  // encryptedData is an object: { ciphertext, iv, salt } (all Base64-encoded)
-  const { ciphertext, iv, salt } = encryptedData;
-  const deviceToken = getDeviceToken();
-  const key = await deriveKey(deviceToken, base64ToArrayBuffer(salt));
-  const decryptedBuffer = await crypto.subtle.decrypt(
-    { name: "AES-GCM", iv: base64ToArrayBuffer(iv) },
-    key,
-    base64ToArrayBuffer(ciphertext)
-  );
-  const decoder = new TextDecoder();
-  return decoder.decode(decryptedBuffer);
-}
-
-async function getDecryptedAPIKey() {
-  const encryptedStr = sessionStorage.getItem("encrypted_api_key");
-  if (!encryptedStr) return null;
-  const encryptedData = JSON.parse(encryptedStr);
-  return await decryptAPIKey(encryptedData);
-}
-
-// --- File Blob Encryption ---
-// Encrypts the audio file blob using a key derived from the decrypted API key and device token.
+// --- File Blob Processing ---
+// Previously used for encryption, now simply returns the original blob along with markers.
 async function encryptFileBlob(blob) {
-  const apiKey = await getDecryptedAPIKey();
-  if (!apiKey) throw new Error("API key not available for encryption");
+  const apiKey = getAPIKey();
+  if (!apiKey) throw new Error("API key not available");
   const deviceToken = getDeviceToken();
-  const password = apiKey + ":" + deviceToken;
-  const encoder = new TextEncoder();
-  const salt = crypto.getRandomValues(new Uint8Array(16)); // 16-byte salt
-  const keyMaterial = await crypto.subtle.importKey(
-    "raw",
-    encoder.encode(password),
-    "PBKDF2",
-    false,
-    ["deriveKey"]
-  );
-  const key = await crypto.subtle.deriveKey(
-    {
-      name: "PBKDF2",
-      salt: salt,
-      iterations: 100000,
-      hash: "SHA-256"
-    },
-    keyMaterial,
-    { name: "AES-GCM", length: 256 },
-    false,
-    ["encrypt", "decrypt"]
-  );
-  const iv = crypto.getRandomValues(new Uint8Array(12)); // 12-byte IV
-  const buffer = await blob.arrayBuffer();
-  const encryptedBuffer = await crypto.subtle.encrypt(
-    { name: "AES-GCM", iv: iv },
-    key,
-    buffer
-  );
-  const encryptedBlob = new Blob([encryptedBuffer], { type: blob.type });
-  
-  // Generate markers using our updated hashString() function.
   const apiKeyMarker = hashString(apiKey);
   const deviceMarker = hashString(deviceToken);
-
+  // Return the original blob without any encryption; iv and salt are empty.
   return {
-    encryptedBlob,
-    iv: arrayBufferToBase64(iv),
-    salt: arrayBufferToBase64(salt),
+    encryptedBlob: blob,
+    iv: "",
+    salt: "",
     apiKeyMarker,
     deviceMarker
   };
 }
 
 // --- HMAC and Request Signing ---
-// Computes an HMAC-SHA256 signature for a given message and secret.
-async function computeHMAC(message, secret) {
-  const encoder = new TextEncoder();
-  const key = await crypto.subtle.importKey(
-    "raw",
-    encoder.encode(secret),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign"]
-  );
-  const signatureBuffer = await crypto.subtle.sign(
-    "HMAC",
-    key,
-    encoder.encode(message)
-  );
-  return arrayBufferToBase64(signatureBuffer);
-}
+// Removed: computeHMAC and signUploadRequest functions are no longer needed.
 
-// Generates a signature for the upload request based on group ID and chunk number.
-async function signUploadRequest(groupId, chunkNumber) {
-  const apiKey = await getDecryptedAPIKey();
-  const deviceToken = getDeviceToken();
-  const secret = apiKey + ":" + deviceToken;
-  const message = "upload:" + groupId + ":" + chunkNumber;
-  return await computeHMAC(message, secret);
-}
-
-// --- Upload Chunk Function (with Encryption, Request Signing, and sending device_token) ---
+// --- Upload Chunk Function ---
+// Adjusted to remove encryption and signing parameters.
 async function uploadChunk(blob, currentChunkNumber, extension, mimeType, isLast = false, currentGroup) {
   let encryptionResult;
   try {
     encryptionResult = await encryptFileBlob(blob);
   } catch (err) {
-    console.error("Error encrypting file blob:", err);
+    console.error("Error processing file blob:", err);
     throw err;
   }
   const encryptedBlob = encryptionResult.encryptedBlob;
-
-  let signature;
-  try {
-    signature = await signUploadRequest(currentGroup, currentChunkNumber);
-  } catch (err) {
-    console.error("Error generating signature:", err);
-    throw err;
-  }
 
   const formData = new FormData();
   formData.append("file", encryptedBlob, `chunk_${currentChunkNumber}.${extension}`);
   formData.append("group_id", currentGroup);
   formData.append("chunk_number", currentChunkNumber);
-  formData.append("api_key", await getDecryptedAPIKey());
-  formData.append("iv", encryptionResult.iv);
-  formData.append("salt", encryptionResult.salt);
+  formData.append("api_key", getAPIKey());
+  formData.append("iv", ""); // No encryption, so empty.
+  formData.append("salt", ""); // No encryption, so empty.
   formData.append("api_key_marker", encryptionResult.apiKeyMarker);
   formData.append("device_marker", encryptionResult.deviceMarker);
-  // Now send the device_token
   formData.append("device_token", getDeviceToken());
-  formData.append("signature", signature);
+  // Signature is removed.
   if (isLast) {
     formData.append("last_chunk", "true");
   }
@@ -538,9 +433,9 @@ function initRecording() {
   if (!startButton || !stopButton || !pauseResumeButton) return;
 
   startButton.addEventListener("click", async () => {
-    // Retrieve and decrypt the API key before starting.
-    const decryptedApiKey = await getDecryptedAPIKey();
-    if (!decryptedApiKey || !decryptedApiKey.startsWith("sk-")) {
+    // Retrieve the API key before starting.
+    const apiKey = getAPIKey();
+    if (!apiKey || !apiKey.startsWith("sk-")) {
       alert("Please enter a valid OpenAI API key before starting the recording.");
       return;
     }
@@ -589,7 +484,6 @@ function initRecording() {
     if (!mediaStream) return;
     const track = mediaStream.getAudioTracks()[0];
     if (track.enabled) {
-      // Modified pause: finalize current chunk upload (without marking as final) then pause.
       await safeProcessAudioChunk(false);
       accumulatedRecordingTime += Date.now() - recordingStartTime;
       track.enabled = false;
@@ -600,7 +494,6 @@ function initRecording() {
       updateStatusMessage("Recording paused", "orange");
       logInfo("Recording paused; current chunk uploaded.");
     } else {
-      // Resuming: do not reset accumulatedRecordingTime, just set a new recordingStartTime.
       track.enabled = true;
       recordingPaused = false;
       recordingStartTime = Date.now();
