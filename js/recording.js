@@ -531,7 +531,20 @@ function resetRecordingState() {
   accumulatedRecordingTime = 0;
 }
 
+function isSupportedBrowser() {
+  const ua = navigator.userAgent;
+  return ua.includes("Chrome") || ua.includes("Edg/");
+}
+
 function initRecording() {
+  // ✅ INSERT this block at the very beginning of initRecording
+  if (!isSupportedBrowser()) {
+    updateStatusMessage(
+      "⚠️ Denne opptaksfunksjonen støttes kun i Google Chrome eller Microsoft Edge.",
+      "orange"
+    );
+  }
+
   const startButton = document.getElementById("startButton");
   const stopButton = document.getElementById("stopButton");
   const pauseResumeButton = document.getElementById("pauseResumeButton");
