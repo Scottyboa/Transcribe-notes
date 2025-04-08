@@ -141,6 +141,11 @@ function updateTranscribeUI(trans) {
   document.getElementById("page-title-transcribe").textContent = trans.pageTitle;
   document.getElementById("openaiUsageLink").textContent = trans.openaiUsageLinkText;
   document.getElementById("btnGuide").textContent = trans.btnGuide;
+
+  const readFirstElem = document.getElementById("read-first-text");
+if (readFirstElem && trans.readFirstText) {
+  readFirstElem.textContent = trans.readFirstText;
+}
   document.getElementById("recordingAreaTitle").textContent = trans.recordingAreaTitle;
   document.getElementById("recordTimer").textContent = trans.recordTimer;
   document.getElementById("transcribeTimer").textContent = trans.transcribeTimer;
