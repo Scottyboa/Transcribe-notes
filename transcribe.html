@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script async src="https://fundingchoicesmessages.google.com/i/pub-3747901131960450?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
   <title id="page-title-transcribe">Transcription Tool with Ads and Guide Overlay</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Merriweather:wght@300;400&display=swap"
@@ -134,11 +133,11 @@
       resize: vertical;
     }
     #transcription,
-#generatedNote {
-  min-height: 150px;
-  resize: vertical; /* user can resize manually */
-  overflow: hidden;
-}
+    #generatedNote {
+      min-height: 150px;
+      resize: vertical; /* user can resize manually */
+      overflow: hidden;
+    }
     #customPrompt {
       min-height: 200px;
       resize: vertical; /* user can resize manually */
@@ -243,29 +242,27 @@
     <!-- Main Content (center column) -->
     <main class="main-content">
       <!-- Top Bar inside Main Content -->
-<div class="top-bar">
-  <!-- Back to frontpage button stays on the far left -->
-  <button id="backToHomeButton" onclick="window.history.back()">Back to frontpage</button>
-
-  <!-- Group for "Read first! ➔" and Guide button; they will appear together -->
-  <div class="mid-controls" style="display: flex; align-items: center;">
-    <span id="read-first-text" style="font-size: 24px; color: black; margin-right: 10px;">Read first! ➔</span>
-    <button id="btnGuide">Guide</button>
-  </div>
-
-  <!-- Language container remains on the far right -->
-  <div id="lang-container-transcribe">
-    <img src="language-icon.png" alt="Language Icon" id="lang-icon-transcribe" />
-    <select id="lang-select-transcribe">
-      <option value="en">English</option>
-      <option value="no">Norsk</option>
-      <option value="sv">Svenska</option>
-      <option value="de">Deutsch</option>
-      <option value="fr">Français</option>
-      <option value="it">Italiano</option>
-    </select>
-  </div>
-</div>
+      <div class="top-bar">
+        <!-- Back to frontpage button stays on the far left -->
+        <button id="backToHomeButton" onclick="window.history.back()">Back to frontpage</button>
+        <!-- Group for "Read first! ➔" and Guide button -->
+        <div class="mid-controls" style="display: flex; align-items: center;">
+          <span id="read-first-text" style="font-size: 24px; color: black; margin-right: 10px;">Read first! ➔</span>
+          <button id="btnGuide">Guide</button>
+        </div>
+        <!-- Language container remains on the far right -->
+        <div id="lang-container-transcribe">
+          <img src="language-icon.png" alt="Language Icon" id="lang-icon-transcribe" />
+          <select id="lang-select-transcribe">
+            <option value="en">English</option>
+            <option value="no">Norsk</option>
+            <option value="sv">Svenska</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="it">Italiano</option>
+          </select>
+        </div>
+      </div>
       <!-- Recording Area -->
       <div class="recording-area">
         <div class="recording-header">
@@ -388,7 +385,7 @@
 
     function refreshAds() {
       const now = Date.now();
-      if (now - lastAdRefreshTime >= 420000) { // 7 minutes
+      if (now - lastAdRefreshTime >= 600000) { // 10 minutes
         const adUnits = [
           { containerId: "right-ad-unit-1", adSlot: "7966995632" },
           { containerId: "right-ad-unit-2", adSlot: "8337760213" },
