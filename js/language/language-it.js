@@ -157,11 +157,37 @@ guideText: `Benvenuto in <strong>Whisper Trascrizione Clinica</strong>. Questa a
   <li><strong>Pulsante "Guida":</strong> Clicca di nuovo sul pulsante "Guida" per tornare all'interfaccia principale.</li>
 </ul><br><br>
 
-<strong>Esempio di prompt:</strong><br>
-Genera una nota medica basata sulla trascrizione di una conversazione tra medico e paziente. Deve includere: Contesto, Problema attuale, Reperti clinici, Valutazione e Piano.  
-La nota deve essere scritta in linguaggio professionale e con terminologia medica adeguata.<br><br>
+<strong>Esempi di prompt:</strong><br><br>
 
-Puoi personalizzare questo prompt come preferisci, in base al tuo stile di documentazione, alla tua specializzazione o al tipo di consulto.`,
+<strong>Consultazione:</strong><br>
+"Prompt di sistema – Generatore di nota medica
+
+Scrivi una nota medica precisa e pronta per il diario clinico, basata su una conversazione trascritta tra medico e paziente. Utilizza la seguente struttura (salvo diverse indicazioni nel dettato):
+Contesto (solo se ci sono precedenti rilevanti), Sintomi/anamnesi, Esame (in elenco puntato), Valutazione, Piano.
+
+Regole:
+– Non includere informazioni, esami o riscontri non menzionati esplicitamente.
+– Inserire riscontri negativi solo se dichiarati.
+– Esami del sangue: scrivere “si richiedono esami del sangue pertinenti”, senza elencarli.
+– Correggere errori evidenti nei nomi dei farmaci.
+– Non usare caratteri speciali o andare a capo prima dei titoli.
+– Seguire le istruzioni esplicite del medico riguardo stile, lunghezza o formulazioni specifiche.
+
+Se il medico aggiunge commenti dopo che il paziente è uscito, vanno presi in considerazione. La nota deve essere ben scritta."
+
+<br><br>
+
+<strong>Lettera al paziente:</strong><br>
+"Scrivi una lettera dal medico al paziente. Inizia con Ciao \\"nome\\", e termina con<br>
+Cordiali saluti<br>
+\\"Il tuo nome\\"<br>
+\\"Nome dello studio\\"<br>
+La lettera deve avere un tono professionale e formale. Puoi migliorare leggermente il testo per renderlo più fluido."
+
+<br><br>
+
+Questi sono esempi efficaci, ma puoi adattarli liberamente al tuo stile documentale, alla tua specializzazione o al tipo di consultazione. Puoi anche creare prompt completamente personalizzati per ogni esigenza.
+`,
 };
 
 export default { indexTranslations, transcribeTranslations };
