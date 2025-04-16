@@ -24,18 +24,14 @@ securityModalText: `La tua privacy e la sicurezza delle informazioni dei pazient
 - <strong>Condivisione di Dati con Terzi e Conformità Regolamentare:</strong> Non vendiamo né condividiamo i tuoi dati personali con terzi. Qualsiasi dato condiviso con servizi esterni—come OpenAI per la trascrizione e la generazione delle note o Google AdSense per annunci personalizzati—è limitato a informazioni anonime relative esclusivamente alla personalizzazione degli annunci e alle preferenze degli utenti, e non include le tue registrazioni, trascrizioni o note generate. Tutta la condivisione dei dati viene effettuata secondo rigorosi standard di riservatezza e in piena conformità con le normative sulla privacy applicabili.<br><br>
 Si prega di notare che, a causa del design del nostro sistema, tutti i dati vengono eliminati automaticamente poco dopo l'elaborazione e non vengono conservati a lungo termine.`,
   aboutModalHeading: "Informazioni",
-  aboutModalText: `Sono un medico di famiglia norvegese con una profonda passione per i progressi tecnologici, in particolare per l'intelligenza artificiale, e ho seguito da vicino gli sviluppi dell'IA in ambito sanitario.<br><br>
-Quando ho appreso per la prima volta dell'esistenza di aziende che offrono servizi di trascrizione da voce a testo per consultazioni mediche in Norvegia, ne sono rimasto entusiasta. Colleghi e recensioni online hanno elogiato questi servizi, evidenziando miglioramenti significativi in termini di efficienza e flusso di lavoro. Tuttavia, approfondendo la questione, sono rimasto sorpreso dai costi elevati richiesti, considerando che il costo reale della tecnologia è solo una frazione di tali prezzi.<br><br>
-Motivato da questa constatazione, ho sviluppato personalmente una soluzione di trascrizione da voce a testo, inizialmente per uso personale. Vedendo quanto fosse efficace ed economica, ho deciso di rendere la mia soluzione accessibile online, offrendo la stessa velocità, precisione e qualità dei servizi premium, ma senza le tariffe elevate.<br><br>
-A differenza dei fornitori commerciali, questa piattaforma non applica maggiorazioni o commissioni inutili.<br>
-• Paghi direttamente a OpenAI — ciò significa che accedi direttamente alla fonte della tecnologia, senza intermediari che aggiungono costi extra.<br>
-• Per questo motivo, è l'opzione più economica disponibile, pur mantenendo una qualità di alto livello.<br><br>
-Ritengo che i servizi offerti da alcune aziende, pur essendo utili, siano sopravvalutati rispetto a quanto effettivamente forniscono. Molti dei miei colleghi, che lavorano duramente ogni giorno in assistenza ai pazienti, finiscono per pagare molto di più di quanto necessario per accedere a uno strumento che dovrebbe essere alla portata di tutti.<br><br>
-Questo sito è completamente gratuito da utilizzare: il tuo unico costo è la tariffa diretta di utilizzo di OpenAI per le trascrizioni.<br>
-• Nessun abbonamento mensile, nessun impegno; paghi solo per le attività svolte.<br>
-• Controlli quanto spendere decidendo quanto trasferire nel tuo portafoglio OpenAI.<br><br>
-L'unica cosa che chiedo è che accetti la visualizzazione degli annunci, che aiutano a coprire i costi dei server di backend.<br>
-Per poter continuare a offrire questo servizio gratuito, ti saremmo molto grati se accettassi la visualizzazione degli annunci di Google Ads. I ricavi pubblicitari ci aiutano a coprire i costi di hosting e gestione, così il servizio può rimanere accessibile a tutti.`,
+aboutModalText: `Questo sito è stato creato per offrire ai professionisti sanitari e ad altri utenti un accesso diretto a trascrizioni vocali di alta qualità e alla generazione di note cliniche—senza costi superflui o intermediari.<br><br>
+Utilizzando la tua chiave API OpenAI personale, ti connetti direttamente alla fonte della tecnologia. Ciò significa che paghi soltanto il costo effettivo stabilito da OpenAI, senza maggiorazioni o tariffe di abbonamento.<br><br>
+Molti fornitori offrono servizi simili, ma applicano prezzi significativamente più elevati—spesso da 8 a 10 volte il costo reale della tecnologia sottostante. Questa piattaforma offre le stesse funzionalità a una frazione del prezzo.<br><br>
+<strong>Punti chiave:</strong><br>
+• Nessun abbonamento, nessun account richiesto.<br>
+• Paghi solo OpenAI per ciò che utilizzi.<br>
+• Il sito stesso è completamente gratuito.<br><br>
+Per continuare a offrire questo servizio gratuito, ti saremmo molto grati se accettassi la visualizzazione degli annunci Google Ads. I ricavi pubblicitari ci aiutano a coprire i costi di hosting e gestione, permettendo al servizio di rimanere accessibile a tutti.`,
   guideModalHeading: "Come si usa",
   guideModalText: `Per utilizzare questa webapp, devi prima creare un profilo API su OpenAI, generare una chiave API e ricaricare il tuo portafoglio OpenAI. La tua chiave API viene quindi copiata e incollata nel campo apposito. Una volta premuto Invio, la webapp salva temporaneamente la chiave API per la tua sessione — questa chiave ti collega ai server di OpenAI, permettendo la trascrizione da voce a testo e la generazione delle note. Nota bene: ti viene addebitato immediatamente per ogni attività svolta. Per ulteriori informazioni sui costi, consulta la sezione "Cost" nella pagina principale.<br><br>
 <strong>1. Crea il tuo profilo API OpenAI</strong><br>
