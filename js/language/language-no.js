@@ -140,7 +140,7 @@ export const transcribeTranslations = {
   customPromptPlaceholder: "Skriv inn tilpasset prompt her",
   adUnitText: "Din annonse her",
   guideHeading: "Guide & Instruksjoner",
-guideText: `Velkommen til <strong>Whisper Klinisk Transkripsjon</strong>. Denne applikasjonen lar helsepersonell, terapeuter og andre fagpersoner ta opp og transkribere konsultasjoner, samt generere profesjonelle notater ved hjelp av en AI-basert notatgenerator.<br><br>
+guideText: `Velkommen til <strong>Transcribe Notes</strong>. Denne applikasjonen lar helsepersonell, terapeuter og andre fagpersoner ta opp og transkribere konsultasjoner, samt generere profesjonelle notater ved hjelp av en AI-basert notatgenerator.<br><br>
 
 <strong>Slik bruker du funksjonene:</strong><br><br>
 
