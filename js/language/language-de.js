@@ -61,63 +61,30 @@ Wenn Sie sich anmelden, indem Sie Ihren API-Schlüssel eingeben, wird dieser nur
   priceModalHeading: "Preis",
 priceModalText: `
 <div>
-  <h1>Kosteninformationen</h1>
-  <h2>Sprach-zu-Text Preisgestaltung</h2>
+  <p><strong>Kostenübersicht</strong></p>
+  <p>Sie zahlen nur für das, was Sie tatsächlich nutzen – direkt an die Quelle, ohne teure Zwischenhändler. Kein Abo. Keine Bindung.</p>
+
+  <p><strong>Preise:</strong></p>
   <ul>
-    <li><strong>Kosten:</strong> $0.006 pro Minute. <em>Beispiel:</em> Eine 15-minütige Konsultation kostet 15 × $0.006 = <strong>$0.09</strong> pro Konsultation.</li>
+    <li>Spracherkennung: $0.006 pro Minute</li>
+    <li>Notizerstellung: $5 pro 1 Million Tokens (Input) und $10 pro 1 Million Tokens (Output)</li>
   </ul>
-  <h2>Preisgestaltung für Notizerstellung</h2>
+
+  <p><strong>Beispiel – 15-minütige Konsultation:</strong></p>
   <ul>
-    <li><strong>Token-basierte Preisgestaltung:</strong></li>
-    <ul>
-      <li><strong>Input (Transkription + Prompt):</strong> $5.00 pro 1.000.000 Tokens (d.h. $0.000005 pro Token).</li>
-      <li><strong>Output (generierte Notiz):</strong> $15.00 pro 1.000.000 Tokens (d.h. $0.000015 pro Token).</li>
-    </ul>
+    <li>Spracherkennung: 15 × $0.006 = $0.09</li>
+    <li>Notizerstellung: typischerweise zwischen $0.005 und $0.01</li>
+    <li>Gesamt: etwa $0.10 für die gesamte Konsultation</li>
   </ul>
-  <h3>Beispielberechnung für eine Konsultation (nur Notizerstellung)</h3>
-  <ol>
-    <li>
-      <strong>Input-Berechnung:</strong>
-      <p>Angenommen, die Transkription einer Konsultation umfasst etwa <strong>700 Wörter</strong> und du fügst einen <strong>30-Wörter-Prompt</strong> hinzu.<br>
-      Gesamtanzahl der Wörter = 700 + 30 = <strong>730 Wörter</strong>.<br>
-      Geschätzte Token-Anzahl = 730 × 0.75 ≈ <strong>547.5 Tokens</strong>.<br>
-      Input-Kosten = 547.5 Tokens × $0.000005 ≈ <strong>$0.0027</strong>.</p>
-    </li>
-    <li>
-      <strong>Output-Berechnung:</strong>
-      <p>Angenommen, die generierte Notiz umfasst etwa <strong>250 Wörter</strong>.<br>
-      Geschätzte Token-Anzahl = 250 × 0.75 ≈ <strong>187.5 Tokens</strong>.<br>
-      Output-Kosten = 187.5 Tokens × $0.000015 ≈ <strong>$0.0028</strong>.</p>
-    </li>
-    <li>
-      <strong>Gesamtkosten der Notizerstellung:</strong>
-      <p>Kombinierte Kosten ≈ $0.0027 + $0.0028 = <strong>$0.0055</strong> pro Konsultation.</p>
-    </li>
-  </ol>
-  <h2>Ungefähre Gesamtkosten pro Konsultation</h2>
-  <p>(für eine 15-minütige Konsultation/Aufnahme bei Nutzung beider Funktionen)</p>
+
+  <p><strong>Monatliche Beispielkosten bei voller Nutzung:</strong></p>
   <ul>
-    <li><strong>Sprach-zu-Text:</strong> <strong>$0.09</strong></li>
-    <li><strong>Notizerstellung:</strong> <strong>$0.0055</strong></li>
-    <li><strong>Gesamt:</strong> Ungefähr <strong>$0.0955</strong> pro Konsultation.</li>
+    <li>20 Konsultationen pro Tag × 4 Tage pro Woche × 4 Wochen = 320 Konsultationen</li>
+    <li>Gesamtkosten pro Monat: etwa $30–31</li>
   </ul>
-  <h2>Monatliche Kostenschätzungen</h2>
-  <p>Wenn du 20 Konsultationen pro Tag, 4 Tage pro Woche, über 4 Wochen im Monat durchführst (20 × 4 × 4 = <strong>320 Konsultationen</strong> pro Monat):</p>
-  <ol>
-    <li>
-      <strong>Nur Sprach-zu-Text:</strong><br>
-      Monatliche Kosten = 320 × $0.09 = <strong>$28.80</strong>.
-    </li>
-    <li>
-      <strong>Sprach-zu-Text + Notizerstellung:</strong><br>
-      Monatliche Kosten = 320 × $0.0955 ≈ <strong>$30.56</strong>.
-    </li>
-  </ol>
-  <h2>Flexible Nutzung</h2>
-  <p>Im Gegensatz zu Anbietern mit monatlichen Abonnements zahlst du nur für die tatsächliche Nutzung. Wenn du Urlaub machst oder einen freien Tag nimmst, entstehen dir keine Kosten. Selbst bei täglicher Nutzung für alle deine Patientenkonsultationen bleiben die Kosten pro Vorgang deutlich geringer als bei anderen Anbietern.</p>
-  <hr>
-  <h2>Vorteil der direkten Verbindung</h2>
-  <p>Unsere Web-App verbindet dich direkt mit der OpenAI API – keine Zwischenhändler, keine zusätzlichen Gebühren. Diese direkte Verbindung bedeutet, dass du nur die tatsächlichen KI-Verarbeitungskosten bezahlst, was unseren Dienst zu einer der kostengünstigsten Lösungen für Sprach-zu-Text und Notizerstellung macht.</p>
+
+  <p><strong>Sie zahlen nur bei Nutzung:</strong><br>
+  Bei Urlaub, Krankheit oder Elternzeit fallen keine Kosten an.</p>
 </div>
 `,
 };
