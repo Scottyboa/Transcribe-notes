@@ -135,7 +135,7 @@ export const transcribeTranslations = {
   customPromptPlaceholder: "Enter custom prompt here",
   adUnitText: "Your Ad Here",
   guideHeading: "Guide & Instructions",
-guideText: `Welcome to the Whisper Transcription tool. This application allows medical professionals, therapists, and other practitioners to record and transcribe consultations, as well as generate professional notes using an AI-powered note generator.<br><br>
+guideText: `Welcome to the Transcribe Notes Transcription tool. This application allows medical professionals, therapists, and other practitioners to record and transcribe consultations, as well as generate professional notes using an AI-powered note generator.<br><br>
 
 <strong>How to Use the Functions:</strong><br><br>
 
