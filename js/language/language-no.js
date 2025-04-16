@@ -55,63 +55,31 @@ Når du logger inn ved å skrive inn API-nøkkelen i feltet på denne forsiden o
   priceModalHeading: "Kostnadsinformasjon",
 priceModalText: `
 <div>
-  <h1>Kostnadsinformasjon</h1>
-  <h2>Tale-til-tekst-prising</h2>
+  <p><strong>Kostnadsinformasjon</strong></p>
+  <p>Du betaler kun for det du bruker, direkte fra kilden, uten dyre mellomledd – ingen abonnement, ingen binding.</p>
+
+  <p><strong>Priser:</strong></p>
   <ul>
-    <li><strong>Kostnad:</strong> $0.006 per minutt. <em>Eksempel:</em> En 15-minutters konsultasjon vil koste 15 × $0.006 = <strong>$0.09</strong> per konsultasjon.</li>
+    <li>Tale-til-tekst: $0.006 per minutt</li>
+    <li>Notatgenerering: $5 per 1 million tokens (input) og $10 per 1 million tokens (output)</li>
   </ul>
-  <h2>Notatgenereringsprising</h2>
+
+  <p><strong>Eksempel – 15-minutters konsultasjon:</strong></p>
   <ul>
-    <li><strong>Token-basert prising:</strong></li>
-    <ul>
-      <li><strong>Input (transkripsjon + prompt):</strong> $5.00 per 1 000 000 tokens (dvs. $0.000005 per token).</li>
-      <li><strong>Output (generert notat):</strong> $15.00 per 1 000 000 tokens (dvs. $0.000015 per token).</li>
-    </ul>
+    <li>Tale-til-tekst: 15 × $0.006 = $0.09</li>
+    <li>Notatgenerering: vanligvis mellom $0.005 og $0.01</li>
+    <li>Totalt: cirka $0.10 for hele konsultasjonen</li>
   </ul>
-  <h3>Eksempelberegning for konsultasjon (kun notatgenerering)</h3>
-  <ol>
-    <li>
-      <strong>Inputberegning:</strong>
-      <p>Anta at transkripsjonen av konsultasjonen er på omtrent <strong>700 ord</strong> og at du legger til en <strong>30-ords prompt</strong>.<br>
-      Totalt antall ord = 700 + 30 = <strong>730 ord</strong>.<br>
-      Estimert antall tokens = 730 × 0.75 ≈ <strong>547.5 tokens</strong>.<br>
-      Inputkostnad = 547.5 tokens × $0.000005 ≈ <strong>$0.0027</strong>.</p>
-    </li>
-    <li>
-      <strong>Outputberegning:</strong>
-      <p>Anta at det genererte notatet er på omtrent <strong>250 ord</strong>.<br>
-      Estimert antall tokens = 250 × 0.75 ≈ <strong>187.5 tokens</strong>.<br>
-      Outputkostnad = 187.5 tokens × $0.000015 ≈ <strong>$0.0028</strong>.</p>
-    </li>
-    <li>
-      <strong>Total notatgenereringskostnad:</strong>
-      <p>Kombinert kostnad ≈ $0.0027 + $0.0028 = <strong>$0.0055</strong> per konsultasjon.</p>
-    </li>
-  </ol>
-  <h2>Omtrentlig samlet kostnad per konsultasjon</h2>
-  <p>(for en 15-minutters konsultasjon/opptak med begge funksjoner)</p>
+
+  <p><strong>Eksempel på månedskostnad ved full bruk:</strong></p>
   <ul>
-    <li><strong>Tale-til-tekst:</strong> <strong>$0.09</strong></li>
-    <li><strong>Notatgenerering:</strong> <strong>$0.0055</strong></li>
-    <li><strong>Totalt:</strong> Omtrent <strong>$0.0955</strong> per konsultasjon.</li>
+    <li>20 konsultasjoner per dag × 4 dager i uken × 4 uker = 320 konsultasjoner</li>
+    <li>Totalkostnad denne måned: cirka $30–31</li>
   </ul>
-  <h2>Månedlige kostnadsestimater</h2>
-  <p>Dersom du gjennomfører 20 konsultasjoner per dag, 4 dager i uken, i 4 uker (20 × 4 × 4 = <strong>320 konsultasjoner</strong> per måned):</p>
-  <ol>
-    <li>
-      <strong>Kun tale-til-tekst</strong>:<br>
-      Månedlig kostnad = 320 × $0.09 = <strong>$28.80</strong>.
-    </li>
-    <li>
-      <strong>Bruk av både tale-til-tekst og notatgenerering:</strong><br>
-      Månedlig kostnad = 320 × $0.0955 ≈ <strong>$30.56</strong>.
-    </li>
-  </ol>
-  <h2>Fleksibilitet i bruken</h2>
-  <p>I motsetning til leverandører som krever et månedlig abonnement, betaler du kun for faktisk bruk. Om du tar en fridag, drar på ferie eller har en periode uten aktivitet, vil kostnadene dine være null. Selv om du bruker tjenesten daglig for alle dine pasientkonsultasjoner, forblir kostnaden per oppgave betydelig lavere enn hos andre leverandører.</p>
-  <hr>
-  <h2>Fordel med direkte tilkobling</h2>
-  <p>Vår webapp kobler deg direkte til OpenAI API – ingen mellomledd, ingen ekstra avgifter. Denne direkte tilkoblingen betyr at du kun betaler for den faktiske AI-behandlingskostnaden, noe som gjør vår tjeneste til den mest rimeligste løsningen for tale-til-tekst og notatgenerering som er tilgjengelig i dag.</p>
+
+  <p><strong>Du betaler bare for bruk:</strong><br>
+  Hvis du ikke bruker tjenesten på grunn av ferie, sykdom, permisjon etc, betaler du ingenting.</p>
+</div>
 `,
 };
 
