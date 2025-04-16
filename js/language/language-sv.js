@@ -1,8 +1,8 @@
 // js/language-sv.js
 
 export const indexTranslations = {
-  pageTitle: "Whisper Klinisk Transkription",
-  headerTitle: "Whisper Klinisk Transkription",
+  pageTitle: "Transcribe Notes",
+  headerTitle: "Transcribe Notes",
   headerSubtitle: "Avancerad AI-driven tal-till-text och notisgenerering för vårdkonsultationer",
   startText: "För att komma igång, vänligen ange din OpenAI API-nyckel:",
   apiPlaceholder: "Ange API-nyckel här",
