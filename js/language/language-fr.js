@@ -1,8 +1,8 @@
 // js/language-fr.js
 
 export const indexTranslations = {
-  pageTitle: "Transcription Clinique Whisper",
-  headerTitle: "Transcription Clinique Whisper",
+  pageTitle: "Transcribe Notes",
+  headerTitle: "Transcribe Notes",
   headerSubtitle: "Transcription audio en texte et génération de notes avancées pour consultations médicales, propulsées par l'IA",
   startText: "Pour commencer, veuillez entrer votre clé API OpenAI :",
   apiPlaceholder: "Entrez la clé API ici",
