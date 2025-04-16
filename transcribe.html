@@ -157,11 +157,12 @@
     #transcription {
       resize: vertical;
     }
-    #transcription,
+#transcription,
 #generatedNote {
   min-height: 150px;
-  resize: vertical; /* user can resize manually */
-  overflow: hidden;
+  resize: vertical;      /* user can still resize manually */
+  overflow-y: auto;      /* enable vertical scrolling */
+  overflow-x: hidden;    /* hide any horizontal scrollbar */
 }
     #customPrompt {
       min-height: 200px;
