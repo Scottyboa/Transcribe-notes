@@ -158,10 +158,37 @@ guideText: `Welcome to the Whisper Transcription tool. This application allows m
   <li><strong>Guide Toggle:</strong> Click the "Guide" button again to return to the main interface.</li>
 </ul><br><br>
 
-<strong>Example Prompt:</strong><br>
-"Make a medical note based on the doctor–patient conversation transcript. It must contain: Background, Presenting complaint, Clinical findings, Assessment, and Plan. The note must be written in professional language and use appropriate medical terminology."<br><br>
+<strong>Prompt Examples:</strong><br><br>
 
-You can customize this prompt however you like to suit your documentation preferences, specialties, or consultation types.`,
+<strong>Consultation:</strong><br>
+"System prompt – Medical Note Generator
+
+Write a medically accurate, journal-ready note based on a transcribed doctor-patient conversation. Use the following structure (unless otherwise specified in the dictation):
+Background (only if relevant history), Presenting complaint/anamnesis, Examination (bullet points), Assessment, Plan.
+
+Rules:
+– Do not include information, investigations, or findings not explicitly mentioned.
+– Negative findings only if stated.
+– Blood tests: write “relevant blood tests are ordered”, do not list them.
+– Correct obvious misspellings in medication names.
+– Do not use special characters or line breaks before headings.
+– Follow explicit instructions from the doctor regarding style, length, or specific wording.
+
+If the doctor adds comments after the patient has left, these must be considered. The note should be well-written."
+
+<br><br>
+
+<strong>Letter to patient:</strong><br>
+"Write a letter from the doctor to the patient. Start with Hi \\"name\\", and end with<br>
+Regards<br>
+\\"Your name\\"<br>
+\\"Clinic name\\"<br>
+The letter must have a professional and formal tone. You may improve the wording slightly for better flow."
+
+<br><br>
+
+These are examples that work well, but feel free to adapt them to your documentation style, specialty, and type of consultation. You can also create entirely custom prompts for any purpose you wish.
+`,
 };
 
 export default { indexTranslations, transcribeTranslations };
