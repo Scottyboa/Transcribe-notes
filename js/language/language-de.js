@@ -170,9 +170,35 @@ guideText: `Willkommen bei <strong>Whisper Klinische Transkription</strong>. Die
   <li><strong>Guide-Schaltfläche:</strong> Klicke erneut auf die "Guide"-Schaltfläche, um zur Hauptansicht zurückzukehren.</li>
 </ul><br><br>
 
-<strong>Beispiel-Prompt:</strong><br>
-Erstelle eine medizinische Notiz basierend auf dem Transkript eines Arzt-Patienten-Gesprächs. Sie soll folgende Abschnitte enthalten: Hintergrund, Aktuelle Beschwerden, Klinische Befunde, Einschätzung und Plan.  
-Die Notiz soll in professioneller Sprache und mit korrekter medizinischer Terminologie verfasst sein.<br><br>
+<strong>Beispiel-Prompts:</strong><br><br>
 
-Du kannst diesen Prompt frei anpassen, um ihn an deinen Dokumentationsstil, deine Fachrichtung oder deine Art der Konsultation anzupassen.`,
+<strong>Konsultation:</strong><br>
+"Systemprompt – Medizinischer Notizgenerator
+
+Erstelle eine medizinisch präzise, dokumentationsfertige Notiz basierend auf einem transkribierten Arzt-Patienten-Gespräch. Verwende folgende Struktur (sofern im Diktat nicht anders angegeben):
+Hintergrund (nur bei relevanter Vorgeschichte), Aktuelle Beschwerden/Anamnese, Untersuchung (stichpunktartig), Einschätzung, Plan.
+
+Regeln:
+– Keine Informationen, Untersuchungen oder Befunde einfügen, die nicht ausdrücklich erwähnt wurden.
+– Negative Befunde nur, wenn erwähnt.
+– Blutuntersuchungen: schreibe “relevante Blutuntersuchungen werden veranlasst”, ohne sie aufzulisten.
+– Offensichtliche Rechtschreibfehler bei Medikamentennamen korrigieren.
+– Keine Sonderzeichen oder Zeilenumbrüche vor Überschriften verwenden.
+– Halte dich an explizite Anweisungen des Arztes bzgl. Stil, Länge oder Formulierungen.
+
+Wenn der Arzt nach dem Gespräch noch Anmerkungen macht, sind diese zu berücksichtigen. Die Notiz sollte sprachlich gut ausgearbeitet sein."
+
+<br><br>
+
+<strong>Brief an den Patienten:</strong><br>
+"Schreibe einen Brief vom Arzt an den Patienten. Beginne mit Hallo \\"Name\\", und schließe mit<br>
+Mit freundlichen Grüßen<br>
+\\"Ihr Name\\"<br>
+\\"Praxisname\\"<br>
+Der Brief soll professionell und formell formuliert sein. Du kannst den Text stilistisch leicht verbessern."
+
+<br><br>
+
+Diese Beispiele funktionieren gut, aber du kannst sie gern an deinen Dokumentationsstil, deine Fachrichtung oder Konsultationstypen anpassen oder ganz eigene Prompts erstellen.
+`,
 };
