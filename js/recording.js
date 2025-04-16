@@ -486,8 +486,15 @@ function initRecording() {
     logInfo("Recording started.");
     try {
       mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      recordingStartTime = Date.now();
-      recordingTimerInterval = setInterval(updateRecordingTimer, 1000);
+// Clear any existing recording timer interval
+if (recordingTimerInterval) {
+  clearInterval(recordingTimerInterval);
+  recordingTimerInterval = null;
+}
+
+recordingStartTime = Date.now();
+recordingTimerInterval = setInterval(updateRecordingTimer, 1000);
+
       
       const track = mediaStream.getAudioTracks()[0];
       const processor = new MediaStreamTrackProcessor({ track: track });
@@ -547,9 +554,16 @@ pauseResumeButton.addEventListener("click", async () => {
 
       // Reset timing variables for the resumed segment
       recordingPaused = false;
-      recordingStartTime = Date.now();
-      lastFrameTime = Date.now();
-      recordingTimerInterval = setInterval(updateRecordingTimer, 1000);
+// Clear any existing recording timer interval
+if (recordingTimerInterval) {
+  clearInterval(recordingTimerInterval);
+  recordingTimerInterval = null;
+}
+
+recordingStartTime = Date.now();
+lastFrameTime = Date.now();
+recordingTimerInterval = setInterval(updateRecordingTimer, 1000);
+
       
       // Update UI to reflect resumed state
       pauseResumeButton.innerText = "Pause Recording";
