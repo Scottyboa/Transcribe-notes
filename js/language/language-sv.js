@@ -163,9 +163,35 @@ guideText: `Välkommen till <strong>Whisper Klinisk Transkription</strong>. Denn
   <li><strong>Guide-knappen:</strong> Klicka på "Guide"-knappen igen för att återgå till huvudsidan.</li>
 </ul><br><br>
 
-<strong>Exempel på prompt:</strong><br>
-Skapa en medicinsk anteckning baserad på samtalet mellan läkare och patient. Den ska innehålla: Bakgrund, Aktuellt, Kliniska fynd, Bedömning och Plan.  
-Anteckningen ska vara skriven med professionellt språk och korrekt medicinsk terminologi.<br><br>
+<strong>Exempel på promptar:</strong><br><br>
 
-Du kan anpassa denna prompt precis som du vill för att matcha din dokumentationsstil, specialitet eller typ av konsultation.`,
+<strong>Konsultation:</strong><br>
+"Systemprompt – Medicinsk notatsgenerator
+
+Skriv en medicinskt korrekt, journalfärdig notis baserad på ett transkriberat samtal mellan läkare och patient. Använd följande struktur (om inget annat anges i diktatet):
+Bakgrund (endast vid relevant historik), Aktuellt/anamnes, Undersökning (punktform), Bedömning, Plan.
+
+Regler:
+– Inkludera inte information, undersökningar eller fynd som inte uttryckligen nämns.
+– Negativa fynd endast om de anges.
+– Blodprover: skriv “relevanta blodprover beställs”, lista dem inte.
+– Rätta uppenbara stavfel i läkemedelsnamn.
+– Använd inte specialtecken eller radbrytningar före rubriker.
+– Följ läkarens uttryckliga instruktioner kring stil, längd eller specifika formuleringar.
+
+Om läkaren lägger till kommentarer efter att patienten har lämnat ska dessa beaktas. Notatet ska vara välformulerat."
+
+<br><br>
+
+<strong>Brev till patient:</strong><br>
+"Skriv ett brev från läkaren till patienten. Börja med Hej \\"namn\\", och avsluta med<br>
+Vänligen<br>
+\\"Ditt namn\\"<br>
+\\"Namn på vårdcentral\\"<br>
+Brevet ska ha en professionell och formell ton. Du kan förbättra språket något för bättre flyt."
+
+<br><br>
+
+Dessa är välfungerande exempel, men du kan gärna anpassa dem till din egen dokumentationsstil, specialitet och typ av konsultation. Du kan också skapa helt egna promptar för andra ändamål.
+`,
 };
