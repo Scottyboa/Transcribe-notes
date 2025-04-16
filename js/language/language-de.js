@@ -147,7 +147,7 @@ export const transcribeTranslations = {
   customPromptPlaceholder: "Benutzerdefinierten Prompt hier eingeben",
   adUnitText: "Ihre Anzeige hier",
   guideHeading: "Anleitung & Instruktionen",
-guideText: `Willkommen bei <strong>Whisper Klinische Transkription</strong>. Diese Anwendung ermöglicht es medizinischem Fachpersonal, Therapeut:innen und anderen Anwender:innen, Gespräche aufzuzeichnen und zu transkribieren sowie professionelle Notizen mithilfe eines KI-gestützten Notizgenerators zu erstellen.<br><br>
+guideText: `Willkommen bei <strong>Transcribe Notes</strong>. Diese Anwendung ermöglicht es medizinischem Fachpersonal, Therapeut:innen und anderen Anwender:innen, Gespräche aufzuzeichnen und zu transkribieren sowie professionelle Notizen mithilfe eines KI-gestützten Notizgenerators zu erstellen.<br><br>
 
 <strong>So verwendest du die Funktionen:</strong><br><br>
 
