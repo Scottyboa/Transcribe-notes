@@ -154,7 +154,7 @@ guideText: `Velkommen til <strong>Transcribe Notes</strong>. Denne applikasjonen
 
   <li><strong>Tilpasset prompt:</strong> På høyre side kan du velge en promptplass (1–10) og skrive inn din egen prompt. Prompten lagres automatisk og knyttes til din API-nøkkel. Du kan lage hvilken som helst prompt som passer din dokumentasjonsstil, tone og faglige fokus. Dette gir deg full fleksibilitet i hvordan notatene dine genereres.</li><br>
 
-  <li><strong>Notatgenerering:</strong> Når transkripsjonen er fullført, klikker du på "Generer notat" for å lage et notat basert på transkripsjonen og den valgte/tilpassede prompten.</li><br>
+  <li><strong>Notatgenerering:</strong> Når transkripsjonen er fullført, klikker du på "Generer notat" for å lage et notat basert på transkripsjonen og den valgte/tilpassede prompten. Genererte journalnotater må gjennomgås og valideres av helsepersonell før de tas i bruk.</li><br>
 
   <li><strong>Kostnadsoversikt:</strong> For å se ditt nåværende forbruk hos OpenAI, klikk på lenken for kostnadsoversikt som er plassert oppe til høyre på denne siden.</li><br>
 
