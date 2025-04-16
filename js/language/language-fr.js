@@ -50,63 +50,30 @@ Lorsque vous vous connectez en saisissant votre clé API, celle-ci est stockée 
   priceModalHeading: "Prix",
 priceModalText: `
 <div>
-  <h1>Informations sur les Coûts</h1>
-  <h2>Tarification de la Transcription Voix-en-Texte</h2>
+  <p><strong>Informations sur les coûts</strong></p>
+  <p>Vous ne payez que ce que vous utilisez — directement à la source, sans intermédiaires coûteux. Aucun abonnement. Aucun engagement.</p>
+
+  <p><strong>Tarifs :</strong></p>
   <ul>
-    <li><strong>Coût :</strong> 0,006 $ par minute. <em>Exemple :</em> Une consultation de 15 minutes coûtera 15 × 0,006 $ = <strong>0,09 $</strong> par consultation.</li>
+    <li>Transcription audio : $0.006 par minute</li>
+    <li>Génération de notes : $5 pour 1 million de tokens (entrée) et $10 pour 1 million de tokens (sortie)</li>
   </ul>
-  <h2>Tarification de la Génération de Notes</h2>
+
+  <p><strong>Exemple – Consultation de 15 minutes :</strong></p>
   <ul>
-    <li><strong>Tarification basée sur les jetons (tokens) :</strong></li>
-    <ul>
-      <li><strong>Entrée (transcription + prompt) :</strong> 5,00 $ pour 1 000 000 de jetons (soit 0,000005 $ par jeton).</li>
-      <li><strong>Sortie (note générée) :</strong> 15,00 $ pour 1 000 000 de jetons (soit 0,000015 $ par jeton).</li>
-    </ul>
+    <li>Transcription : 15 × $0.006 = $0.09</li>
+    <li>Génération de note : généralement entre $0.005 et $0.01</li>
+    <li>Total : environ $0.10 pour toute la consultation</li>
   </ul>
-  <h3>Exemple de Calcul pour une Consultation (génération de note uniquement)</h3>
-  <ol>
-    <li>
-      <strong>Calcul pour l'entrée :</strong>
-      <p>Supposons que la transcription fasse environ <strong>700 mots</strong> et que vous ajoutiez un prompt de <strong>30 mots</strong>.<br>
-      Total des mots = 700 + 30 = <strong>730 mots</strong>.<br>
-      Estimation en jetons = 730 × 0,75 ≈ <strong>547,5 jetons</strong>.<br>
-      Coût d’entrée = 547,5 × 0,000005 $ ≈ <strong>0,0027 $</strong>.</p>
-    </li>
-    <li>
-      <strong>Calcul pour la sortie :</strong>
-      <p>Supposons que la note générée fasse environ <strong>250 mots</strong>.<br>
-      Estimation en jetons = 250 × 0,75 ≈ <strong>187,5 jetons</strong>.<br>
-      Coût de sortie = 187,5 × 0,000015 $ ≈ <strong>0,0028 $</strong>.</p>
-    </li>
-    <li>
-      <strong>Coût total pour la génération de note :</strong>
-      <p>Coût combiné ≈ 0,0027 $ + 0,0028 $ = <strong>0,0055 $</strong> par consultation.</p>
-    </li>
-  </ol>
-  <h2>Coût Total Approximatif par Consultation</h2>
-  <p>(pour une consultation ou un enregistrement de 15 minutes utilisant les deux fonctions)</p>
+
+  <p><strong>Exemple de coût mensuel en utilisation régulière :</strong></p>
   <ul>
-    <li><strong>Transcription Voix-en-Texte :</strong> <strong>0,09 $</strong></li>
-    <li><strong>Génération de Note :</strong> <strong>0,0055 $</strong></li>
-    <li><strong>Total :</strong> Environ <strong>0,0955 $</strong> par consultation.</li>
+    <li>20 consultations par jour × 4 jours par semaine × 4 semaines = 320 consultations</li>
+    <li>Coût mensuel total : environ $30–31</li>
   </ul>
-  <h2>Estimations Mensuelles</h2>
-  <p>Si vous effectuez 20 consultations par jour, 4 jours par semaine, pendant 4 semaines (20 × 4 × 4 = <strong>320 consultations</strong> par mois) :</p>
-  <ol>
-    <li>
-      <strong>Utilisation uniquement de la transcription :</strong><br>
-      Coût mensuel = 320 × 0,09 $ = <strong>28,80 $</strong>.
-    </li>
-    <li>
-      <strong>Utilisation de la transcription et de la génération de notes :</strong><br>
-      Coût mensuel = 320 × 0,0955 $ ≈ <strong>30,56 $</strong>.
-    </li>
-  </ol>
-  <h2>Souplesse d’Utilisation</h2>
-  <p>Contrairement à certains prestataires qui imposent un abonnement mensuel, ici vous ne payez que ce que vous consommez réellement. Si vous prenez des congés ou avez des jours sans activité, le coût est nul. Même avec un usage quotidien, le coût par consultation reste bien inférieur à celui des solutions concurrentes.</p>
-  <hr>
-  <h2>Avantage de la Connexion Directe</h2>
-  <p>Notre application se connecte directement à l’API d’OpenAI — sans intermédiaire ni frais supplémentaires. Cela signifie que vous ne payez que pour le traitement réel effectué par l’IA, faisant de notre service l’une des options les plus abordables pour la transcription et la génération de notes disponibles aujourd’hui.</p>
+
+  <p><strong>Vous ne payez qu’à l’usage :</strong><br>
+  En cas de congés, maladie ou absence, vous ne payez rien.</p>
 </div>
 `,
 };
