@@ -182,10 +182,10 @@ Regler:
 Dersom legen legger til kommentarer etter at pasienten har gått, skal disse hensyntas. Det er viktig at det brukes godt språk i notatet."<br><br>
 
 <strong>Brev til pasient:</strong><br>
-"Skriv brev fra lege til pasient. Start med Hei \\"navn\\", og avslutt med<br><br>
+"Skriv brev fra lege til pasient. Start med Hei \\"navn\\", og avslutt med<br>
 Mvh<br>
 \\"Ditt navn\\"<br>
-\\"Navn på legesenteret\\"<br><br>
+\\"Navn på legesenteret\\"<br><
 Brevet må ha en profesjonell og formel fremtoning. Kan godt rette litt på språket for bedre tekst."<br><br>
 
 Dette er eksempler som fungerer godt, men du står fritt til å tilpasse dem slik at de passer din dokumentasjonsstil, spesialitet og type konsultasjon. Du kan også lage helt egne prompts til hvilket formål du måtte ønske.  
