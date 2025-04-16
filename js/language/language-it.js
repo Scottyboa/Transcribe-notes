@@ -134,7 +134,7 @@ export const transcribeTranslations = {
   customPromptPlaceholder: "Inserisci qui il prompt personalizzato",
   adUnitText: "Il tuo annuncio qui",
   guideHeading: "Guida e Istruzioni",
-guideText: `Benvenuto in <strong>Whisper Trascrizione Clinica</strong>. Questa applicazione consente a professionisti sanitari, terapisti e altri operatori di registrare e trascrivere consulti, nonché di generare note professionali utilizzando un generatore di testi basato su intelligenza artificiale.<br><br>
+guideText: `Benvenuto in <strong>Transcribe Notes</strong>. Questa applicazione consente a professionisti sanitari, terapisti e altri operatori di registrare e trascrivere consulti, nonché di generare note professionali utilizzando un generatore di testi basato su intelligenza artificiale.<br><br>
 
 <strong>Come utilizzare le funzionalità:</strong><br><br>
 
