@@ -159,9 +159,35 @@ guideText: `Bienvenue dans <strong>Whisper Transcription Clinique</strong>. Cett
   <li><strong>Bouton "Guide" :</strong> Cliquez de nouveau sur le bouton "Guide" pour revenir à l’interface principale.</li>
 </ul><br><br>
 
-<strong>Exemple de prompt :</strong><br>
-Générez une note médicale basée sur la transcription d’un échange entre un médecin et un patient. Elle doit inclure : Contexte, Problématique actuelle, Résultats cliniques, Évaluation et Plan.  
-La note doit être rédigée dans un langage professionnel et avec une terminologie médicale appropriée.<br><br>
+<strong>Exemples de prompts :</strong><br><br>
 
-Vous pouvez personnaliser ce prompt comme vous le souhaitez, selon votre style de documentation, votre spécialité ou le type de consultation.`,
+<strong>Consultation :</strong><br>
+"Prompt système – Générateur de note médicale
+
+Rédigez une note médicalement précise et prête pour le journal à partir d’une conversation transcrite entre le médecin et le patient. Utilisez la structure suivante (sauf indication contraire dans le dictat) :
+Contexte (seulement si antécédents pertinents), Motif de consultation/anamnèse, Examen (puces), Évaluation, Plan.
+
+Règles :
+– Ne pas inclure d’informations, examens ou constatations non mentionnés explicitement.
+– Constatations négatives uniquement si mentionnées.
+– Bilans sanguins : écrivez “des bilans sanguins pertinents sont prescrits”, sans les détailler.
+– Corrigez les fautes évidentes dans les noms de médicaments.
+– N’utilisez pas de caractères spéciaux ni de sauts de ligne avant les titres.
+– Suivez les instructions explicites du médecin concernant le style, la longueur ou les formulations spécifiques.
+
+Si le médecin ajoute des commentaires après le départ du patient, ceux-ci doivent être pris en compte. La note doit être bien rédigée."
+
+<br><br>
+
+<strong>Lettre au patient :</strong><br>
+"Rédigez une lettre du médecin au patient. Commencez par Bonjour \\"nom\\", et terminez par<br>
+Cordialement<br>
+\\"Votre nom\\"<br>
+\\"Nom du cabinet\\"<br>
+La lettre doit avoir un ton professionnel et formel. Vous pouvez améliorer légèrement le style pour une meilleure fluidité."
+
+<br><br>
+
+Ce sont des exemples efficaces, mais vous êtes libre de les adapter à votre style de documentation, votre spécialité ou votre type de consultation. Vous pouvez également créer vos propres prompts pour tout autre usage.
+`,
 };
