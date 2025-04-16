@@ -136,7 +136,7 @@ export const transcribeTranslations = {
   customPromptPlaceholder: "Saisissez l'invite personnalisée ici",
   adUnitText: "Votre publicité ici",
   guideHeading: "Guide et instructions",
-guideText: `Bienvenue dans <strong>Whisper Transcription Clinique</strong>. Cette application permet aux professionnels de santé, thérapeutes et autres praticiens d’enregistrer et de transcrire des consultations, ainsi que de générer des notes professionnelles grâce à un générateur alimenté par intelligence artificielle.<br><br>
+guideText: `Bienvenue dans <strong>Transcribe Notes</strong>. Cette application permet aux professionnels de santé, thérapeutes et autres praticiens d’enregistrer et de transcrire des consultations, ainsi que de générer des notes professionnelles grâce à un générateur alimenté par intelligence artificielle.<br><br>
 
 <strong>Comment utiliser les fonctionnalités :</strong><br><br>
 
