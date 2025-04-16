@@ -161,7 +161,7 @@ guideText: `Willkommen bei <strong>Transcribe Notes</strong>. Diese Anwendung er
 
   <li><strong>Benutzerdefinierter Prompt:</strong> Wähle rechts einen Prompt-Slot (1–10) aus und gib deinen eigenen Prompt ein. Dein Prompt wird automatisch gespeichert und mit deinem API-Schlüssel verknüpft. Du kannst jeden beliebigen Prompt erstellen, der zu deinem Dokumentationsstil, Tonfall und fachlichen Fokus passt. So hast du volle Kontrolle über die Generierung deiner Notizen.</li><br>
 
-  <li><strong>Notiz generieren:</strong> Sobald die Transkription abgeschlossen ist, klicke auf "Notiz generieren", um eine medizinische Notiz basierend auf deinem Transkript und dem gewählten Prompt zu erstellen.</li><br>
+  <li><strong>Notiz generieren:</strong> Sobald die Transkription abgeschlossen ist, klicke auf "Notiz generieren", um eine medizinische Notiz basierend auf deinem Transkript und dem gewählten Prompt zu erstellen. Generierte medizinische Notizen müssen vor der Verwendung von medizinischem Fachpersonal überprüft und validiert werden.</li><br>
 
   <li><strong>Kostenübersicht:</strong> Um deine aktuellen Nutzungskosten bei OpenAI zu überprüfen, klicke auf den Link zur Kostenübersicht oben rechts auf dieser Seite.</li><br>
 
