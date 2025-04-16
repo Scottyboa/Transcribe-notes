@@ -1,6 +1,6 @@
 export const indexTranslations = {
-  pageTitle: "Whisper Clinical Transcription",
-  headerTitle: "Whisper Clinical Transcription",
+  pageTitle: "Transcribe Notes",
+  headerTitle: "Transcribe Notes",
   headerSubtitle: "Advanced AI-Powered Speech-to-Text and Clinical Note Generation for Healthcare Consultations",
   startText: "Dont have an API-key yet? Click on «API guide- How to Get» for easy instructions.",
   apiPlaceholder: "Enter API Key here",
