@@ -163,7 +163,9 @@ guideText: `Velkommen til <strong>Whisper Klinisk Transkripsjon</strong>. Denne 
   <li><strong>Guide-knapp:</strong> Klikk på "Guide"-knappen igjen for å gå tilbake til hovedvisningen.</li>
 </ul><br><br>
 
-<strong>Eksempel på prompt:</strong><br>
+<strong>Eksempler på prompts:</strong><br><br>
+
+<strong>Konsultasjon:</strong><br>
 "Systemprompt – Medisinsk notatgenerator
 
 Skriv et medisinsk presist, journalklart notat basert på en transkribert lege-pasient-samtale. Bruk følgende struktur (med mindre annet er spesifisert i diktatet):
@@ -179,7 +181,15 @@ Regler:
 
 Dersom legen legger til kommentarer etter at pasienten har gått, skal disse hensyntas. Det er viktig at det brukes godt språk i notatet."<br><br>
 
-Du kan tilpasse denne prompten slik du selv ønsker, slik at den passer din dokumentasjonsstil, spesialitet eller type konsultasjon.`,
+<strong>Brev til pasient:</strong><br>
+"Skriv brev fra lege til pasient. Start med Hei \\"navn\\", og avslutt med<br><br>
+Mvh<br>
+\\"Ditt navn\\"<br>
+\\"Navn på legesenteret\\"<br><br>
+Brevet må ha en profesjonell og formel fremtoning. Kan godt rette litt på språket for bedre tekst."<br><br>
+
+Dette er eksempler som fungerer godt, men du står fritt til å tilpasse dem slik at de passer din dokumentasjonsstil, spesialitet og type konsultasjon. Du kan også lage helt egne prompts til hvilket formål du måtte ønske.  
+`,
 };
 
 export default { indexTranslations, transcribeTranslations };
