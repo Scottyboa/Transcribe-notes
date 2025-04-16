@@ -44,63 +44,30 @@ Per far funzionare la webapp, il tuo portafoglio OpenAI deve avere fondi suffici
   priceModalHeading: "Prezzo",
 priceModalText: `
 <div>
-  <h1>Informazioni sui Costi</h1>
-  <h2>Prezzi per la Trascrizione da Voce a Testo</h2>
+  <p><strong>Informazioni sui costi</strong></p>
+  <p>Paghi solo per ciò che usi – direttamente alla fonte, senza intermediari costosi. Nessun abbonamento. Nessun vincolo.</p>
+
+  <p><strong>Prezzi:</strong></p>
   <ul>
-    <li><strong>Costo:</strong> $0.006 al minuto. <em>Esempio:</em> Una consulenza di 15 minuti costerà 15 × $0.006 = <strong>$0.09</strong> per consulenza.</li>
+    <li>Trascrizione audio: $0.006 al minuto</li>
+    <li>Generazione note: $5 per 1 milione di token (input) e $10 per 1 milione di token (output)</li>
   </ul>
-  <h2>Prezzi per la Generazione delle Note</h2>
+
+  <p><strong>Esempio – Consulto di 15 minuti:</strong></p>
   <ul>
-    <li><strong>Prezzi basati sui Token:</strong></li>
-    <ul>
-      <li><strong>Input (trascrizione + prompt):</strong> $5.00 per 1.000.000 di token (cioè $0.000005 per token).</li>
-      <li><strong>Output (nota generata):</strong> $15.00 per 1.000.000 di token (cioè $0.000015 per token).</li>
-    </ul>
+    <li>Trascrizione: 15 × $0.006 = $0.09</li>
+    <li>Generazione nota: solitamente tra $0.005 e $0.01</li>
+    <li>Totale: circa $0.10 per l’intero consulto</li>
   </ul>
-  <h3>Calcolo Esemplificativo per una Consulenza (solo generazione della nota)</h3>
-  <ol>
-    <li>
-      <strong>Calcolo dell'Input:</strong>
-      <p>Supponiamo che la trascrizione della consulenza contenga circa <strong>700 parole</strong> e che venga aggiunto un prompt di <strong>30 parole</strong>.<br>
-      Totale parole = 700 + 30 = <strong>730 parole</strong>.<br>
-      Token stimati = 730 × 0.75 ≈ <strong>547,5 token</strong>.<br>
-      Costo dell'input = 547,5 × $0.000005 ≈ <strong>$0.0027</strong>.</p>
-    </li>
-    <li>
-      <strong>Calcolo dell'Output:</strong>
-      <p>Supponiamo che la nota generata contenga circa <strong>250 parole</strong>.<br>
-      Token stimati = 250 × 0.75 ≈ <strong>187,5 token</strong>.<br>
-      Costo dell'output = 187,5 × $0.000015 ≈ <strong>$0.0028</strong>.</p>
-    </li>
-    <li>
-      <strong>Costo Totale per la Generazione della Nota:</strong>
-      <p>Costo combinato ≈ $0.0027 + $0.0028 = <strong>$0.0055</strong> per consulenza.</p>
-    </li>
-  </ol>
-  <h2>Costo Totale Approssimativo per Consulenza</h2>
-  <p>(per una consulenza/registrazione di 15 minuti, utilizzando entrambe le funzioni)</p>
+
+  <p><strong>Esempio di costo mensile con uso regolare:</strong></p>
   <ul>
-    <li><strong>Trascrizione da Voce a Testo:</strong> <strong>$0.09</strong></li>
-    <li><strong>Generazione della Nota:</strong> <strong>$0.0055</strong></li>
-    <li><strong>Totale:</strong> Circa <strong>$0.0955</strong> per consulenza.</li>
+    <li>20 consulti al giorno × 4 giorni a settimana × 4 settimane = 320 consulti</li>
+    <li>Costo mensile totale: circa $30–31</li>
   </ul>
-  <h2>Stime Mensili dei Costi</h2>
-  <p>Supponendo di effettuare 20 consulenze al giorno, 4 giorni a settimana, per 4 settimane al mese (20 × 4 × 4 = <strong>320 consulenze</strong> al mese):</p>
-  <ol>
-    <li>
-      <strong>Solo Trascrizione da Voce a Testo:</strong><br>
-      Costo mensile = 320 × $0.09 = <strong>$28.80</strong>.
-    </li>
-    <li>
-      <strong>Trascrizione + Generazione Note:</strong><br>
-      Costo mensile = 320 × $0.0955 ≈ <strong>$30.56</strong>.
-    </li>
-  </ol>
-  <h2>Flessibilità d'Uso</h2>
-  <p>A differenza dei fornitori che richiedono un abbonamento mensile, qui paghi solo per ciò che effettivamente utilizzi. Se prendi un giorno libero, vai in vacanza o hai un periodo inattivo, i costi saranno pari a zero. Anche con uso quotidiano, il costo per ogni singola attività resta significativamente più basso rispetto ad altri servizi.</p>
-  <hr>
-  <h2>Vantaggio della Connessione Diretta</h2>
-  <p>La nostra webapp si connette direttamente all’API di OpenAI – nessun intermediario, nessun costo aggiuntivo. Questo significa che paghi esclusivamente per l'elaborazione effettiva dell'IA, rendendo il nostro servizio una delle soluzioni più convenienti per la trascrizione e la generazione di note attualmente disponibili.</p>
+
+  <p><strong>Paghi solo in base all'utilizzo:</strong><br>
+  Se non utilizzi il servizio per ferie, malattia o congedo, non paghi nulla.</p>
 </div>
 `,
 };
