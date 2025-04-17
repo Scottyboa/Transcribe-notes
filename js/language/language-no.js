@@ -142,7 +142,7 @@ Bakgrunn (kun ved relevant historikk), Aktuelt/anamnese, Undersøkelse (punktvis
 Regler:
 – Ikke inkluder opplysninger, undersøkelser eller funn som ikke er eksplisitt nevnt.
 – Negative funn kun hvis nevnt.
-– Blodprøver: skriv “relevante blodprøver rekvireres”, ikke list opp prøver.
+– Hvis blodprøver rekvireres: skriv “relevante blodprøver rekvireres”, ikke list opp alle prøvene så langt lege ikke nevner dette eksplisitt.
 – Rett åpenbare feilstavinger i medikamentnavn.
 – Ikke bruk spesialtegn eller linjeskift før overskrifter.
 – Følg eksplisitte instruksjoner fra legen om stil, lengde eller spesifikke formuleringer.
