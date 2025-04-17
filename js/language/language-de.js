@@ -12,27 +12,17 @@ export const indexTranslations = {
   aboutButton: "Über",
   adRevenueMessage: "Da diese Website kostenlos genutzt werden kann und ausschließlich auf Werbeeinnahmen angewiesen ist, stimmen Sie bitte personalisierter Werbung zu, um den Dienst zu unterstützen.",
   securityModalHeading: "Datenschutz",
-securityModalText: `Ihre Privatsphäre und die Sicherheit von Patientendaten haben für uns höchste Priorität. Wir setzen robuste Maßnahmen ein, um sicherzustellen, dass Ihre Daten vertraulich und geschützt bleiben:<br><br>
+securityModalText: `Der Schutz Ihrer Privatsphäre und die Sicherheit von Patientendaten haben für uns oberste Priorität. Diese Web-App wurde so entwickelt, dass die gesamte Datenverarbeitung direkt und temporär in Ihrem Browser erfolgt – ohne jegliche serverseitige Speicherung oder Verarbeitung unsererseits.<br><br>
 
-- <strong>Datenverschlüsselung:</strong> Alle von unserem System verarbeiteten Daten – einschließlich Audioaufnahmen, Transkripte und Notizen – werden nach branchenüblichen Methoden verschlüsselt. Transkripte und Notizen sind ausschließlich mit Ihrem verschlüsselten persönlichen API-Schlüssel und dem verwendeten Gerät verknüpft, sodass nur Sie auf die generierten Inhalte zugreifen können.<br><br>
+<strong>Wie Daten verarbeitet werden:</strong><br>
+Audioaufnahmen, Transkriptionen und generierte Notizen werden lokal in Ihrem Browser verarbeitet und direkt über die sichere API von OpenAI übermittelt. Transkriptionen und Notizen werden ausschließlich temporär im Browser angezeigt und automatisch gelöscht, sobald sie ersetzt oder die Seite geschlossen wird. Audiodateien werden lediglich vorübergehend verarbeitet, um die Transkription zu ermöglichen, und nicht gespeichert.<br><br>
 
-- <strong>Automatische Löschung:</strong> Sobald ein Transkript oder eine Notiz generiert und auf Ihrem Bildschirm angezeigt wurde, wird es automatisch und unwiderruflich innerhalb von 2 Minuten von unseren Servern gelöscht. Audiodateien werden nur vorübergehend zur Verarbeitung gespeichert und nicht über den unmittelbaren Verwendungszweck hinaus aufbewahrt.<br><br>
+<strong>Speicherung bei OpenAI:</strong><br>
+Textdaten werden vorübergehend für bis zu 30 Tage gespeichert, um Fehlerbehebung und mögliche Auskunftsanfragen durch den Nutzer zu unterstützen. Anschließend werden sie automatisch gelöscht. Die Daten werden nicht für das Training oder die Weiterentwicklung von Modellen verwendet. OpenAI folgt außerdem dem GDPR-Rahmenwerk für Datenschutz und Datenübermittlung. Weitere Informationen finden Sie unter <a href="https://openai.com/security-and-privacy/" target="_blank" style="color: blue; text-decoration: underline;">OpenAI Sicherheit und Datenschutz</a>.<br><br>
+Nutzern wird zudem empfohlen, eine Datenschutzvereinbarung (Data Processing Addendum, DPA) mit OpenAI abzuschließen. Dies ist einfach möglich – eine Anleitung dazu finden Sie im <strong>API-Leitfaden auf der Startseite</strong>.<br><br>
 
-- <strong>Schutz vor unbefugtem Zugriff:</strong> Selbst bei unbefugtem Zugriff auf Ihren API-Schlüssel bleiben Ihre Daten durch gerätespezifische Marker verschlüsselt und somit unzugänglich.<br><br>
-
-- <strong>DSGVO-konformes Hosting:</strong> Alle Backend-Prozesse laufen auf dedizierten Microsoft Azure-Servern innerhalb der EU und entsprechen vollständig den Anforderungen der DSGVO. Weitere Informationen darüber, wie wir Ihre Daten schützen, finden Sie unter <a href="https://openai.com/security-and-privacy/" target="_blank" style="color: blue; text-decoration: underline;">OpenAI Sicherheit und Datenschutz</a>.<br><br>
-
-<strong>Weitere Datenschutzmaßnahmen:</strong><br><br>
-
-- <strong>Minimale Datenerfassung:</strong> Wir erfassen nur die Informationen, die für die Bereitstellung unserer Dienste unbedingt erforderlich sind. Dazu gehören Ihr OpenAI API-Schlüssel (in verschlüsselter Form für die Dauer Ihrer Sitzung gespeichert), ein ausschließlich zur Verschlüsselung verwendetes Gerätetoken sowie Ihre Spracheinstellung. Es werden keine weiteren personenbezogenen Daten gespeichert.<br><br>
-
-- <strong>Cookie-Nutzung:</strong> Cookies auf dieser Website dienen ausschließlich der Anzeige personalisierter Werbung und der Verbesserung Ihrer Nutzererfahrung. Diese Cookies werden nicht zur Erfassung oder Speicherung personenbezogener Daten über das für diesen Zweck erforderliche Maß hinaus verwendet. Zudem nutzt unsere Website Cookies zur Speicherung von Benutzereinstellungen und zur Verwaltung von Einwilligungen.<br><br>
-
-- <strong>Datenverarbeitung & -speicherung:</strong> Alle von unserem System verarbeiteten Daten – einschließlich Audioaufnahmen, Transkripte und generierter Notizen – werden nur für die Dauer des Transkriptions- und Notizerstellungsprozesses gespeichert und kurz nach Abschluss der Verarbeitung automatisch gelöscht. Wir speichern oder teilen keine personenbezogenen Daten über das für die ordnungsgemäße Funktion unseres Dienstes erforderliche Maß hinaus.<br><br>
-
-- <strong>Datenweitergabe an Dritte & gesetzliche Vorgaben:</strong> Wir verkaufen oder teilen Ihre personenbezogenen Daten nicht mit Dritten. Alle Daten, die an externe Dienste – wie OpenAI zur Transkription und Notizerstellung oder Google AdSense zur Anzeige personalisierter Werbung – weitergegeben werden, beschränken sich auf anonymisierte Informationen, die sich ausschließlich auf Werbepersonalisierung und Benutzereinstellungen beziehen. Ihre Aufnahmen, Transkripte oder generierten Notizen sind davon ausgeschlossen. Jegliche Datenweitergabe erfolgt unter strikter Vertraulichkeit und in voller Übereinstimmung mit den geltenden Datenschutzbestimmungen.<br><br>
-
-Bitte beachten Sie, dass aufgrund unseres Systemdesigns alle Daten kurz nach der Verarbeitung automatisch gelöscht werden und nicht langfristig gespeichert werden.`,
+<strong>Cookies und Werbung:</strong><br>
+Wir verwenden Cookies ausschließlich zur Verbesserung der Benutzererfahrung und zur Anzeige relevanter Werbung über Google Ads. Diese Cookies speichern keine personenbezogenen Daten über das für Funktionalität und Anpassung erforderliche Maß hinaus. Die Website verwendet Cookies auch zur Speicherung von Spracheinstellungen, benutzerdefinierten Prompts und Einwilligungspräferenzen.`,
 
   aboutModalHeading: "Über uns",
   aboutModalText: `Diese Website wurde entwickelt, um Gesundheitsfachkräfte und andere Nutzer mit direktem Zugang zu hochwertiger Spracherkennung und klinischer Notizgenerierung zu versorgen – ohne unnötige Kosten oder Zwischenhändler.<br><br>
