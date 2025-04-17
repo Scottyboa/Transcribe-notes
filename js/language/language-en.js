@@ -33,19 +33,22 @@ Many existing providers offer similar services but charge significantly more—o
 • The website itself is completely free.<br><br>
 To continue offering this free service, we would greatly appreciate it if you accept the display of ads from Google Ads. Ad revenue helps us cover hosting and operational costs, allowing the service to remain accessible to everyone.`,
   guideModalHeading: "API key - How to Get",
-  guideModalText: `To use this webapp, you must first create an OpenAI API profile, generate an API key, and fund your OpenAI wallet. Your API key is then copied and pasted into the provided API key field. Once you press Enter, the webapp saves the API key temporarily for your session—this key links you to the OpenAI servers so that speech-to-text transcription and note generation can work. Please note, you are charged immediately per task performed. For more info on cost, please review the "Cost" section on the front page.
+guideModalText: `To use this web app, you must first create an OpenAI API account, generate an API key, and ensure that your OpenAI wallet has sufficient funds. The API key is then copied and pasted into the designated field. When you press "Enter", the web app temporarily stores the API key for the session—this key connects you to OpenAI’s servers so that speech-to-text transcription and note generation can function. Please note that you are charged immediately for each task (speech-to-text and/or note generation). For more information on costs, see the "Cost Information" section on the homepage.
 <br><br>
-<strong>1. Create Your OpenAI API Profile</strong><br>
-To begin, you need to create a profile on the OpenAI API platform. This profile serves as your account for managing API keys and billing. To get started, visit the <a href="https://platform.openai.com/signup" style="color:blue;">OpenAI API Signup</a> page. Follow the instructions to sign up by providing your email address, setting a password, and verifying your account. Once registered, you'll have access to your dashboard.
+<strong>1. Create your OpenAI API account</strong><br>
+To get started, you need to create an account on the OpenAI API platform. This account serves as your dashboard for managing API keys and billing. To begin, visit <a href="https://platform.openai.com/signup" style="color:blue;">OpenAI API Registration</a>. Follow the instructions to create a user account. Once registered, you’ll gain access to your dashboard, where you can generate a personal API key and add credit to your OpenAI wallet.
 <br><br>
-<strong>2. Generate an API Key</strong><br>
-After creating your profile, generate an API key by navigating to the <a href="https://platform.openai.com/account/api-keys" style="color:blue;">API key management</a> page. Click the button to create a new API key. Important: You will only see your API key once. Copy it immediately and store it securely (e.g., in a text file) for future use. If you lose the key or suspect it has been compromised, delete it from your account and create a new one.
+<strong>2. Generate an API key</strong><br>
+After creating your account, go to the <a href="https://platform.openai.com/account/api-keys" style="color:blue;">API Key Management</a> page to generate a new API key. Click the button to create a new key. Important: The key will only be visible once. Copy it immediately and store it securely (e.g., in a text file). If you lose the key or suspect it has been compromised, you can easily deactivate/delete it and generate a new one on the same page.
 <br><br>
-<strong>3. Fund Your OpenAI Wallet</strong><br>
-For the webapp to function, your OpenAI wallet must have sufficient funds. Visit the <a href="https://platform.openai.com/account/billing/overview" style="color:blue;">Billing & Payment</a> page to add funds. You can transfer any amount at any time. As long as funds are available, you'll be able to use the site—each task is charged immediately.
+<strong>3. Add funds to your OpenAI wallet</strong><br>
+To use the web app, your OpenAI wallet must have sufficient funds. Visit the <a href="https://platform.openai.com/account/billing/overview" style="color:blue;">Billing and Payment page</a> to top up your balance. You can add any amount at any time. As long as funds are available, you’ll be able to use the features in this web app—each task is charged immediately. For a detailed pricing overview, see the "Cost Information" section.
 <br><br>
-<strong>Session Security Reminder</strong><br>
-When you log in by entering your API key, it is stored only temporarily in your browser session. This means if you exit the website, close your browser, or turn off your computer, the API key will not be saved. You will need to re-enter your API key the next time you use the webapp, ensuring your key remains secure.`,
+<strong>4. Sign a Data Processing Agreement (DPA)</strong><br>
+If you plan to use the API services to process personal data (e.g., in a healthcare setting), it is recommended that you enter into a Data Processing Agreement with OpenAI. You can find OpenAI’s standard agreement here: <a href="https://ironcladapp.com/public-launch/63ffefa2bed6885f4536d0fe" style="color:blue;">OpenAI Data Processing Agreement (DPA)</a>. To fill in your correct organization ID, visit <a href="https://platform.openai.com/settings/organization/general" style="color:blue;">your OpenAI organization profile</a>. Once the agreement is signed, you’re ready to use the service.
+<br><br>
+<strong>Session Security Notice</strong><br>
+When you log in by entering your API key on the homepage and pressing Enter, the key is stored only temporarily in your browser session. This means that if you leave the site, close your browser, or shut down your computer, the API key will not be saved. You’ll need to paste it again the next time you use the web app, which helps keep your key secure.`,
   priceButton: "Price",
   priceModalHeading: "Price",
 priceModalText: `
