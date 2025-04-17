@@ -12,19 +12,17 @@ export const indexTranslations = {
   aboutButton: "Om",
   adRevenueMessage: "Eftersom denna webbplats är gratis att använda och enbart finansieras genom annonsintäkter, vänligen godkänn annonser för att stödja tjänsten.",
 
-  securityModalHeading: "Integritet",
-securityModalText: `Din integritet och säkerheten för patientinformation är vår högsta prioritet. Vi använder robusta åtgärder för att säkerställa att dina uppgifter förblir konfidentiella och skyddade:<br><br>
-- <strong>Datakryptering:</strong> All data som behandlas av vårt system – inklusive ljudinspelningar, transkriptioner och anteckningar – är krypterad med branschstandardmetoder. Transkriptioner och anteckningar är uteslutande kopplade till din krypterade personliga API-nyckel och den enhet som används för åtkomst, vilket garanterar att endast du kan se det genererade innehållet.<br><br>
-- <strong>Automatisk radering:</strong> När en transkription eller anteckning har genererats och visats på din skärm, raderas den automatiskt och oåterkalleligt från våra servrar inom 2 minuter. Ljudfiler lagras endast tillfälligt för bearbetning och sparas inte efter att de använts.<br><br>
-- <strong>Skydd mot obehörig åtkomst:</strong> Även om obehörig åtkomst till din API-nyckel skulle inträffa, förblir dina data krypterade och skyddade av enhetsspecifika markörer, vilket gör informationen oåtkomlig.<br><br>
-- <strong>GDPR-kompatibel hosting:</strong> Alla backend-processer körs på dedikerade Microsoft Azure-servrar inom EU och är fullt kompatibla med GDPR-förordningen. Du kan läsa mer om hur vi skyddar dina data genom att besöka <a href="https://openai.com/security-and-privacy/" target="_blank" style="color: blue; text-decoration: underline;">OpenAI säkerhet och integritet</a>.<br><br>
-<strong>Ytterligare integritetspraxis:</strong><br><br>
-- <strong>Minimal datainsamling:</strong> Vi samlar endast in den information som är nödvändig för att tillhandahålla våra tjänster. Detta inkluderar din OpenAI API-nyckel (lagras i krypterad form under sessionens varaktighet), enhetstoken som endast används för kryptering, samt ditt språkval. Ingen ytterligare personlig information lagras.<br><br>
-- <strong>Användning av cookies:</strong> Cookies på denna webbplats används uteslutande för att visa personligt anpassade annonser och förbättra din upplevelse. Vi använder inte cookies för att samla in eller lagra personlig information utöver det som krävs för detta ändamål. Vår webbplats använder även cookies för att spara användarinställningar och hantera samtycke.<br><br>
-- <strong>Databearbetning och lagring:</strong> All data som behandlas av vårt system – inklusive ljudinspelningar, transkriptioner och genererade anteckningar – lagras endast så länge det är nödvändigt för att slutföra transkription- och anteckningsprocessen, och raderas automatiskt kort därefter. Vi lagrar eller delar inte någon personligt identifierbar information utöver vad som krävs för att tjänsten ska fungera korrekt.<br><br>
-- <strong>Tredjepartsdelning och efterlevnad av regler:</strong> Vi säljer eller delar inte din personliga information med tredje part. All data som delas med externa tjänster – såsom OpenAI för transkription och anteckningsgenerering eller Google AdSense för personligt anpassade annonser – är begränsad till anonymiserad information som enbart rör annonsanpassning och användarinställningar, och inkluderar inte dina inspelningar, transkriptioner eller genererade anteckningar. All datadelning sker under strikt sekretess och i full överensstämmelse med gällande integritetsregler.<br><br>
-Observera att all data automatiskt raderas kort efter bearbetning och inte lagras långsiktigt på grund av hur vårt system är utformat.`,
+securityModalText: `Din integritet och säkerheten för patientinformation är vår högsta prioritet. Denna webapp är utformad så att all databehandling sker direkt och tillfälligt i din webbläsare – utan någon serverlagring eller serverbaserad behandling från vår sida.<br><br>
 
+<strong>Hur data behandlas:</strong><br>
+Ljudinspelningar, transkriptioner och genererade anteckningar hanteras lokalt i din webbläsare och skickas direkt till OpenAI via deras säkra API. Transkriptioner och anteckningar visas endast tillfälligt i webbläsaren och raderas automatiskt när de ersätts eller när sidan stängs. Ljudfiler behandlas endast tillfälligt för att möjliggöra transkription och sparas inte efter användning.<br><br>
+
+<strong>Lagring hos OpenAI:</strong><br>
+Textdata lagras tillfälligt i upp till 30 dagar för att stödja felsökning och eventuella begäranden om åtkomst från användaren, varefter de automatiskt raderas. Dessa data används inte för modellträning eller vidareutveckling. OpenAI följer även GDPR:s regelverk för dataöverföring och integritetsskydd. Läs mer på <a href="https://openai.com/security-and-privacy/" target="_blank" style="color: blue; text-decoration: underline;">OpenAI säkerhet och integritet</a>.<br><br>
+Det rekommenderas också att användare ingår ett personuppgiftsbiträdesavtal (DPA) med OpenAI. Detta kan göras enkelt, och instruktioner finns i <strong>API-guiden på startsidan</strong>.<br><br>
+
+<strong>Cookies och annonser:</strong><br>
+Vi använder cookies enbart för att förbättra användarupplevelsen och visa relevanta annonser via Google Ads. Dessa cookies lagrar inte personuppgifter utöver vad som är nödvändigt för funktionalitet och anpassning. Webbplatsen använder även cookies för att lagra språkinställningar, anpassade promptinställningar och samtyckesval.`,
 
   aboutModalHeading: "Om",
 aboutModalText: `Denna webbplats skapades för att ge vårdpersonal och andra användare direkt tillgång till högkvalitativ tal-till-text-transkription och generering av kliniska notat – utan onödiga kostnader eller mellanhänder.<br><br>
