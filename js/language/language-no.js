@@ -20,7 +20,7 @@ Lydopptak, transkripsjoner og genererte notater behandles lokalt i nettleseren d
 
 <strong>Lagring hos OpenAI:</strong><br>
 Tekstdata lagres midlertidig i opptil 30 dager for å kunne støtte feilsøking og eventuelle innsynsforespørsler fra brukeren, før det automatisk slettes. Dataene brukes ikke til modelltrening eller videreutvikling. OpenAI følger også GDPR-rammeverket for dataoverføring og personvern. Les mer hos <a href="https://openai.com/security-and-privacy/" target="_blank" style="color: blue; text-decoration: underline;">OpenAI sikkerhet og personvern</a>.<br><br>
-Det anbefales også at brukere inngår databehandleravtale (DPA) med OpenAI. Dette kan gjøres enkelt, og instruksjoner for dette finner du i informasjonsseksjonen <strong>API-guiden her på forsiden</strong>.<br><br>
+Det anbefales også at brukere inngår databehandleravtale (DPA) med OpenAI. Dette kan gjøres enkelt, og instruksjoner for dette finner du i API-guiden her på forsiden.<br><br>
 
 <strong>Informasjonskapsler og annonser:</strong><br>
 Vi benytter informasjonskapsler (cookies) utelukkende for å forbedre brukeropplevelsen og vise relevante annonser gjennom Google Ads. Informasjonskapslene lagrer ikke personopplysninger utover det som er nødvendig for funksjonalitet og tilpasning. Nettstedet bruker også informasjonskapsler for å lagre språkvalg, tilpassede promptinnstillinger og samtykkevalg.`,
