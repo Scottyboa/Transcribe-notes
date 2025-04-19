@@ -17,7 +17,7 @@ Audio recordings, transcriptions, and generated notes are handled locally in you
 
 <strong>Storage at OpenAI:</strong><br>
 Text data is stored temporarily for up to 30 days to support debugging and potential access requests from the user, after which it is automatically deleted. The data is not used for model training or further development. OpenAI also follows the GDPR framework for data transfer and privacy protection. Read more at <a href="https://openai.com/security-and-privacy/" target="_blank" style="color: blue; text-decoration: underline;">OpenAI Security and Privacy</a>.<br><br>
-Users are also encouraged to sign a Data Processing Addendum (DPA) with OpenAI. This can be done easily, and instructions are provided in the <strong>API guide on the front page</strong>.<br><br>
+Users are also encouraged to sign a Data Processing Addendum (DPA) with OpenAI. This can be done easily, and instructions are provided in the API-guide here on the front page.<br><br>
 
 <strong>Cookies and advertisements:</strong><br>
 We use cookies solely to enhance the user experience and to display relevant ads via Google Ads. These cookies do not store personal data beyond what is necessary for functionality and customization. The site also uses cookies to store language preferences, custom prompt settings, and consent choices.`,
