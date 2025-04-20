@@ -122,7 +122,7 @@ guideText: `Welcome to the Transcribe Notes Transcription tool. This application
 
   <li><strong>Usage Overview:</strong> To check your current usage at OpenAI, click on the usage overview hyperlink on the main interface.</li><br>
 
-  <li><strong>Security:</strong> Your audio recording is sent directly to OpenAI’s API servers, which do not store the data and only use it for the purpose of transcription. The transcribed text displayed in your browser is not saved anywhere, and it is deleted/disappears as soon as you close the browser or load new content.</li><br>
+  <li><strong>Security:</strong> Your audio recording is sent directly to OpenAI’s API servers for transcription, only for the purpose of transcription. It is not used for machine learning. The transcribed text displayed in your browser is not saved anywhere, and is deleted/disappears as soon as you close the browser or load new content.</li><br>
 
   <li><strong>Guide Toggle:</strong> Click the "Guide" button again to return to the main interface.</li>
 </ul><br><br>
