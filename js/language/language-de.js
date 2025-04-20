@@ -112,7 +112,7 @@ guideText: `Willkommen bei <strong>Transcribe Notes</strong>. Diese Anwendung er
 <strong>So verwendest du die Funktionen:</strong><br><br>
 
 <ul>
-  <li><strong>Aufnahme:</strong> Klicke auf "Aufnahme starten", um mit der Tonaufnahme zu beginnen. Alle 2 Minuten wird ein Audioabschnitt automatisch an die Server von OpenAI gesendet, um transkribiert zu werden. Die Transkripte erscheinen fortlaufend im Transkriptionsfeld.<br><br>
+  <li><strong>Aufnahme:</strong> Die Einwilligung des Patienten muss stets eingeholt werden, bevor diese Anwendung verwendet wird. Klicke auf "Aufnahme starten", um mit der Tonaufnahme zu beginnen. Alle 2 Minuten wird ein Audioabschnitt automatisch an die Server von OpenAI gesendet, um transkribiert zu werden. Die Transkripte erscheinen fortlaufend im Transkriptionsfeld.<br><br>
   <strong><u>Wichtig:</u> Die Aufnahmefunktion funktioniert nicht in allen Webbrowsern. Wir empfehlen die Verwendung von <strong>Google Chrome</strong> oder <strong>Microsoft Edge</strong>.</strong></li><br>
 
   <li><strong>Pausieren und Fortsetzen:</strong> Sie können die "Pause"-Schaltfläche verwenden, um die Aufnahme vorübergehend zu stoppen – zum Beispiel, wenn die Konsultation unterbrochen wird oder Sie kurz das Büro verlassen müssen. Wenn Sie auf "Pause" klicken, wird das aktuelle Audiosegment hochgeladen und transkribiert, und die Aufnahme pausiert. Wenn Sie bereit sind fortzufahren, klicken Sie auf "Fortsetzen", und die Aufnahme wird automatisch mit dem nächsten Segment fortgesetzt. Der Timer läuft dort weiter, wo er gestoppt wurde, und die Sitzung kann wie gewohnt mit "Stopp/Abschließen" beendet werden.</li><br>
