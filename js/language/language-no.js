@@ -126,7 +126,7 @@ guideText: `Velkommen til <strong>Transcribe Notes</strong>. Denne applikasjonen
 
   <li><strong>Kostnadsoversikt:</strong> For å se ditt nåværende forbruk hos OpenAI, klikk på lenken for kostnadsoversikt som er plassert oppe til høyre på denne siden.</li><br>
 
-  <li><strong>Sikkerhet:</strong> Lydopptaket ditt sendes direkte til OpenAI sine API-servere, som ikke lagrer dataene og kun bruker dem til transkribering. Den transkriberte teksten vises kun i nettleseren din, og <strong>den slettes/forsvinner så snart du lukker nettleseren eller laster inn nytt innhold.</strong></li><br>
+  <li><strong>Sikkerhet:</strong> Lydopptaket ditt sendes direkte til OpenAI sine API-servere for transkribering. Den transkriberte teksten vises kun i nettleseren din, og den slettes/forsvinner så snart du lukker nettleseren eller laster inn nytt innhold.</li><br>
 
   <li><strong>Guide-knapp:</strong> Klikk på "Guide"-knappen igjen for å gå tilbake til hovedvisningen.</li>
 </ul><br><br>
