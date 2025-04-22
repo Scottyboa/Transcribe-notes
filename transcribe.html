@@ -19,6 +19,7 @@
     googletag.pubads().setTargeting('refreshable','true');
     // …and fetch all slots in a single request
     googletag.pubads().enableSingleRequest();
+    googletag.pubads().setForceSafeFrame(true);
 
     // only call enableServices() once
     googletag.enableServices();
