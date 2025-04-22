@@ -401,38 +401,48 @@
     window.addEventListener("resize", setGridHeight);
   </script>
 
-      <script>
-      // Immediately log a page view when the script loads
-      fetch("https://script.google.com/macros/s/AKfycbzBIvbc-xWbqzBz-PQK-lW1s2I3aCSq8rGtJV3sxN8rPRmpqGCm3J5t1R1yVt9keKK5/exec?page=" +
-            encodeURIComponent(window.location.pathname) +
-            "&userAgent=" + encodeURIComponent(navigator.userAgent) +
-            "&referrer=" + encodeURIComponent(document.referrer));
+<script>
+  // 1) Generate or retrieve a per‑browser anonymous visitorId
+  let visitorId = localStorage.getItem('visitorId');
+  if (!visitorId) {
+    visitorId = (crypto.randomUUID && crypto.randomUUID()) ||
+                Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('visitorId', visitorId);
+  }
 
-      // Wait for the DOM to be fully loaded so that the buttons exist
-      document.addEventListener("DOMContentLoaded", function() {
-        // Attach an event listener to the Stop Recording button
-        var stopButton = document.getElementById("stopButton");
-        if (stopButton) {
-          stopButton.addEventListener("click", function() {
-            fetch("https://script.google.com/macros/s/AKfycbzBIvbc-xWbqzBz-PQK-lW1s2I3aCSq8rGtJV3sxN8rPRmpqGCm3J5t1R1yVt9keKK5/exec?action=stopRecording&page=" +
-                  encodeURIComponent(window.location.pathname) +
-                  "&userAgent=" + encodeURIComponent(navigator.userAgent) +
-                  "&referrer=" + encodeURIComponent(document.referrer));
-          });
-        }
+  // 2) Helper to log an event to your Apps Script
+  function logEvent(params) {
+    const baseUrl = 'https://script.google.com/macros/s/AKfycbzBIvbc-xWbqzBz-PQK-lW1s2I3aCSq8rGtJV3sxN8rPRmpqGCm3J5t1R1yVt9keKK5/exec';
+    const qs = new URLSearchParams({
+      visitorId,
+      page: window.location.pathname,
+      userAgent: navigator.userAgent,
+      referrer: document.referrer,
+      ...params
+    }).toString();
+    fetch(`${baseUrl}?${qs}`, { mode: 'no-cors' });
+  }
 
-        // Attach an event listener to the Generate Note button
-        var generateNoteButton = document.getElementById("generateNoteButton");
-        if (generateNoteButton) {
-          generateNoteButton.addEventListener("click", function() {
-            fetch("https://script.google.com/macros/s/AKfycbzBIvbc-xWbqzBz-PQK-lW1s2I3aCSq8rGtJV3sxN8rPRmpqGCm3J5t1R1yVt9keKK5/exec?action=noteGeneration&page=" +
-                  encodeURIComponent(window.location.pathname) +
-                  "&userAgent=" + encodeURIComponent(navigator.userAgent) +
-                  "&referrer=" + encodeURIComponent(document.referrer));
-          });
-        }
+  // 3) Immediately log the page view
+  logEvent({ action: 'pageview' });
+
+  // 4) Once DOM is ready, attach your button listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    const stopButton = document.getElementById('stopButton');
+    if (stopButton) {
+      stopButton.addEventListener('click', () => {
+        logEvent({ action: 'stopRecording' });
       });
-    </script>
+    }
+
+    const generateNoteButton = document.getElementById('generateNoteButton');
+    if (generateNoteButton) {
+      generateNoteButton.addEventListener('click', () => {
+        logEvent({ action: 'noteGeneration' });
+      });
+    }
+  });
+</script>
 
   <!-- Import the main module to initialize language, recording, note generation, and UI functionalities -->
   <script type="module" src="./js/main.js"></script>
