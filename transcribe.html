@@ -9,23 +9,18 @@
 <script>
   window.googletag = window.googletag || { cmd: [] };
   googletag.cmd.push(function() {
-    // Big Top Left Ad (Fixed 300x600)
-    googletag.defineSlot('/23295908256/Big-top-left', [300, 600], 'div-gpt-ad-1744469658576-0')
-             .addService(googletag.pubads());
-    
-    // Big Top Right Ad (Fixed 300x600)
-    googletag.defineSlot('/23295908256/big-top-right', [300, 600], 'div-gpt-ad-1744469682244-0')
-             .addService(googletag.pubads());
-    
-    // Bottom Left Ad (Fixed 300x250)
-    googletag.defineSlot('/23295908256/bottom-left', [300, 250], 'div-gpt-ad-1744473133809-0')
-             .addService(googletag.pubads());
-    
-    // Bottom Right Ad (Fixed 300x250)
-    googletag.defineSlot('/23295908256/bottom-right', [300, 250], 'div-gpt-ad-1744473114007-0')
-             .addService(googletag.pubads());
-    
+    // define slots and save them globally
+    window.slotTopLeft     = googletag.defineSlot('/23295908256/Big-top-left',  [300,600], 'div-gpt-ad-1744469658576-0').addService(googletag.pubads());
+    window.slotTopRight    = googletag.defineSlot('/23295908256/big-top-right',[300,600], 'div-gpt-ad-1744469682244-0').addService(googletag.pubads());
+    window.slotBottomLeft  = googletag.defineSlot('/23295908256/bottom-left',  [300,250], 'div-gpt-ad-1744473133809-0').addService(googletag.pubads());
+    window.slotBottomRight = googletag.defineSlot('/23295908256/bottom-right',[300,250], 'div-gpt-ad-1744473114007-0').addService(googletag.pubads());
+
+    // declare inventory as refreshable…
+    googletag.pubads().setTargeting('refreshable','true');
+    // …and fetch all slots in a single request
     googletag.pubads().enableSingleRequest();
+
+    // only call enableServices() once
     googletag.enableServices();
   });
 </script>
@@ -442,41 +437,36 @@
   <!-- Import the main module to initialize language, recording, note generation, and UI functionalities -->
   <script type="module" src="./js/main.js"></script>
 
-  <script>
-    googletag.cmd.push(function() {
-      // 1) Capture the same slots you defined in your GPT setup
-      const slotTopLeft    = googletag.defineSlot('/23295908256/Big-top-left',  [300,600], 'div-gpt-ad-1744469658576-0').addService(googletag.pubads());
-      const slotTopRight   = googletag.defineSlot('/23295908256/big-top-right',[300,600], 'div-gpt-ad-1744469682244-0').addService(googletag.pubads());
-      const slotBottomLeft = googletag.defineSlot('/23295908256/bottom-left',  [300,250], 'div-gpt-ad-1744473133809-0').addService(googletag.pubads());
-      const slotBottomRight= googletag.defineSlot('/23295908256/bottom-right',[300,250], 'div-gpt-ad-1744473114007-0').addService(googletag.pubads());
+<script>
+  googletag.cmd.push(function() {
+    // reuse the slots you already defined above
+    const refreshSlots = [
+      window.slotTopLeft,
+      window.slotTopRight,
+      window.slotBottomLeft,
+      window.slotBottomRight
+    ];
 
-      // 2) Declare this inventory as refreshable (transparency in the bid request)
-      googletag.pubads().setTargeting('refreshable', 'true');
-      googletag.pubads().enableSingleRequest();
-      googletag.enableServices();
+    // simple cooldown
+    let lastRefresh = Date.now();
+    const MIN_REFRESH_INTERVAL = 5 * 60 * 1000; // 1 hour
 
-      // 3) Array of slots we'll refresh
-      const refreshSlots = [ slotTopLeft, slotTopRight, slotBottomLeft, slotBottomRight ];
+    function refreshAds() {
+      const now = Date.now();
+      if (now - lastRefresh < MIN_REFRESH_INTERVAL) return;
+      // refresh without changing the correlator
+      googletag.pubads().refresh(refreshSlots, { changeCorrelator: false });
+      lastRefresh = now;
+      console.log('Ads refreshed at', new Date().toLocaleTimeString());
+    }
 
-      // 4) Cooldown control: still yours to tweak
-      let lastRefresh = Date.now();
-      const MIN_REFRESH_INTERVAL = 60 * 60 * 1000; // 1 hour in ms (you choose)
-
-      function refreshAds() {
-        const now = Date.now();
-        if (now - lastRefresh < MIN_REFRESH_INTERVAL) return;
-        // Official GPT refresh call — keeps the same page‑level correlator
-        googletag.pubads().refresh(refreshSlots, { changeCorrelator: false });
-        lastRefresh = now;
-        console.log('Ads refreshed at', new Date().toLocaleTimeString());
-      }
-
-      // 5) Hook your interaction buttons — no change to your existing event triggers
-      ['startButton', 'stopButton', 'generateNoteButton'].forEach(id => {
+    // hook into your existing buttons
+    ['startButton','stopButton','generateNoteButton']
+      .forEach(id => {
         const btn = document.getElementById(id);
         if (btn) btn.addEventListener('click', refreshAds);
       });
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
