@@ -423,7 +423,7 @@
     fetch(`${baseUrl}?${qs}`, { mode: 'no-cors' });
   }
 
-  // 3) Immediately log the page view
+  // 3) Immediately log the pageview
   logEvent({ action: 'pageview' });
 
   // 4) Once DOM is ready, attach your button listeners
