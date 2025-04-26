@@ -8,7 +8,7 @@ export const indexTranslations = {
   apiPlaceholder: "Ange API-nyckel här",
   enterButton: "Gå till transkriptionsverktyget",
   guideButton: "Hur du använder",
-  securityButton: "Säkerhet",
+  securityButton: "Integritet",
   aboutButton: "Om",
   adRevenueMessage: "Eftersom denna webbplats är gratis att använda och enbart finansieras genom annonsintäkter, vänligen godkänn annonser för att stödja tjänsten.",
 
