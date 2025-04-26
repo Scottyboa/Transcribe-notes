@@ -13,17 +13,122 @@ export const indexTranslations = {
   adRevenueMessage: "Siden dette nettstedet er gratis å bruke og utelukkende finansieres av annonseinntekter, setter vi stor pris på om du godtar annonser for å støtte tjenesten.",
   
   securityModalHeading: "Personvern",
-securityModalText: `Personvernet ditt og sikkerheten til pasientinformasjon er vår høyeste prioritet. Vi har utviklet denne webappen slik at all behandling skjer direkte og midlertidig i nettleseren – uten noen form for datalagring eller serverbasert prosessering fra vår side.<br><br>
+  securityModalText: `
+<strong>Personvern og Databehandling</strong><br><br>
+Denne webappen er laget som et verktøy for bruk av tale-til-tekst og notatgenerering. Det er ditt fulle ansvar som helsepersonell/behandlingsansvarlig å sikre at all bruk er i samsvar med GDPR, helsepersonelloven og Normen for informasjonssikkerhet.<br><br>
 
-<strong>Hvordan data behandles:</strong><br>
-Lydopptak, transkripsjoner og genererte notater behandles lokalt i nettleseren din og sendes direkte til OpenAI via deres sikre API. Transkripsjoner og notater vises kun i nettleseren, og slettes automatisk når de erstattes eller siden lukkes. Lydfiler behandles kun midlertidig for å muliggjøre transkripsjon, og beholdes ikke etter bruk.<br><br>
+Du er eneansvarlig for at bruken av denne appen oppfyller alle krav i:<br>
+- GDPR<br>
+- Helsepersonelloven<br>
+- Normen for informasjonssikkerhet<br><br>
 
-<strong>Lagring hos OpenAI:</strong><br>
-Tekstdata lagres midlertidig i opptil 30 dager for å kunne støtte feilsøking og eventuelle innsynsforespørsler fra brukeren, før det automatisk slettes. Dataene brukes ikke til modelltrening eller videreutvikling. OpenAI følger også GDPR-rammeverket for dataoverføring og personvern. Les mer hos <a href="https://openai.com/security-and-privacy/" target="_blank" style="color: blue; text-decoration: underline;">OpenAI sikkerhet og personvern</a>.<br><br>
-Det anbefales også at brukere inngår databehandleravtale (DPA) med OpenAI. Dette kan gjøres enkelt, og instruksjoner for dette finner du i API-guiden her på forsiden.<br><br>
+Dette innebærer blant annet:<br>
+- Inngå nødvendige avtaler (DPA)<br>
+- Utføre grundige risikovurderinger (DPIA og TIA)<br><br>
 
-<strong>Informasjonskapsler og annonser:</strong><br>
-Vi benytter informasjonskapsler (cookies) utelukkende for å forbedre brukeropplevelsen og vise relevante annonser gjennom Google Ads. Informasjonskapslene lagrer ikke personopplysninger utover det som er nødvendig for funksjonalitet og tilpasning. Nettstedet bruker også informasjonskapsler for å lagre språkvalg, tilpassede promptinnstillinger og samtykkevalg.`,
+- Mer informasjon om dette lengere ned i denne teksten.<br><br>
+
+Utvikler av denne webapp påtar seg intet ansvar for din bruk eller manglende etterlevelse.<br><br>
+<hr><br>
+
+<strong>1. Hva fungerer webappen?</strong><br>
+- Tar opp lyd via nettleserens opptaksfunksjon.<br>
+- Behandler lyd i nettleserens minne (RAM).<br>
+- Laster opp lydfil via sikker HTTPS-forbindelse til OpenAI Whisper API for transkripsjon, ved bruk av din egen API-nøkkel.<br>
+- Sender transkripsjonen (og eventuell tilleggstekst / prompt) videre til OpenAI API som genererer et notatutkast, også med din egen API-nøkkel.<br>
+- Nettleseren mottar notatet direkte fra OpenAI med sikker/kryptert tilkobling.<br>
+- Din API-nøkkel lagres bare midlertidig i nettleserens minne (SessionStorage). Skrur du av webappen, eller går ut av nettleseren, så slettes API-nøkkelen din fra nettleserens minne. For å da kunne bruke webappen igjen, så må du klippe-lime inn din API-nøkkel på nytt. Dette fungerer som et ekstra lag med sikkerhet overfor din API-nøkkel, og motvirker ikke-autorisert tilgang til din nøkkel.<br><br>
+<hr><br>
+
+<strong>2. Din egen OpenAI API-nøkkel er påkrevd</strong><br>
+All kommunikasjon med OpenAI skjer direkte fra din nettleser ved bruk av din personlige API-nøkkel. Utvikleren av denne webappen har ingen tilgang til din nøkkel eller data.<br><br>
+<hr><br>
+
+<strong>3. Databehandleravtale (DPA) med OpenAI</strong><br>
+Hvis du skal bruke API-tjenestene til behandling av personopplysninger anbefales det at du inngår en databehandleravtale med OpenAI. Du finner OpenAI sin standardavtale her: <a href="https://ironcladapp.com/public-launch/63ffefa2bed6885f4536d0fe" style="color:blue;" target="_blank">OpenAI databehandleravtale (DPA)</a>. Du finner ditt organisasjonsnummer her: <a href="https://platform.openai.com/settings/organization/general" style="color:blue;" target="_blank">din OpenAI organisasjonsprofil</a>. Når avtalen er signert, så har du og OpenAI anerkjent at det er du som bruker, som har rollen som databehandler – ikke OpenAI.<br><br>
+<hr><br>
+
+<strong>4. DPIA og TIA – Nødvendige risikovurderinger</strong><br><br>
+
+<strong>DPIA (Data Protection Impact Assessment):</strong> Påkrevd etter GDPR artikkel 35 når ny teknologi brukes til å behandle særlige kategorier opplysninger. Formålet er å identifisere og redusere personvernrisikoene knyttet til selve behandlingen.<br>
+Undersøk hva som behandles, hvorfor, og hvilke tiltak som trengs for å beskytte pasientenes rettigheter.<br>
+Eksempelmal tilgjengelig her: <a href="https://transcribe-notes.netlify.app/dpia" style="color:blue;" target="_blank">Forslag til DPIA (eksempelmal)</a><br><br>
+
+<strong>TIA (Transfer Impact Assessment):</strong> Påkrevd etter Schrems II-dommen og GDPR artikkel 44–49 når personopplysninger overføres til et land utenfor EØS (som USA). Formålet er å dokumentere at overføringen gir et «vesentlig tilsvarende» personvernnivå.<br>
+Vurder amerikansk lovgivning (FISA 702, CLOUD Act m.m.) mot dataenes art og dine supplerende tekniske/kontraktuelle tiltak.<br>
+Konkluder på om overføringen – sammen med Standard Contractual Clauses og OpenAIs EU-US Data Privacy Framework-sertifisering – fortsatt er forsvarlig.<br>
+Eksempelmal tilgjengelig her: <a href="https://transcribe-notes.netlify.app/tia.html" style="color:blue;" target="_blank">Forslag til Transfer Impact Assessment (TIA)</a><br><br>
+
+Begge vurderingene bør være gjennomført, dokumentert og godkjent av deg som bruker før webappen tas i bruk.<br><br>
+<hr><br>
+
+<strong>5. Zero Data Retention (ZDR) og datalagring hos OpenAI</strong><br><br>
+
+<strong>OpenAIs standard policy</strong><br>
+Per OpenAIs API Data Usage Policy brukes data sendt til API-et ikke til å trene modellene. Data kan imidlertid lagres midlertidig (typisk opptil 30 dager) for misbruksovervåking og feilsøking før de slettes.<br><br>
+
+<strong>Zero Data Retention (ZDR)</strong><br>
+OpenAI tilbyr ZDR for enkelte større kunder etter særskilt avtale, men dette er ikke standard for vanlig API-bruk og er derfor ikke aktivt for denne appen.<br><br>
+
+<strong>Veien videre</strong><br>
+Fremtidige versjoner av appen kan utforske støtte for alternative KI-leverandører som tilbyr ZDR som standard (f.eks. visse tjenester på Microsoft Azure). Eventuelle oppdateringer med tanke på dette vil kommuniseres via webappen.<br><br>
+<hr><br>
+
+<strong>6. Forutsetninger for potensiell klinisk bruk</strong><br><br>
+Din vurdering er avgjørende: Lovligheten av å bruke dette verktøyet med pasientdata avhenger utelukkende av din egen grundige vurdering. Du må selv konkludere – basert på DPA med OpenAI, DPIA og TIA – om bruken er forsvarlig og om restrisikoen er akseptabel for din praksis.<br><br>
+
+<strong>Minimumskrav før bruk med pasientdata:</strong><br>
+- Gyldig DPA med OpenAI er på plass.<br>
+- Virksomhetsspesifikk DPIA og TIA er gjennomført, godkjent og konkluderer med akseptabel restrisiko.<br>
+- Ansvar for innhold: Du er ansvarlig for alt innhold du sender til OpenAI via din API-nøkkel og for å kvalitetssikre notatutkastet som genereres i etterkant, før de evt. overføres til pasientjournal.<br><br>
+<hr><br>
+
+<strong>7. Oversikt over datalagring</strong><br><br>
+<table style="border-collapse:collapse;width:100%;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ccc;padding:4px;">Datatype</th>
+      <th style="border:1px solid #ccc;padding:4px;">Hvor lagres den?</th>
+      <th style="border:1px solid #ccc;padding:4px;">Hvor lenge?</th>
+      <th style="border:1px solid #ccc;padding:4px;">Hvem har tilgang?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Din OpenAI API-nøkkel</td>
+      <td style="border:1px solid #ccc;padding:4px;">SessionStorage-minne i din nettleser</td>
+      <td style="border:1px solid #ccc;padding:4px;">Til du enten avslutter webappen eller nettleseren</td>
+      <td style="border:1px solid #ccc;padding:4px;">Kun deg og din nettleser</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Lydsegmenter under opptak</td>
+      <td style="border:1px solid #ccc;padding:4px;">Nettleserens minne (RAM)</td>
+      <td style="border:1px solid #ccc;padding:4px;">Kun under opptak/prosessering. Lagres ikke hos OpenAI etter prosessering er fullført</td>
+      <td style="border:1px solid #ccc;padding:4px;">Kun deg og din nettleser</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Tekst/notatutkast</td>
+      <td style="border:1px solid #ccc;padding:4px;">OpenAI API (midlertidig)</td>
+      <td style="border:1px solid #ccc;padding:4px;">Maks 30 dager hos OpenAI</td>
+      <td style="border:1px solid #ccc;padding:4px;">Du, OpenAI (midlertidig)</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Instruksjoner / Prompter</td>
+      <td style="border:1px solid #ccc;padding:4px;">Lokalt i din nettleser. Hvis du som bruker logger inn i webappen på samme nettleser, datamaskin og med samme API-nøkkel, så vil promptene du har laget være tilgjengelige for deg igjen</td>
+      <td style="border:1px solid #ccc;padding:4px;">Til du sletter dem</td>
+      <td style="border:1px solid #ccc;padding:4px;">Du og din nettleser</td>
+    </tr>
+  </tbody>
+</table><br><br>
+<hr><br>
+
+<strong>8. Kildekode</strong><br><br>
+- Kildekoden er åpen og kjører lokalt i din nettleser.<br><br>
+<hr><br>
+
+<strong>9. Informasjonskapsler og annonser</strong><br><br>
+Vi benytter informasjonskapsler (cookies) utelukkende for å kunne vise relevante annonser gjennom Google Ads, og for språkvalg, samtykke og for lagring av tilpassede prompts som du har laget. Informasjonskapslene lagrer ikke personopplysninger utover det som er nødvendig for funksjonalitet og tilpasning. Googles informasjonskapsler har ingen tilgang til data relatert til lydopptak og generert tekst (pasientdata).
+`,
   
   aboutModalHeading: "Om",
   aboutModalText: `Denne nettsiden ble opprettet for å gi helsepersonell og andre brukere direkte tilgang til høykvalitets tale-til-tekst transkripsjon og klinisk notatgenerering – uten unødvendige kostnader eller mellomledd.<br><br>
