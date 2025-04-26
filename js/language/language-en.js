@@ -10,123 +10,17 @@ export const indexTranslations = {
   aboutButton: "About",
   adRevenueMessage: "As this website is free to use and relies solely on ad revenue, please consent to ads to help support the service.",
   securityModalHeading: "Privacy",
-securityModalText: `
-<strong>Privacy and Data Processing</strong><br><br>
-This web app is provided as a tool for speech-to-text and note generation. As a healthcare professional/data controller you are fully responsible for ensuring that all use complies with the GDPR, the Health Personnel Act, and the Norwegian “Norm” for information security.<br><br>
+securityModalText: `Your privacy and the security of patient information are our highest priority. This web app has been developed so that all data processing happens directly and temporarily in your browser — with no server-side storage or processing on our end.<br><br>
 
-You alone are responsible for making sure the use of this app satisfies every requirement in:<br>
-- GDPR<br>
-- Health Personnel Act<br>
-- Norm for Information Security<br><br>
+<strong>How data is processed:</strong><br>
+Audio recordings, transcriptions, and generated notes are handled locally in your browser and sent directly to OpenAI via their secure API. Transcriptions and notes are only displayed temporarily in the browser and are automatically deleted when replaced or when the page is closed. Audio files are processed only temporarily to enable transcription and are not retained after use.<br><br>
 
-This includes, among other things:<br>
-- Signing the necessary agreements (DPA)<br>
-- Carrying out thorough risk assessments (DPIA and TIA)<br><br>
+<strong>Storage at OpenAI:</strong><br>
+Text data is stored temporarily for up to 30 days to support debugging and potential access requests from the user, after which it is automatically deleted. The data is not used for model training or further development. OpenAI also follows the GDPR framework for data transfer and privacy protection. Read more at <a href="https://openai.com/security-and-privacy/" target="_blank" style="color: blue; text-decoration: underline;">OpenAI Security and Privacy</a>.<br><br>
+Users are also encouraged to sign a Data Processing Addendum (DPA) with OpenAI. This can be done easily, and instructions are provided in the API-guide here on the front page.<br><br>
 
-More information on these topics appears further down in this text.<br><br>
-
-The developer of this web app accepts no liability for your use of it or for any failure to comply with applicable regulations.<br><br>
-<hr><br>
-
-<strong>1. How does the web app work?</strong><br>
-- Records audio using the browser’s recording feature.<br>
-- Processes audio in the browser’s memory (RAM).<br>
-- Uploads the audio file over a secure HTTPS connection to the OpenAI Whisper API for transcription, using your own API key.<br>
-- Sends the transcription (and any additional text/prompt) to the OpenAI API, which generates a draft note—also with your own API key.<br>
-- Receives the note directly in your browser over a secure/encrypted connection.<br>
-- Your API key is stored only temporarily in SessionStorage. When you close the web app or exit the browser, the key is deleted from memory. To use the app again you must paste in your key anew. This provides an extra layer of security for your key and prevents unauthorised access.<br><br>
-<hr><br>
-
-<strong>2. Your own OpenAI API key is required</strong><br>
-All communication with OpenAI happens directly from your browser using your personal API key. The developer has no access to your key or data.<br><br>
-<hr><br>
-
-<strong>3. Data Processing Agreement (DPA) with OpenAI</strong><br>
-If you will use the API services to process personal data, you should sign a DPA with OpenAI. You can find OpenAI’s standard agreement here: <a href="https://ironcladapp.com/public-launch/63ffefa2bed6885f4536d0fe" style="color:blue;" target="_blank">OpenAI Data Processing Agreement (DPA)</a>. Your organisation ID is available here: <a href="https://platform.openai.com/settings/organization/general" style="color:blue;" target="_blank">your OpenAI organisation profile</a>. Once signed, both you and OpenAI acknowledge that you, the user, act as data processor—not OpenAI.<br><br>
-<hr><br>
-
-<strong>4. DPIA and TIA – Required risk assessments</strong><br><br>
-
-<strong>DPIA (Data Protection Impact Assessment):</strong> Required under GDPR Article 35 when new technology is used to process special-category data. The purpose is to identify and mitigate privacy risks in the processing itself.<br>
-Assess what is processed, why, and which measures are needed to protect patients’ rights.<br>
-Template available here: <a href="https://transcribe-notes.netlify.app/dpia" style="color:blue;" target="_blank">Suggested DPIA (template)</a><br><br>
-
-<strong>TIA (Transfer Impact Assessment):</strong> Required under the Schrems II ruling and GDPR Articles 44–49 when personal data are transferred to a country outside the EEA (such as the USA). The purpose is to document that the transfer provides a “level of protection essentially equivalent” to the EEA.<br>
-Assess US legislation (FISA 702, CLOUD Act, etc.) against the nature of the data and your supplementary technical/contractual safeguards.<br>
-Conclude whether the transfer—together with Standard Contractual Clauses and OpenAI’s EU-US Data Privacy Framework certification—remains defensible.<br>
-Template available here: <a href="https://transcribe-notes.netlify.app/tia.html" style="color:blue;" target="_blank">Suggested Transfer Impact Assessment (TIA)</a><br><br>
-
-Both assessments should be completed, documented, and approved by you before the web app is used.<br><br>
-<hr><br>
-
-<strong>5. Zero Data Retention (ZDR) and data storage at OpenAI</strong><br><br>
-
-<strong>OpenAI’s standard policy</strong><br>
-Under OpenAI’s API Data Usage Policy, data sent to the API are not used to train the models. However, they may be stored temporarily (typically up to 30 days) for abuse monitoring and debugging before deletion.<br><br>
-
-<strong>Zero Data Retention (ZDR)</strong><br>
-OpenAI offers ZDR for certain larger customers by special agreement, but this is not standard for normal API users and is therefore not active for this app.<br><br>
-
-<strong>Next steps</strong><br>
-Future versions of the app may explore support for alternative AI providers that offer ZDR as standard (e.g. certain services on Microsoft Azure). Any updates in this regard will be communicated through the web app.<br><br>
-<hr><br>
-
-<strong>6. Prerequisites for potential clinical use</strong><br><br>
-Your assessment is decisive: The legality of using this tool with patient data depends entirely on your own thorough evaluation. You must conclude—based on the DPA with OpenAI, DPIA, and TIA—whether the usage is defensible and any residual risk acceptable for your practice.<br><br>
-
-<strong>Minimum requirements before using patient data:</strong><br>
-- A valid DPA with OpenAI is in place.<br>
-- A practice-specific DPIA and TIA are completed, approved, and conclude that residual risk is acceptable.<br>
-- Content responsibility: You are responsible for all content you send to OpenAI via your API key and for quality-assuring the generated draft note before it is possibly transferred to the patient record.<br><br>
-<hr><br>
-
-<strong>7. Overview of data storage</strong><br><br>
-<table style="border-collapse:collapse;width:100%;">
-  <thead>
-    <tr>
-      <th style="border:1px solid #ccc;padding:4px;">Data&nbsp;Type</th>
-      <th style="border:1px solid #ccc;padding:4px;">Where is it stored?</th>
-      <th style="border:1px solid #ccc;padding:4px;">For how long?</th>
-      <th style="border:1px solid #ccc;padding:4px;">Who has access?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="border:1px solid #ccc;padding:4px;">Your OpenAI API key</td>
-      <td style="border:1px solid #ccc;padding:4px;">SessionStorage memory in your browser</td>
-      <td style="border:1px solid #ccc;padding:4px;">Until you close the web app or the browser</td>
-      <td style="border:1px solid #ccc;padding:4px;">Only you and your browser</td>
-    </tr>
-    <tr>
-      <td style="border:1px solid #ccc;padding:4px;">Audio segments while recording</td>
-      <td style="border:1px solid #ccc;padding:4px;">Browser memory (RAM)</td>
-      <td style="border:1px solid #ccc;padding:4px;">Only during recording/processing. Not stored at OpenAI once processing is finished</td>
-      <td style="border:1px solid #ccc;padding:4px;">Only you and your browser</td>
-    </tr>
-    <tr>
-      <td style="border:1px solid #ccc;padding:4px;">Text/draft note</td>
-      <td style="border:1px solid #ccc;padding:4px;">OpenAI API (temporary)</td>
-      <td style="border:1px solid #ccc;padding:4px;">Up to 30 days at OpenAI</td>
-      <td style="border:1px solid #ccc;padding:4px;">You, OpenAI (temporary)</td>
-    </tr>
-    <tr>
-      <td style="border:1px solid #ccc;padding:4px;">Instructions / Prompts</td>
-      <td style="border:1px solid #ccc;padding:4px;">Locally in your browser. If you log in to the web app on the same browser, computer, and with the same API key, your prompts will be available again</td>
-      <td style="border:1px solid #ccc;padding:4px;">Until you delete them</td>
-      <td style="border:1px solid #ccc;padding:4px;">You and your browser</td>
-    </tr>
-  </tbody>
-</table><br><br>
-<hr><br>
-
-<strong>8. Source code</strong><br><br>
-- The source code is open and runs locally in your browser.<br><br>
-<hr><br>
-
-<strong>9. Cookies and ads</strong><br><br>
-We use cookies solely to display relevant ads through Google Ads, and for language selection, consent management, and storage of customised prompts you have created. The cookies do not store personal data beyond what is necessary for functionality and personalisation. Google’s cookies have no access to data related to audio recordings and generated text (patient data).
-``,
-
+<strong>Cookies and advertisements:</strong><br>
+We use cookies solely to enhance the user experience and to display relevant ads via Google Ads. These cookies do not store personal data beyond what is necessary for functionality and customization. The site also uses cookies to store language preferences, custom prompt settings, and consent choices.`,
   aboutModalHeading: "About",
   aboutModalText: `This website was created to provide healthcare professionals and other users with direct access to high-quality speech-to-text transcription and clinical note generation—without unnecessary costs or intermediaries.<br><br>
 By using your own OpenAI API key, you connect directly to the source of the technology. This means you only pay the actual usage cost set by OpenAI, without markups or subscription fees.<br><br>
