@@ -12,17 +12,123 @@ export const indexTranslations = {
   aboutButton: "Informazioni",
   adRevenueMessage: "Poiché questo sito è gratuito e si basa esclusivamente sui ricavi pubblicitari, ti preghiamo di acconsentire alla visualizzazione di annunci personalizzati per sostenere il servizio.",
   securityModalHeading: "Privacy",
-securityModalText: `La tua privacy e la sicurezza delle informazioni dei pazienti sono la nostra massima priorità. Questa web app è stata progettata affinché tutta l’elaborazione dei dati avvenga direttamente e temporaneamente nel tuo browser – senza alcuna memorizzazione o elaborazione lato server da parte nostra.<br><br>
+securityModalText: 
+`<strong>Privacy e Trattamento dei Dati</strong><br><br>
+Questa web-app è uno strumento per la trascrizione vocale e la generazione di appunti. Come professionista sanitario / titolare del trattamento, è tua piena responsabilità garantire che ogni utilizzo sia conforme al GDPR, alla Helsepersonelloven e alla Norma norvegese per la sicurezza delle informazioni.<br><br>
 
-<strong>Come vengono trattati i dati:</strong><br>
-Le registrazioni audio, le trascrizioni e le note generate vengono elaborate localmente nel tuo browser e inviate direttamente a OpenAI tramite la loro API sicura. Le trascrizioni e le note sono visualizzate solo temporaneamente nel browser e vengono eliminate automaticamente quando vengono sostituite o quando la pagina viene chiusa. I file audio vengono elaborati solo temporaneamente per consentire la trascrizione e non vengono conservati dopo l'uso.<br><br>
+Sei l’unico responsabile del rispetto di:<br>
+- GDPR<br>
+- Helsepersonelloven<br>
+- Norma per la sicurezza delle informazioni<br><br>
 
-<strong>Conservazione presso OpenAI:</strong><br>
-I dati testuali vengono conservati temporaneamente per un massimo di 30 giorni per supportare la risoluzione di eventuali problemi tecnici e richieste di accesso da parte dell’utente, dopodiché vengono eliminati automaticamente. I dati non vengono utilizzati per l’addestramento dei modelli o per lo sviluppo futuro. OpenAI aderisce inoltre al quadro normativo GDPR per il trasferimento dei dati e la protezione della privacy. Per maggiori informazioni, visita <a href="https://openai.com/security-and-privacy/" target="_blank" style="color: blue; text-decoration: underline;">OpenAI Sicurezza e Privacy</a>.<br><br>
-Si consiglia inoltre agli utenti di sottoscrivere un Data Processing Addendum (DPA) con OpenAI. È possibile farlo facilmente seguendo le istruzioni disponibili nella <strong>guida all’API sulla pagina iniziale</strong>.<br><br>
+Ciò implica, tra l’altro:<br>
+- Stipulare gli accordi necessari (DPA)<br>
+- Eseguire approfondite valutazioni dei rischi (DPIA e TIA)<br><br>
 
-<strong>Cookie e pubblicità:</strong><br>
-Utilizziamo i cookie esclusivamente per migliorare l’esperienza dell’utente e mostrare annunci pertinenti tramite Google Ads. Questi cookie non memorizzano dati personali oltre quanto necessario per il funzionamento e la personalizzazione. Il sito utilizza anche cookie per salvare le preferenze linguistiche, le impostazioni dei prompt personalizzati e le scelte relative al consenso.`,
+- Maggiori informazioni più avanti in questo testo.<br><br>
+
+Lo sviluppatore di questa web-app declina ogni responsabilità per il tuo utilizzo o per l’eventuale mancata conformità.<br><br>
+<hr><br>
+
+<strong>1. Come funziona la web-app?</strong><br>
+- Registra l’audio tramite la funzione di registrazione del browser.<br>
+- Elabora l’audio nella memoria (RAM) del browser.<br>
+- Carica il file audio, tramite connessione sicura HTTPS, all’API Whisper di OpenAI per la trascrizione, utilizzando la tua chiave API personale.<br>
+- Invia la trascrizione (ed eventuale testo aggiuntivo / prompt) all’API di OpenAI che genera una bozza di appunto, sempre con la tua chiave API.<br>
+- Il browser riceve l’appunto direttamente da OpenAI tramite connessione sicura/crittografata.<br>
+- La tua chiave API viene conservata solo temporaneamente nella memoria del browser (SessionStorage). Quando chiudi la web-app o il browser, la chiave viene cancellata dalla memoria. Per riutilizzare la web-app dovrai incollare di nuovo la tua chiave API. Ciò aggiunge un ulteriore livello di sicurezza alla chiave e previene accessi non autorizzati.<br><br>
+<hr><br>
+
+<strong>2. È richiesta la tua chiave API di OpenAI</strong><br>
+Tutta la comunicazione con OpenAI avviene direttamente dal tuo browser usando la tua chiave API personale. Lo sviluppatore non ha accesso alla tua chiave né ai tuoi dati.<br><br>
+<hr><br>
+
+<strong>3. Accordo sul trattamento dei dati (DPA) con OpenAI</strong><br>
+Se utilizzi i servizi API per trattare dati personali, si raccomanda di stipulare un DPA con OpenAI. Il modello standard è disponibile qui: <a href="https://ironcladapp.com/public-launch/63ffefa2bed6885f4536d0fe" style="color:blue;" target="_blank">Accordo sul trattamento dei dati di OpenAI (DPA)</a>. Trova il tuo numero di organizzazione qui: <a href="https://platform.openai.com/settings/organization/general" style="color:blue;" target="_blank">profilo organizzazione OpenAI</a>. Una volta firmato, tu e OpenAI riconoscete che sei tu, in qualità di utente, a rivestire il ruolo di responsabile del trattamento – non OpenAI.<br><br>
+<hr><br>
+
+<strong>4. DPIA e TIA – Valutazioni dei rischi necessarie</strong><br><br>
+
+<strong>DPIA (Data Protection Impact Assessment):</strong> Obbligatoria ai sensi dell’art. 35 GDPR quando si utilizza nuova tecnologia per trattare categorie particolari di dati. L’obiettivo è identificare e ridurre i rischi per la privacy connessi al trattamento.<br>
+Analizza cosa viene trattato, perché e quali misure sono necessarie per tutelare i diritti dei pazienti.<br>
+Modello di esempio disponibile qui: <a href="https://transcribe-notes.netlify.app/dpia" style="color:blue;" target="_blank">Esempio di DPIA</a><br><br>
+
+<strong>TIA (Transfer Impact Assessment):</strong> Richiesta dopo la sentenza Schrems II e gli art. 44–49 GDPR per i trasferimenti di dati personali verso Paesi extra SEE (come gli USA). Serve a documentare che il trasferimento garantisca un livello di tutela «essenzialmente equivalente».<br>
+Valuta la normativa statunitense (FISA 702, CLOUD Act ecc.) rispetto alla natura dei dati e alle tue misure tecniche/contrattuali supplementari.<br>
+Concludi se il trasferimento – insieme alle Clausole Contrattuali Standard e alla certificazione di OpenAI al Data Privacy Framework UE-USA – rimanga comunque lecito.<br>
+Modello di esempio disponibile qui: <a href="https://transcribe-notes.netlify.app/tia.html" style="color:blue;" target="_blank">Esempio di TIA</a><br><br>
+
+Entrambe le valutazioni devono essere completate, documentate e approvate da te prima di utilizzare la web-app.<br><br>
+<hr><br>
+
+<strong>5. Conservazione zero dei dati (ZDR) e archiviazione presso OpenAI</strong><br><br>
+
+<strong>Policy standard di OpenAI</strong><br>
+Secondo la API Data Usage Policy di OpenAI, i dati inviati non vengono usati per addestrare i modelli. Tuttavia possono essere conservati temporaneamente (fino a 30 giorni) per monitoraggio abusi e debug, quindi eliminati.<br><br>
+
+<strong>Zero Data Retention (ZDR)</strong><br>
+OpenAI offre ZDR solo ad alcuni clienti enterprise su accordo specifico; non è prevista per l’uso API ordinario e quindi non è attiva in questa app.<br><br>
+
+<strong>Prospettive future</strong><br>
+Versioni future dell’app potrebbero supportare provider di IA alternativi che offrano ZDR di default (ad es. alcuni servizi di Microsoft Azure). Eventuali aggiornamenti verranno comunicati tramite la web-app.<br><br>
+<hr><br>
+
+<strong>6. Prerequisiti per un potenziale uso clinico</strong><br><br>
+La tua valutazione è determinante: la liceità di usare questo strumento con dati dei pazienti dipende esclusivamente dalla tua analisi approfondita. Devi concludere – sulla base del DPA con OpenAI, DPIA e TIA – se l’uso sia adeguato e se il rischio residuo sia accettabile per la tua pratica.<br><br>
+
+<strong>Requisiti minimi prima di usare dati di pazienti:</strong><br>
+- DPA valido con OpenAI.<br>
+- DPIA e TIA specifiche per l’organizzazione completate, approvate e concludenti per un rischio residuo accettabile.<br>
+- Responsabilità sul contenuto: sei responsabile di tutte le informazioni inviate a OpenAI tramite la tua chiave API e della verifica della bozza di appunto generata, prima di eventuale inserimento nella cartella clinica.<br><br>
+<hr><br>
+
+<strong>7. Panoramica sulla conservazione dei dati</strong><br><br>
+<table style="border-collapse:collapse;width:100%;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ccc;padding:4px;">Tipo di dato</th>
+      <th style="border:1px solid #ccc;padding:4px;">Dove viene conservato?</th>
+      <th style="border:1px solid #ccc;padding:4px;">Per quanto tempo?</th>
+      <th style="border:1px solid #ccc;padding:4px;">Chi ha accesso?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">La tua chiave API di OpenAI</td>
+      <td style="border:1px solid #ccc;padding:4px;">Memoria SessionStorage del tuo browser</td>
+      <td style="border:1px solid #ccc;padding:4px;">Fino a quando chiudi la web-app o il browser</td>
+      <td style="border:1px solid #ccc;padding:4px;">Solo tu e il tuo browser</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Segmenti audio durante la registrazione</td>
+      <td style="border:1px solid #ccc;padding:4px;">RAM del browser</td>
+      <td style="border:1px solid #ccc;padding:4px;">Solo durante registrazione/elaborazione. Non archiviati da OpenAI dopo la fine del processo</td>
+      <td style="border:1px solid #ccc;padding:4px;">Solo tu e il tuo browser</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Testo / bozza di appunto</td>
+      <td style="border:1px solid #ccc;padding:4px;">API di OpenAI (temporaneamente)</td>
+      <td style="border:1px solid #ccc;padding:4px;">Max 30 giorni da OpenAI</td>
+      <td style="border:1px solid #ccc;padding:4px;">Tu, OpenAI (temporaneamente)</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Istruzioni / prompt</td>
+      <td style="border:1px solid #ccc;padding:4px;">Localmente nel tuo browser. Se effettui di nuovo l’accesso con lo stesso browser, computer e chiave API, i tuoi prompt personalizzati saranno nuovamente disponibili</td>
+      <td style="border:1px solid #ccc;padding:4px;">Finché non li elimini</td>
+      <td style="border:1px solid #ccc;padding:4px;">Tu e il tuo browser</td>
+    </tr>
+  </tbody>
+</table><br><br>
+<hr><br>
+
+<strong>8. Codice sorgente</strong><br><br>
+- Il codice sorgente è aperto e gira localmente nel tuo browser.<br><br>
+<hr><br>
+
+<strong>9. Cookie e annunci</strong><br><br>
+Utilizziamo cookie esclusivamente per mostrare annunci pertinenti tramite Google Ads e per le preferenze linguistiche, il consenso e la memorizzazione dei prompt personalizzati che hai creato. I cookie non memorizzano dati personali oltre quanto necessario per funzionalità e personalizzazione. I cookie di Google non hanno accesso ai dati relativi a registrazioni audio e testo generato (dati dei pazienti).
+`,
+
   aboutModalHeading: "Informazioni",
 aboutModalText: `Questo sito è stato creato per offrire ai professionisti sanitari e ad altri utenti un accesso diretto a trascrizioni vocali di alta qualità e alla generazione di note cliniche—senza costi superflui o intermediari.<br><br>
 Utilizzando la tua chiave API OpenAI personale, ti connetti direttamente alla fonte della tecnologia. Ciò significa che paghi soltanto il costo effettivo stabilito da OpenAI, senza maggiorazioni o tariffe di abbonamento.<br><br>
