@@ -12,18 +12,122 @@ export const indexTranslations = {
   aboutButton: "Über",
   adRevenueMessage: "Da diese Website kostenlos genutzt werden kann und ausschließlich auf Werbeeinnahmen angewiesen ist, stimmen Sie bitte personalisierter Werbung zu, um den Dienst zu unterstützen.",
   securityModalHeading: "Datenschutz",
-securityModalText: `Der Schutz Ihrer Privatsphäre und die Sicherheit von Patientendaten haben für uns oberste Priorität. Diese Web-App wurde so entwickelt, dass die gesamte Datenverarbeitung direkt und temporär in Ihrem Browser erfolgt – ohne jegliche serverseitige Speicherung oder Verarbeitung unsererseits.<br><br>
+securityModalText: 
+`<strong>Datenschutz und Datenverarbeitung</strong><br><br>
+Diese Web-App ist ein Werkzeug für Sprach-zu-Text und das Erstellen von Notizen. Als Gesundheits­fachkraft / Verantwortliche r für die Verarbeitung liegt es vollständig in deiner Verantwortung sicherzustellen, dass jede Nutzung mit der DSGVO, dem norwegischen Gesundheits­personalgesetz (Helsepersonelloven) und der Norm für Informationssicherheit übereinstimmt.<br><br>
 
-<strong>Wie Daten verarbeitet werden:</strong><br>
-Audioaufnahmen, Transkriptionen und generierte Notizen werden lokal in Ihrem Browser verarbeitet und direkt über die sichere API von OpenAI übermittelt. Transkriptionen und Notizen werden ausschließlich temporär im Browser angezeigt und automatisch gelöscht, sobald sie ersetzt oder die Seite geschlossen wird. Audiodateien werden lediglich vorübergehend verarbeitet, um die Transkription zu ermöglichen, und nicht gespeichert.<br><br>
+Du trägst die alleinige Verantwortung dafür, dass die Nutzung dieser App alle Anforderungen aus:<br>
+- DSGVO (GDPR)<br>
+- Helsepersonelloven<br>
+- Norm für Informationssicherheit<br><br>
 
-<strong>Speicherung bei OpenAI:</strong><br>
-Textdaten werden vorübergehend für bis zu 30 Tage gespeichert, um Fehlerbehebung und mögliche Auskunftsanfragen durch den Nutzer zu unterstützen. Anschließend werden sie automatisch gelöscht. Die Daten werden nicht für das Training oder die Weiterentwicklung von Modellen verwendet. OpenAI folgt außerdem dem GDPR-Rahmenwerk für Datenschutz und Datenübermittlung. Weitere Informationen finden Sie unter <a href="https://openai.com/security-and-privacy/" target="_blank" style="color: blue; text-decoration: underline;">OpenAI Sicherheit und Datenschutz</a>.<br><br>
-Nutzern wird zudem empfohlen, eine Datenschutzvereinbarung (Data Processing Addendum, DPA) mit OpenAI abzuschließen. Dies ist einfach möglich – eine Anleitung dazu finden Sie im <strong>API-Leitfaden auf der Startseite</strong>.<br><br>
+erfüllt. Das bedeutet unter anderem:<br>
+- Abschluss aller erforderlichen Vereinbarungen (DPA)<br>
+- Durchführung gründlicher Risikoanalysen (DPIA und TIA)<br><br>
 
-<strong>Cookies und Werbung:</strong><br>
-Wir verwenden Cookies ausschließlich zur Verbesserung der Benutzererfahrung und zur Anzeige relevanter Werbung über Google Ads. Diese Cookies speichern keine personenbezogenen Daten über das für Funktionalität und Anpassung erforderliche Maß hinaus. Die Website verwendet Cookies auch zur Speicherung von Spracheinstellungen, benutzerdefinierten Prompts und Einwilligungspräferenzen.`,
+– Weitere Informationen hierzu findest du weiter unten in diesem Text.<br><br>
 
+Der Entwickler dieser Web-App übernimmt keinerlei Verantwortung für deine Nutzung oder eine fehlende Compliance.<br><br>
+<hr><br>
+
+<strong>1. Wie funktioniert die Web-App?</strong><br>
+- Nimmt Ton über die Aufnahme­funktion des Browsers auf.<br>
+- Verarbeitet die Audiodaten im Arbeitsspeicher (RAM) des Browsers.<br>
+- Lädt die Audiodatei über eine gesicherte HTTPS-Verbindung mit deinem eigenen API-Schlüssel an die OpenAI-Whisper-API zur Transkription hoch.<br>
+- Sendet die Transkription (und ggf. zusätzlichen Text / Prompt) mit deinem eigenen API-Schlüssel an die OpenAI-API, die daraus einen Notiz­entwurf erstellt.<br>
+- Der Browser erhält die Notiz direkt von OpenAI über eine verschlüsselte Verbindung.<br>
+- Dein API-Schlüssel wird nur vorübergehend im SessionStorage des Browsers gespeichert. Schließt du die Web-App oder den Browser, wird der Schlüssel aus dem Speicher gelöscht. Um die App erneut zu nutzen, musst du den API-Schlüssel wieder einfügen. Das bietet eine zusätzliche Schutzschicht für deinen Schlüssel und verhindert unbefugten Zugriff.<br><br>
+<hr><br>
+
+<strong>2. Eigener OpenAI-API-Schlüssel erforderlich</strong><br>
+Sämtliche Kommunikation mit OpenAI erfolgt direkt aus deinem Browser unter Verwendung deines persönlichen API-Schlüssels. Der Entwickler dieser Web-App hat keinen Zugriff auf deinen Schlüssel oder deine Daten.<br><br>
+<hr><br>
+
+<strong>3. Auftragsverarbeitungsvertrag (DPA) mit OpenAI</strong><br>
+Für die Verarbeitung von Personen­daten über die API-Dienste wird empfohlen, einen Auftragsverarbeitungs­vertrag mit OpenAI abzuschließen. Die Standard­vereinbarung von OpenAI findest du hier: <a href="https://ironcladapp.com/public-launch/63ffefa2bed6885f4536d0fe" style="color:blue;" target="_blank">OpenAI-Auftragsverarbeitungs­vertrag (DPA)</a>. Deine Organisations­nummer erhältst du hier: <a href="https://platform.openai.com/settings/organization/general" style="color:blue;" target="_blank">dein OpenAI-Organisations­profil</a>. Mit der unterschriebenen Vereinbarung erkennen du und OpenAI an, dass du als Nutzer die Rolle des Daten­verarbeiters übernimmst – nicht OpenAI.<br><br>
+<hr><br>
+
+<strong>4. DPIA und TIA – erforderliche Risikoanalysen</strong><br><br>
+
+<strong>DPIA (Data Protection Impact Assessment):</strong> Gemäß Artikel 35 DSGVO erforderlich, wenn neue Technologien zur Verarbeitung besonderer Kategorien von Daten eingesetzt werden. Ziel ist es, die Datenschutz­risiken der Verarbeitung zu identifizieren und zu minimieren.<br>
+Untersuche, welche Daten verarbeitet werden, warum, und welche Maßnahmen nötig sind, um die Rechte der Patientinnen und Patienten zu schützen.<br>
+Beispielformular hier verfügbar: <a href="https://transcribe-notes.netlify.app/dpia" style="color:blue;" target="_blank">Vorschlag für DPIA (Beispielformular)</a><br><br>
+
+<strong>TIA (Transfer Impact Assessment):</strong> Nach dem Schrems-II-Urteil und den Artikeln 44–49 DSGVO erforderlich, wenn Personen­daten in ein Land außerhalb des EWR (z. B. die USA) übermittelt werden. Ziel ist es zu dokumentieren, dass das Schutzniveau der Übermittlung „im Wesentlichen gleichwertig“ ist.<br>
+Bewerte die US-Gesetzgebung (FISA 702, CLOUD Act usw.) im Verhältnis zur Art der Daten und deinen ergänzenden technischen und vertraglichen Maßnahmen.<br>
+Ziehe eine Schlussfolgerung, ob die Übermittlung – zusammen mit Standard Contractual Clauses und OpenAIs Zertifizierung nach dem EU-US Data Privacy Framework – weiterhin vertretbar ist.<br>
+Beispielformular hier verfügbar: <a href="https://transcribe-notes.netlify.app/tia.html" style="color:blue;" target="_blank">Vorschlag für Transfer Impact Assessment (TIA)</a><br><br>
+
+Beide Bewertungen sollten durchgeführt, dokumentiert und von dir als Nutzer genehmigt sein, bevor die Web-App eingesetzt wird.<br><br>
+<hr><br>
+
+<strong>5. Zero Data Retention (ZDR) und Datenspeicherung bei OpenAI</strong><br><br>
+
+<strong>OpenAIs Standardrichtlinie</strong><br>
+Nach der OpenAI-Richtlinie zur API-Datennutzung werden Daten, die an die API gesendet werden, nicht zum Training der Modelle verwendet. Die Daten können jedoch vorübergehend (typischerweise bis zu 30 Tage) für Missbrauchs­überwachung und Fehler­behebung gespeichert werden, bevor sie gelöscht werden.<br><br>
+
+<strong>Zero Data Retention (ZDR)</strong><br>
+OpenAI bietet ZDR für einige größere Kunden nach individueller Vereinbarung an, jedoch ist dies für die reguläre API-Nutzung nicht Standard und daher für diese App nicht aktiviert.<br><br>
+
+<strong>Weiteres Vorgehen</strong><br>
+Künftige Versionen der App können eine Unterstützung alternativer KI-Anbieter prüfen, die ZDR standardmäßig anbieten (z. B. bestimmte Dienste auf Microsoft Azure). Etwaige Updates hierzu werden über die Web-App kommuniziert.<br><br>
+<hr><br>
+
+<strong>6. Voraussetzungen für einen potenziellen klinischen Einsatz</strong><br><br>
+Deine eigene Bewertung ist entscheidend: Die rechtmäßige Nutzung dieses Werkzeugs mit Patienten­daten hängt ausschließlich von deiner gründlichen Beurteilung ab. Du musst – auf Basis des DPA mit OpenAI, der DPIA und der TIA – selbst zu dem Schluss kommen, ob die Nutzung vertretbar ist und das Restrisiko für deine Praxis akzeptabel bleibt.<br><br>
+
+<strong>Mindestanforderungen vor der Nutzung mit Patientendaten:</strong><br>
+- Ein gültiger DPA mit OpenAI ist abgeschlossen.<br>
+- Eine unternehmens­spezifische DPIA und TIA sind durchgeführt, genehmigt und kommen zu einem akzeptablen Restrisiko.<br>
+- Inhaltsverantwortung: Du trägst die Verantwortung für alle Inhalte, die du über deinen API-Schlüssel an OpenAI sendest, und musst den generierten Notizentwurf vor einer etwaigen Übernahme in die Patientenakte fachlich prüfen.<br><br>
+<hr><br>
+
+<strong>7. Übersicht über die Datenspeicherung</strong><br><br>
+<table style="border-collapse:collapse;width:100%;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ccc;padding:4px;">Datentyp</th>
+      <th style="border:1px solid #ccc;padding:4px;">Speicherort</th>
+      <th style="border:1px solid #ccc;padding:4px;">Speicherdauer</th>
+      <th style="border:1px solid #ccc;padding:4px;">Zugriff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Dein OpenAI-API-Schlüssel</td>
+      <td style="border:1px solid #ccc;padding:4px;">SessionStorage im Browser</td>
+      <td style="border:1px solid #ccc;padding:4px;">Bis du die Web-App oder den Browser schließt</td>
+      <td style="border:1px solid #ccc;padding:4px;">Nur du und dein Browser</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Audiosegmente während der Aufnahme</td>
+      <td style="border:1px solid #ccc;padding:4px;">Arbeitsspeicher (RAM) des Browsers</td>
+      <td style="border:1px solid #ccc;padding:4px;">Nur während Aufnahme / Verarbeitung. Nach der Verarbeitung nicht bei OpenAI gespeichert</td>
+      <td style="border:1px solid #ccc;padding:4px;">Nur du und dein Browser</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Text / Notizentwurf</td>
+      <td style="border:1px solid #ccc;padding:4px;">OpenAI-API (vorübergehend)</td>
+      <td style="border:1px solid #ccc;padding:4px;">Max. 30 Tage bei OpenAI</td>
+      <td style="border:1px solid #ccc;padding:4px;">Du, OpenAI (vorübergehend)</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ccc;padding:4px;">Anweisungen / Prompts</td>
+      <td style="border:1px solid #ccc;padding:4px;">Lokal im Browser. Wenn du dich in der Web-App auf demselben Browser, Gerät und mit demselben API-Schlüssel anmeldest, sind deine gespeicherten Prompts erneut verfügbar</td>
+      <td style="border:1px solid #ccc;padding:4px;">Bis du sie löschst</td>
+      <td style="border:1px solid #ccc;padding:4px;">Du und dein Browser</td>
+    </tr>
+  </tbody>
+</table><br><br>
+<hr><br>
+
+<strong>8. Quellcode</strong><br><br>
+- Der Quellcode ist offen einsehbar und läuft lokal in deinem Browser.<br><br>
+<hr><br>
+
+<strong>9. Cookies und Werbung</strong><br><br>
+Wir verwenden Cookies ausschließlich, um relevante Werbung über Google Ads anzuzeigen sowie für Sprachauswahl, Einwilligungen und das Speichern deiner angepassten Prompts. Die Cookies speichern keine Personen­daten, die über das für Funktionalität und Personalisierung notwendige Maß hinausgehen. Die Cookies von Google haben keinen Zugriff auf Daten im Zusammenhang mit Audioaufnahmen und generiertem Text (Patientendaten).
+`,
   aboutModalHeading: "Über uns",
   aboutModalText: `Diese Website wurde entwickelt, um Gesundheitsfachkräfte und andere Nutzer mit direktem Zugang zu hochwertiger Spracherkennung und klinischer Notizgenerierung zu versorgen – ohne unnötige Kosten oder Zwischenhändler.<br><br>
 Durch die Verwendung Ihres eigenen OpenAI API-Schlüssels verbinden Sie sich direkt mit der Quelle der Technologie. Das bedeutet, dass Sie nur die tatsächlichen Nutzungskosten zahlen, die von OpenAI festgelegt werden, ohne Aufschläge oder Abonnementgebühren.<br><br>
