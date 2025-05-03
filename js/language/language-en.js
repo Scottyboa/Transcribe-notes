@@ -49,7 +49,7 @@ If you will use the API services to process personal data, you should sign a DPA
 
 <strong>DPIA (Data Protection Impact Assessment):</strong> Required under GDPR Article 35 when new technology is used to process special-category data. The purpose is to identify and mitigate privacy risks in the processing itself.<br>
 Assess what is processed, why, and which measures are needed to protect patients’ rights.<br>
-Template available here: <a href="https://transcribe-notes.netlify.app/dpia" style="color:blue;" target="_blank">Suggested DPIA (template)</a><br><br>
+Template available here: <a href="https://transcribe-notes.netlify.app/dpia-en" style="color:blue;" target="_blank">Suggested DPIA (template)</a><br><br>
 
 <strong>TIA (Transfer Impact Assessment):</strong> Required under the Schrems II ruling and GDPR Articles 44–49 when personal data are transferred to a country outside the EEA (such as the USA). The purpose is to document that the transfer provides a “level of protection essentially equivalent” to the EEA.<br>
 Assess US legislation (FISA 702, CLOUD Act, etc.) against the nature of the data and your supplementary technical/contractual safeguards.<br>
