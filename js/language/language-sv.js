@@ -12,6 +12,7 @@ export const indexTranslations = {
   aboutButton: "Om",
   adRevenueMessage: "Eftersom denna webbplats är gratis att använda och enbart finansieras genom annonsintäkter, vänligen godkänn annonser för att stödja tjänsten.",
 
+securityModalHeading: "Integritet",
 securityModalText: `
 <strong>Integritet och Databehandling</strong><br><br>
 Denna webbapp är skapad som ett verktyg för tal-till-text och anteckningsgenerering. Det är ditt fulla ansvar som vårdpersonal/behandlingsansvarig att säkerställa att all användning sker i enlighet med GDPR, hälso- och sjukvårdslagen och Normen för informationssäkerhet.<br><br>
