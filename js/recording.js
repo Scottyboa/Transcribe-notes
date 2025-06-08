@@ -249,13 +249,33 @@ async function transcribeChunkDirectly(wavBlob, chunkNum) {
       body: formData
     });
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`OpenAI API error: ${errorText}`);
+      // Attempt to parse JSON error
+      let err;
+      try { err = await response.json(); } catch { err = null; }
+      // Handle insufficient quota specifically
+      if (err?.error?.code === "insufficient_quota") {
+        logError("Insufficient quota for transcription:", err);
+        updateStatusMessage(
+          "Error: You have exceeded your OpenAI quota or have no credits left.",
+          "red"
+        );
+        return "";
+      }
+      // Fallback for other errors
+      const msg = err?.error?.message || await response.text();
+      throw new Error(`OpenAI API error: ${msg}`);
     }
     const result = await response.json();
     return result.text || "";
   } catch (error) {
     logError(`Error transcribing chunk ${chunkNum}:`, error);
+    // Show tailored message if it really was a quota issue
+    updateStatusMessage(
+      error.message.includes("insufficient_quota")
+        ? "Error: You have exceeded your OpenAI quota or have no credits left."
+        : "Error transcribing: please try again",
+      "red"
+    );
     return `[Error transcribing chunk ${chunkNum}]`;
   }
 }
