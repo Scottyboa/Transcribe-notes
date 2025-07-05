@@ -238,7 +238,13 @@ async function transcribeChunkDirectly(wavBlob, chunkNum) {
   
   const formData = new FormData();
   formData.append("file", wavBlob, `chunk_${chunkNum}.wav`);
-  formData.append("model", "whisper-1");
+  formData.append("model", "gpt-4o-transcribe");
+  formData.append("temperature", "0.2");
+  formData.append("prompt", 
+    "Only transcribe spoken words; exclude all non-verbal and background noises." +
+    "Do NOT omit, summarize, or “clean up” anything related to spoken words. " +
+    "Output every word as spoken. Do NOT truncate or leave out anything in the transcript, that is spoken"
+  );
   
   try {
     const response = await fetch("https://api.openai.com/v1/audio/transcriptions", {
@@ -715,4 +721,3 @@ stopButton.addEventListener("click", async () => {
 }
 
 export { initRecording };
-
