@@ -241,9 +241,7 @@ async function transcribeChunkDirectly(wavBlob, chunkNum) {
   formData.append("model", "gpt-4o-transcribe");
   formData.append("temperature", "0.2");
   formData.append("prompt", 
-    "Only transcribe spoken words; exclude all non-verbal and background noises." +
-    "Do NOT omit, summarize, or “clean up” anything related to spoken words. " +
-    "Output every word as spoken. Do NOT truncate or leave out anything in the transcript, that is spoken"
+    "Transcribe only spoken words exactly as heard. Exclude non-verbal sounds and background noise. Do NOT omit, summarize, or alter any spoken words or sentences. Do NOT repeat the same sentence multiple times in succession."
   );
   
   try {
