@@ -131,37 +131,48 @@ All headings should be plain text with a colon, like 'Bakgrunn:'.`.trim();
           { role: "system", content: finalPromptText },
           { role: "user", content: transcriptionText }
         ],
-        temperature: 0.7,
+        temperature: 0.1,
         stream: true,
         store: false
       })
     });
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let done = false;
+        const reader    = response.body.getReader();
+    const decoder   = new TextDecoder("utf-8");
+    // buffer for incomplete SSE events
+    let   sseBuffer = "";
+    let   done      = false;
+
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
-      const chunkValue = decoder.decode(value);
-      const lines = chunkValue.split("\n").filter(line => line.trim() !== "");
-      for (const line of lines) {
-        if (line.startsWith("data: ")) {
-          const jsonStr = line.replace("data: ", "").trim();
-          if (jsonStr === "[DONE]") {
-            done = true;
-            break;
-          }
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const textChunk = parsed.choices[0].delta?.content || "";
-            generatedNoteField.value += textChunk;
-            autoResize(generatedNoteField);
-          } catch (err) {
-            console.error("Stream chunk parsing error:", err);
-          }
+
+      // — start streaming parse —
+      // decode with stream:true to preserve partial UTF-8 codepoints
+      const chunkText = decoder.decode(value, { stream: true });
+      sseBuffer += chunkText;
+
+      // extract all full SSE events terminated by "\n\n"
+      let boundary;
+      while ((boundary = sseBuffer.indexOf("\n\n")) !== -1) {
+        const event = sseBuffer.slice(0, boundary).trim();
+        sseBuffer = sseBuffer.slice(boundary + 2);
+
+        if (!event.startsWith("data: ")) continue;
+        const payload = event.replace(/^data: /, "");
+        if (payload === "[DONE]") { done = true; break; }
+
+        try {
+          const parsed    = JSON.parse(payload);
+          const textChunk = parsed.choices[0].delta?.content || "";
+          generatedNoteField.value += textChunk;
+          autoResize(generatedNoteField);
+        } catch (err) {
+          console.error("Malformed SSE JSON, skipping:", err, payload);
         }
       }
+      // — end streaming parse —
     }
+
     clearInterval(noteTimerInterval);
     if (noteTimerElement) {
       noteTimerElement.innerText = "Text generation completed!";
