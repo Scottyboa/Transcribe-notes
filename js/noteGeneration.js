@@ -131,7 +131,7 @@ All headings should be plain text with a colon, like 'Bakgrunn:'.`.trim();
           { role: "system", content: finalPromptText },
           { role: "user", content: transcriptionText }
         ],
-        temperature: 0.1,
+        temperature: 0.2,
         stream: true,
         store: false
       })
