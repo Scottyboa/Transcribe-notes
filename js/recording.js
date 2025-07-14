@@ -299,7 +299,7 @@ async function transcribeChunkDirectly(wavBlob, chunkNum) {
   const formData = new FormData();
   formData.append("file", wavBlob, `chunk_${chunkNum}.wav`);
   formData.append("model", "gpt-4o-transcribe");
-  formData.append("temperature", "0.2");
+  formData.append("temperature", "0.1");
   formData.append(
   "prompt",
   "Doctor patient consultation. Audio is mostly norwegian, but can have other languages sometimes also. Transcribe only the spoken words, exactly as heard, without omitting, summarizing, or altering any spoken content. Include all conversational fillers (such as 'um', 'yeah', 'okay', 'all right', 'hm', 'mm', 'nei', etc.), hesitations, false starts, stutters, repeated words, unfinished and interrupted sentences, and self-corrections. Transcribe overlapping or simultaneous speech when possible. Reflect every change in speaker as a new paragraph, even if the speaker is not named. Do not paraphrase or clean up grammar. Your goal is to produce a fully lifelike, raw, and unedited transcript."
