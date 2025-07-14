@@ -302,7 +302,7 @@ async function transcribeChunkDirectly(wavBlob, chunkNum) {
   formData.append("temperature", "0.2");
   formData.append(
   "prompt",
-  "Transcribe only the spoken words, exactly as heard, without omitting, summarizing, or altering any spoken content. Include all conversational fillers (such as 'um', 'yeah', 'okay', 'all right', 'hm', 'mm', 'nei', etc.), hesitations, false starts, stutters, repeated words, unfinished and interrupted sentences, and self-corrections. Transcribe overlapping or simultaneous speech when possible. Reflect every change in speaker as a new paragraph, even if the speaker is not named. Do not paraphrase or clean up grammar. Your goal is to produce a fully lifelike, raw, and unedited transcript."
+  "Audio is mostly norwegian, but can have other languages sometimes also. Transcribe only the spoken words, exactly as heard, without omitting, summarizing, or altering any spoken content. Include all conversational fillers (such as 'um', 'yeah', 'okay', 'all right', 'hm', 'mm', 'nei', etc.), hesitations, false starts, stutters, repeated words, unfinished and interrupted sentences, and self-corrections. Transcribe overlapping or simultaneous speech when possible. Reflect every change in speaker as a new paragraph, even if the speaker is not named. Do not paraphrase or clean up grammar. Your goal is to produce a fully lifelike, raw, and unedited transcript."
 );
 
   try {
