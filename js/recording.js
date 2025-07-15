@@ -357,11 +357,13 @@ async function processTranscriptionQueue() {
   isProcessingQueue = true;
   
   while (transcriptionQueue.length > 0) {
-    const { chunkNum, wavBlob } = transcriptionQueue.shift();
+    let { chunkNum, wavBlob } = transcriptionQueue.shift();
     logInfo(`Transcribing chunk ${chunkNum}...`);
     const transcript = await transcribeChunkDirectly(wavBlob, chunkNum);
     transcriptChunks[chunkNum] = transcript;
     updateTranscriptionOutput();
+    // free this chunk’s audio immediately
+    wavBlob = null;
   }
   
   isProcessingQueue = false;
