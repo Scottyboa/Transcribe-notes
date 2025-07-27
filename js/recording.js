@@ -2,6 +2,7 @@
 // Updated recording module without encryption/HMAC mechanisms,
 // processing audio chunks using OfflineAudioContext,
 // and implementing a client‑side transcription queue that sends each processed chunk directly to OpenAI's Whisper API.
+let transcriptionError = false;
 
 function hashString(str) {
   let hash = 0;
@@ -326,6 +327,7 @@ async function transcribeChunkDirectly(wavBlob, chunkNum) {
           "Error: You have exceeded your OpenAI quota or have no credits left.",
           "red"
         );
+        transcriptionError = true;
         return "";
       }
       // Fallback for other errors
@@ -343,6 +345,7 @@ async function transcribeChunkDirectly(wavBlob, chunkNum) {
         : "Error transcribing: please try again",
       "red"
     );
+    transcriptionError = true;
     return `[Error transcribing chunk ${chunkNum}]`;
   }
 }
@@ -475,8 +478,12 @@ function updateTranscriptionOutput() {
   }
   if (manualStop && Object.keys(transcriptChunks).length >= expectedChunks) {
     clearInterval(completionTimerInterval);
-    updateStatusMessage("Transcription finished!", "green");
-    logInfo("Transcription complete.");
+    if (!transcriptionError) {
+      updateStatusMessage("Transcription finished!", "green");
+      logInfo("Transcription complete.");
+    } else {
+      logInfo("Transcription complete with errors; keeping error message visible.");
+    }
     transcriptChunks = {};
   }
 }
@@ -542,6 +549,8 @@ function scheduleChunk() {
 }
 
 function resetRecordingState() {
+  // ─── Clear our quota-error flag for this session ───
+  transcriptionError = false;
   // ─── Clear any old completion timer (we’re starting fresh) ───
   if (completionTimerInterval) {
     clearInterval(completionTimerInterval);
