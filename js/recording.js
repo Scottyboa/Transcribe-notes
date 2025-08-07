@@ -162,7 +162,7 @@ function stopMicrophone() {
     audioReader = null;
   }
 }
-
+  
 // --- Base64 Helper Functions (kept for legacy) ---
 function arrayBufferToBase64(buffer) {
   let binary = "";
@@ -197,6 +197,30 @@ function getDeviceToken() {
 function getAPIKey() {
   return sessionStorage.getItem("user_api_key");
 }
+
+async function sendChunk(formData, retries = 5, backoff = 2000) {
+  // grab the API key at call-time
+  const apiKey = getAPIKey();
+  if (!apiKey) throw new Error("API key not available");
+   try {
+     return await fetch(
+       "https://api.openai.com/v1/audio/transcriptions",
+       {
+         method: "POST",
+         headers: { Authorization: `Bearer ${apiKey}` },
+         body: formData,
+       }
+     );
+   } catch (err) {
+     if (retries > 0) {
+       console.warn(`Chunk failed, retrying in ${backoff}ms… (${retries} left)`);
+       await new Promise(res => setTimeout(res, backoff));
+       return sendChunk(formData, retries - 1, backoff * 1.5);
+     }
+     // out of retries → bubble error
+     throw err;
+   }
+ }
 
 // --- File Blob Processing ---
 // Previously used for encryption; now simply returns the original blob along with markers.
@@ -309,13 +333,7 @@ async function transcribeChunkDirectly(wavBlob, chunkNum) {
 );
 
   try {
-    const response = await fetch("https://api.openai.com/v1/audio/transcriptions", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + apiKey
-      },
-      body: formData
-    });
+     const response = await sendChunk(formData);
     if (!response.ok) {
       // Attempt to parse JSON error
       let err;
