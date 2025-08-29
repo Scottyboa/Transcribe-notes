@@ -15,19 +15,18 @@ module.exports = async (req, res) => {
   if (!headerKey) return res.status(400).json({ error: "Missing API key" });
 
   try {
-    // Wrap the req stream so we can forward it
     const upstream = await fetch("https://api.mistral.ai/v1/audio/transcriptions", {
       method: "POST",
       headers: {
         "x-api-key": headerKey,
         "content-type": req.headers["content-type"],
       },
-      body: Readable.toWeb(req),   // ✅ forward the raw incoming stream
+      body: Readable.toWeb(req),
     });
 
-    // Relay the response back transparently
-    res.status(upstream.status);
-    upstream.body.pipeTo(res);    // ✅ stream directly to the response
+    // Buffer the full body and return JSON (works with response.json() in frontend)
+    const text = await upstream.text();
+    res.status(upstream.status).send(text);
   } catch (e) {
     res.status(502).json({ error: "Upstream request failed", detail: String(e?.message || e) });
   }
