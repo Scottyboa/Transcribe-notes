@@ -33,7 +33,7 @@ const DEBUG = true;
   // confidence ≤ 0.35 → silence
   negativeSpeechThreshold: 0.35,
   // allow up to 3 “false-silence” frames before firing onSpeechEnd
-  redemptionFrames: 7,
+  redemptionFrames: 5,
   // prepend 1 frame of audio before onSpeechStart
   preSpeechPadFrames: 2,
   // require at least 3 consecutive speech frames to declare onSpeechStart
