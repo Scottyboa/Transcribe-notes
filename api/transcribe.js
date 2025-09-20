@@ -58,7 +58,7 @@ export default async function handler(req, res) {
     }
 
     const transcript = await transcriptResp.json();
-    res.status(200).json({ id: transcript.id });
+    res.status(200).json({ id: transcript.id, endpoint: AAI_BASE });
   } catch (err) {
     console.error("Error in /api/transcribe:", err);
     res.status(500).json({ error: err.message });
