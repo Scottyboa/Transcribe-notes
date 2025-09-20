@@ -193,8 +193,9 @@ function getDeviceToken() {
 
 // --- API Key Retrieval ---
 // With encryption removed, we now simply get the API key from sessionStorage.
+import { getProviderKey } from './sttStorage.js';
 function getAPIKey() {
-  return sessionStorage.getItem("user_api_key");
+  return getProviderKey('assembly'); // sessionStorage.stt_key_assembly
 }
 
 // --- File Blob Processing ---
