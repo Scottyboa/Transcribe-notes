@@ -1,5 +1,6 @@
 {
   "routes": [
     { "src": "/api/transcribe", "dest": "api/transcribe.js" }
+    { "src": "/api/status/(.*)", "dest": "api/status/[id].js" }
   ]
 }
