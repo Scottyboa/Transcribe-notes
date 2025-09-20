@@ -1,13 +1,11 @@
 // api/transcribe.js
-// Vercel serverless proxy → Mistral
-// - Multipart/form-data  → forwards to /v1/audio/transcriptions
-// - JSON (or ?mode=chat) → forwards to /v1/chat/completions
-// Buffers the incoming body (no streaming), then forwards.
+// Vercel serverless proxy → AssemblyAI
+// Forwards multipart/form-data audio to AssemblyAI /v2/transcribe
 
 const { Buffer } = require("buffer");
 
 module.exports = async (req, res) => {
-  // CORS (tighten origin later)
+  // CORS (loose for now; tighten origin later)
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, x-api-key");
@@ -21,19 +19,8 @@ module.exports = async (req, res) => {
     (req.headers["authorization"] && req.headers["authorization"].replace(/Bearer\s+/i, "").trim());
 
   if (!headerKey) {
-    return res.status(400).json({ error: "Missing API key (send in x-api-key or Authorization: Bearer ...)" });
+    return res.status(400).json({ error: "Missing AssemblyAI API key (send in x-api-key or Authorization)" });
   }
-
-  // Decide route
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  const modeParam = url.searchParams.get("mode"); // e.g. ?mode=chat to force chat
-  const contentType = (req.headers["content-type"] || "").toLowerCase();
-
-  const isJson = contentType.startsWith("application/json");
-  const goChat = modeParam === "chat" || isJson; // chat/completions when JSON or explicitly requested
-  const upstreamUrl = goChat
-    ? "https://api.mistral.ai/v1/chat/completions"
-    : "https://api.mistral.ai/v1/audio/transcriptions";
 
   try {
     // Buffer incoming body
@@ -41,39 +28,29 @@ module.exports = async (req, res) => {
     for await (const chunk of req) chunks.push(chunk);
     const bodyBuffer = Buffer.concat(chunks);
 
-    // Headers for upstream
+    const contentType = (req.headers["content-type"] || "").toLowerCase();
+    if (!contentType.startsWith("multipart/form-data")) {
+      return res.status(400).json({ error: "Content-Type must be multipart/form-data for AssemblyAI transcriptions" });
+    }
+
+    // Headers for AssemblyAI
     const headers = {
-      // Mistral accepts either header — include both for safety.
-      "Authorization": `Bearer ${headerKey}`,
-      "x-api-key": headerKey,
+      "authorization": headerKey,
+      "content-type": contentType, // preserve boundary
       "accept": "application/json",
     };
 
-    let body;
-    if (goChat) {
-      // JSON payload → forward as JSON
-      headers["content-type"] = "application/json";
-      body = bodyBuffer; // already JSON bytes
-    } else {
-      // Multipart payload → preserve original content-type (includes boundary)
-      if (!contentType.startsWith("multipart/form-data")) {
-        return res.status(400).json({ error: "Content-Type must be multipart/form-data for transcriptions" });
-      }
-      headers["content-type"] = contentType;
-      body = bodyBuffer;
-    }
-
-    const upstream = await fetch(upstreamUrl, {
+    const upstream = await fetch("https://api.assemblyai.com/v2/transcribe", {
       method: "POST",
       headers,
-      body,
+      body: bodyBuffer,
     });
 
-    const text = await upstream.text(); // pass through raw to keep error details
+    const text = await upstream.text(); // forward raw response (JSON or error)
     res.status(upstream.status).send(text);
   } catch (e) {
     res.status(502).json({
-      error: "Upstream request failed",
+      error: "Upstream request to AssemblyAI failed",
       detail: String(e?.message || e),
     });
   }
