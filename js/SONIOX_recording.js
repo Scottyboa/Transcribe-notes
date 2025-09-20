@@ -194,9 +194,11 @@ function getDeviceToken() {
 
 // --- API Key Retrieval ---
 // With encryption removed, we now simply get the API key from sessionStorage.
+import { getProviderKey } from './sttStorage.js';
 function getAPIKey() {
-  return sessionStorage.getItem("user_api_key");
+  return getProviderKey('soniox'); // sessionStorage.stt_key_soniox
 }
+
 
 const SONIOX_BASE = "https://api.soniox.com/v1";
 
