@@ -1,14 +1,14 @@
 // sttStorage.js
+
+// --- Provider IDs used everywhere ---
 export const STT_PROVIDERS = {
   openai: 'openai',     // gpt-4o-transcribe
   soniox: 'soniox',
-  assembly: 'assembly'
+  assembly: 'assembly',
 };
 
-const KEY_PROVIDER = 'stt_provider'; // localStorage
-const KEY_PREFIX   = 'stt_key_';     // sessionStorage.stt_key_<provider>
-
-// --- Provider selection ---
+// --- Selected provider (persists across reloads) ---
+const KEY_PROVIDER = 'stt_provider';
 export function getProvider() {
   return localStorage.getItem(KEY_PROVIDER) || STT_PROVIDERS.openai;
 }
@@ -16,22 +16,43 @@ export function setProvider(p) {
   localStorage.setItem(KEY_PROVIDER, p);
 }
 
-// --- Per-provider API keys in sessionStorage ---
+// --- Per-provider API keys (write to both; read preferring session) ---
 export function setProviderKey(provider, key) {
   if (!provider) return;
-  if (key) sessionStorage.setItem(KEY_PREFIX + provider, key);
-  else     sessionStorage.removeItem(KEY_PREFIX + provider);
-}
-export function getProviderKey(provider) {
-  return sessionStorage.getItem(KEY_PREFIX + provider) || '';
+  const k = 'stt_key_' + provider;
+  if (key) {
+    sessionStorage.setItem(k, key);
+    localStorage.setItem(k, key);
+  } else {
+    sessionStorage.removeItem(k);
+    localStorage.removeItem(k);
+  }
 }
 
-// --- OpenAI key for note generation (stable home) ---
-const OPENAI_KEY = 'openai_api_key';
+export function getProviderKey(provider) {
+  const k = 'stt_key_' + provider;
+  return (
+    sessionStorage.getItem(k) ??
+    localStorage.getItem(k) ??
+    ''
+  );
+}
+
+// --- Canonical OpenAI key for note generation (also across tabs) ---
 export function setOpenAIKey(key) {
-  if (key) sessionStorage.setItem(OPENAI_KEY, key);
-  else     sessionStorage.removeItem(OPENAI_KEY);
+  const K = 'openai_api_key';
+  if (key) {
+    sessionStorage.setItem(K, key);
+    localStorage.setItem(K, key);
+  } else {
+    sessionStorage.removeItem(K);
+    localStorage.removeItem(K);
+  }
 }
 export function getOpenAIKey() {
-  return sessionStorage.getItem(OPENAI_KEY) || '';
+  return (
+    sessionStorage.getItem('openai_api_key') ??
+    localStorage.getItem('openai_api_key') ??
+    ''
+  );
 }
