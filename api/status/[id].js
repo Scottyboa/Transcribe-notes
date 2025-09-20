@@ -1,41 +1,30 @@
 // api/status/[id].js
-// Vercel serverless proxy for polling AssemblyAI transcription status
+const baseUS = "https://api.assemblyai.com/v2/transcript";
+const baseEU = "https://api.eu.assemblyai.com/v2/transcript";
 
 module.exports = async (req, res) => {
-  // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, x-api-key");
+  res.setHeader("Access-Control-Allow-Headers", "Authorization, x-api-key, x-region");
 
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "GET") return res.status(405).json({ error: "Method not allowed" });
 
-  // Accept user-supplied key via header
-  const headerKey =
+  const apiKey =
     req.headers["x-api-key"] ||
     (req.headers["authorization"] && req.headers["authorization"].replace(/Bearer\s+/i, "").trim());
+  if (!apiKey) return res.status(400).json({ error: "Missing API key (send in x-api-key or Authorization: Bearer ...)" });
 
-  if (!headerKey) {
-    return res.status(400).json({ error: "Missing API key (send in x-api-key or Authorization: Bearer ...)" });
-  }
+  const { id } = req.query;
+  const base = (req.headers["x-region"] === "eu") ? baseEU : baseUS;
 
   try {
-    const { id } = req.query; // dynamic part from [id].js
-
-    const upstream = await fetch(`https://api.assemblyai.com/v2/transcribe/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: headerKey,
-        Accept: "application/json"
-      }
+    const upstream = await fetch(`${base}/${encodeURIComponent(id)}`, {
+      headers: { Authorization: apiKey }
     });
-
     const text = await upstream.text();
     res.status(upstream.status).send(text);
   } catch (e) {
-    res.status(502).json({
-      error: "Upstream request failed",
-      detail: String(e?.message || e),
-    });
+    res.status(502).json({ error: "Upstream request failed", detail: String(e?.message || e) });
   }
 };
