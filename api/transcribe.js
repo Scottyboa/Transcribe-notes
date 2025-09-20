@@ -1,65 +1,73 @@
 // api/transcribe.js
-// Vercel serverless proxy → AssemblyAI
-// Flow: browser sends raw WAV bytes -> here -> upload to /v2/upload -> create /v2/transcript
-// Returns the created transcript JSON (contains `id`)
-const { Buffer } = require("buffer");
+//
+// Vercel serverless function: receives raw WAV/PCM audio bytes from the client,
+// forwards them to AssemblyAI's EU endpoint, and returns the transcript ID.
+//
+// Residency: pinned to EU via vercel.json ("fra1") + using api.eu.assemblyai.com.
+// Security: the AssemblyAI key stays in Vercel env vars (never sent to the client).
 
-module.exports = async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, x-api-key, x-model, x-language-code, x-region");
-  if (req.method === "OPTIONS") return res.status(204).end();
-  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
-
-  const apiKey =
-    req.headers["x-api-key"] ||
-    (req.headers["authorization"] && req.headers["authorization"].replace(/Bearer\s+/i, "").trim());
-  if (!apiKey) return res.status(400).json({ error: "Missing API key (send in x-api-key or Authorization: Bearer ...)" });
-
-  // Optional knobs from browser
-  const speechModel   = (req.headers["x-model"] || "universal").toString();
-  const languageCode  = (req.headers["x-language-code"] || "").toString() || null; // e.g. "no"
-  const baseHost      = (req.headers["x-region"] === "eu") ? "https://api.eu.assemblyai.com" : "https://api.assemblyai.com";
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Method not allowed" });
+    return;
+  }
 
   try {
-    // read raw bytes (audio)
-    const chunks = [];
-    for await (const c of req) chunks.push(c);
-    const audioBytes = Buffer.concat(chunks);
-    if (!audioBytes.length) return res.status(400).json({ error: "No audio bytes in request body" });
+    const AAI_API_KEY = process.env.AAI_API_KEY;
+    const AAI_BASE = process.env.AAI_BASE || "https://api.eu.assemblyai.com";
 
-    // 1) Upload bytes
-    const up = await fetch(`${baseHost}/v2/upload`, {
-      method: "POST",
-      headers: { Authorization: apiKey, "Content-Type": "application/octet-stream" },
-      body: audioBytes
-    });
-    if (!up.ok) {
-      const txt = await up.text();
-      return res.status(up.status).send(txt || "Upload failed");
+    if (!AAI_API_KEY) {
+      return res.status(500).json({ error: "AssemblyAI API key not configured" });
     }
-    const { upload_url } = await up.json();
 
-    // 2) Create transcript
-    const body = {
-      audio_url: upload_url,
-      // When null or omitted, AssemblyAI uses "universal"
-      speech_model: speechModel || null,
-      // You can omit language_code to let AAI auto-detect; include when you know it.
-      language_code: languageCode
-    };
-
-    const tr = await fetch(`${baseHost}/v2/transcript`, {
+    // Forward audio to AssemblyAI EU endpoint
+    const uploadResp = await fetch(`${AAI_BASE}/v2/upload`, {
       method: "POST",
-      headers: { Authorization: apiKey, "Content-Type": "application/json" },
-      body: JSON.stringify(body)
+      headers: {
+        Authorization: AAI_API_KEY,
+        "Transfer-Encoding": "chunked"
+      },
+      body: req.body
     });
-    const text = await tr.text(); // keep raw details on error
-    return res.status(tr.status).send(text);
-  } catch (err) {
-    return res.status(502).json({ error: "Proxy failure", detail: String(err?.message || err) });
-  }
-};
 
-// Keep body parser off so we can read the raw stream
-module.exports.config = { api: { bodyParser: false } };
+    if (!uploadResp.ok) {
+      const txt = await uploadResp.text();
+      return res
+        .status(uploadResp.status)
+        .json({ error: "Upload failed", details: txt });
+    }
+
+    const { upload_url } = await uploadResp.json();
+
+    // Request transcription with options
+    const transcriptResp = await fetch(`${AAI_BASE}/v2/transcript`, {
+      method: "POST",
+      headers: {
+        Authorization: AAI_API_KEY,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        audio_url: upload_url,
+        language_code: "no",       // Norwegian; change to "auto" if you prefer autodetect
+        punctuate: true,
+        format_text: true,
+        disfluencies: false,
+        speaker_labels: false
+        // Add word_boost, custom_spelling, etc. here if needed
+      })
+    });
+
+    if (!transcriptResp.ok) {
+      const txt = await transcriptResp.text();
+      return res
+        .status(transcriptResp.status)
+        .json({ error: "Transcription init failed", details: txt });
+    }
+
+    const transcript = await transcriptResp.json();
+    res.status(200).json({ id: transcript.id });
+  } catch (err) {
+    console.error("Error in /api/transcribe:", err);
+    res.status(500).json({ error: "Server error", details: err.message });
+  }
+}
