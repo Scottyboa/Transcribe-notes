@@ -119,44 +119,59 @@ All headings should be plain text with a colon, like 'Bakgrunn:'.`.trim();
   const finalPromptText = promptText + "\n\n" + baseInstruction;
   
   try {
-  // Prepare the messages array for the Responses API
-  const messages = [
-    { role: "system", content: finalPromptText },
-    { role: "user",   content: transcriptionText }
-  ];
-  // Call the Responses API with GPT-5 and streaming
-  const resp = await fetch("https://api.openai.com/v1/responses", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: "gpt-5",
-      input: messages.map(m => ({
-        role: m.role,
-        content: [{ type: "input_text", text: m.content }]
-      })),
-      stream: true,
-      // —— OPTIONAL TUNING PARAMS —— 
-      text: {
-        verbosity: "medium"    // try "low" (faster/terse) or "high" (more detail)
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + apiKey
       },
-      reasoning: {
-        effort: "minimal"      // try "minimal" (fastest) or omit for default medium
-      }
-    })
-  });
-    await streamOpenAIResponse(resp, {
-      onDelta: (textChunk) => {
-        generatedNoteField.value += textChunk;
-      },
-      onDone: () => {},
-      onError: (err) => {
-        console.error("Streaming error:", err);
-        alert("Error during note generation");
-      }
+      body: JSON.stringify({
+        model: "chatgpt-4o-latest",
+        messages: [
+          { role: "system", content: finalPromptText },
+          { role: "user", content: transcriptionText }
+        ],
+        temperature: 0.2,
+        stream: true,
+        store: false
+      })
     });
+        const reader    = response.body.getReader();
+    const decoder   = new TextDecoder("utf-8");
+    // buffer for incomplete SSE events
+    let   sseBuffer = "";
+    let   done      = false;
+
+    while (!done) {
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+
+      // — start streaming parse —
+      // decode with stream:true to preserve partial UTF-8 codepoints
+      const chunkText = decoder.decode(value, { stream: true });
+      sseBuffer += chunkText;
+
+      // extract all full SSE events terminated by "\n\n"
+      let boundary;
+      while ((boundary = sseBuffer.indexOf("\n\n")) !== -1) {
+        const event = sseBuffer.slice(0, boundary).trim();
+        sseBuffer = sseBuffer.slice(boundary + 2);
+
+        if (!event.startsWith("data: ")) continue;
+        const payload = event.replace(/^data: /, "");
+        if (payload === "[DONE]") { done = true; break; }
+
+        try {
+          const parsed    = JSON.parse(payload);
+          const textChunk = parsed.choices[0].delta?.content || "";
+          generatedNoteField.value += textChunk;
+          autoResize(generatedNoteField);
+        } catch (err) {
+          console.error("Malformed SSE JSON, skipping:", err, payload);
+        }
+      }
+      // — end streaming parse —
+    }
 
     clearInterval(noteTimerInterval);
     if (noteTimerElement) {
@@ -172,63 +187,6 @@ All headings should be plain text with a colon, like 'Bakgrunn:'.`.trim();
     }
   }
 }
-
-async function streamOpenAIResponse(resp, {
-  onDelta = () => {},
-  onDone = () => {},
-  onError = (e) => { console.error(e); },
-} = {}) {
-  if (!resp.ok || !resp.body) {
-    const text = await resp.text().catch(() => "");
-    throw new Error(`OpenAI error ${resp.status}: ${text}`);
-  }
-
-  const reader = resp.body.getReader();
-  const decoder = new TextDecoder();
-  let buffer = "";
-
-  try {
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-      const parts = buffer.split("\n\n");
-      buffer = parts.pop() ?? "";
-
-      for (const part of parts) {
-        const lines = part.split("\n");
-        let event = null;
-        let dataStr = null;
-        for (const line of lines) {
-          if (line.startsWith("event:")) event = line.slice(6).trim();
-          if (line.startsWith("data:"))  dataStr = line.slice(5).trim();
-        }
-        if (!dataStr) continue;
-        if (dataStr === "[DONE]") { onDone(); return; }
-
-        let payload;
-        try { payload = JSON.parse(dataStr); } catch { continue; }
-
-        if (payload.type === "response.output_text.delta" && typeof payload.delta === "string") {
-          onDelta(payload.delta);
-        }
-        if (payload.type === "response.completed") {
-          onDone(payload);
-          return;
-        }
-        if (payload.type === "response.error") {
-          onError(new Error(payload.error?.message || "Unknown streaming error"));
-          return;
-        }
-      }
-    }
-    onDone();
-  } catch (e) {
-    onError(e);
-  }
-}
-
  
 // Initializes note generation functionality, including prompt slot handling and event listeners.
 function initNoteGeneration() {
