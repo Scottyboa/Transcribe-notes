@@ -329,7 +329,7 @@ async function transcribeChunkDirectly(wavBlob, chunkNum) {
   formData.append("temperature", "0.1");
   formData.append(
   "prompt",
-  "Doctor patient consultation. Audio is mostly norwegian, but can have other languages sometimes also. Transcribe only the spoken words, exactly as heard, without omitting, summarizing, or altering any spoken content. Include all conversational fillers (such as 'um', 'yeah', 'okay', 'all right', 'hm', 'mm', 'nei', etc.), hesitations, false starts, stutters, repeated words, unfinished and interrupted sentences, and self-corrections. Transcribe overlapping or simultaneous speech when possible. Reflect every change in speaker as a new paragraph, even if the speaker is not named. Do not paraphrase or clean up grammar. Your goal is to produce a fully lifelike, raw, and unedited transcript."
+  "Transcribe verbatim in the original language(s). Do not omit, condense, or correct anything. Keep all fillers, hesitations, false starts, repetitions, stutters, partial/aborted words, and profanity. Do not expand abbreviations. Do not normalize numbers or dates. Preserve dialectal forms. Keep every speaker turn on a new paragraph (even if unnamed). Do not infer or summarize. If a word is unclear, write [inaudible] and keep the surrounding words. Maintain punctuation only if clearly spoken; otherwise minimal punctuation. Do not translate. Do not interpret. Verbatim only."
 );
 
   try {
