@@ -102,8 +102,8 @@ async function generateNote() {
     }
   }, 1000);
   
-    // Phase 3: Always use the OpenAI key for note generation (independent of transcription provider)
-  const apiKey = sessionStorage.getItem("openai_api_key");
+  // Retrieve the plain API key from sessionStorage
+  const apiKey = sessionStorage.getItem("user_api_key");
   if (!apiKey) {
     alert("No API key available for note generation.");
     clearInterval(noteTimerInterval);
@@ -119,44 +119,61 @@ All headings should be plain text with a colon, like 'Bakgrunn:'.`.trim();
   const finalPromptText = promptText + "\n\n" + baseInstruction;
   
   try {
-  // Prepare the messages array for the Responses API
-  const messages = [
-    { role: "system", content: finalPromptText },
-    { role: "user",   content: transcriptionText }
-  ];
-  // Call the Responses API with GPT-5 and streaming
-  const resp = await fetch("https://api.openai.com/v1/responses", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: "gpt-5",
-      input: messages.map(m => ({
-        role: m.role,
-        content: [{ type: "input_text", text: m.content }]
-      })),
-      stream: true,
-      // —— OPTIONAL TUNING PARAMS —— 
-      text: {
-        verbosity: "medium"    // try "low" (faster/terse) or "high" (more detail)
+    // Non-streaming single-shot call to Responses API with GPT-5
+    const resp = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + apiKey
       },
-      reasoning: {
-        effort: "minimal"      // try "minimal" (fastest) or omit for default medium
-      }
-    })
-  });
-    await streamOpenAIResponse(resp, {
-      onDelta: (textChunk) => {
-        generatedNoteField.value += textChunk;
-      },
-      onDone: () => {},
-      onError: (err) => {
-        console.error("Streaming error:", err);
-        alert("Error during note generation");
-      }
+      body: JSON.stringify({
+        model: "gpt-5",
+        input: [
+          {
+            role: "system",
+            content: [{ type: "input_text", text: finalPromptText }]
+          },
+          {
+            role: "user",
+            content: [{ type: "input_text", text: transcriptionText }]
+          }
+        ],
+        text: {
+          verbosity: "medium"   // optional tuning knob; can adjust "low" / "high"
+        },
+        reasoning: {
+          effort: "minimal"     // optional; controls how much reasoning depth GPT-5 applies
+        }
+      })
     });
+
+    if (!resp.ok) {
+      // Surface API error details if available
+      let errText = "";
+      try { errText = await resp.text(); } catch {}
+      throw new Error("OpenAI HTTP " + resp.status + (errText ? (": " + errText) : ""));
+    }
+
+    const data = await resp.json();
+    // Prefer convenience field; fall back to assembling from parts
+    let fullText = "";
+    if (typeof data.output_text === "string") {
+      fullText = data.output_text;
+    } else if (Array.isArray(data.output)) {
+      fullText = data.output
+        .map(part => {
+          // common shapes: {type:"output_text", text:"..."} or {content:[{type:"output_text", text:"..."}]}
+          if (typeof part.text === "string") return part.text;
+          if (Array.isArray(part.content)) {
+            return part.content.map(c => (typeof c.text === "string" ? c.text : "")).join("");
+          }
+          return "";
+        })
+        .join("");
+    }
+
+    generatedNoteField.value = fullText || "";
+    autoResize(generatedNoteField);
 
     clearInterval(noteTimerInterval);
     if (noteTimerElement) {
@@ -172,63 +189,6 @@ All headings should be plain text with a colon, like 'Bakgrunn:'.`.trim();
     }
   }
 }
-
-async function streamOpenAIResponse(resp, {
-  onDelta = () => {},
-  onDone = () => {},
-  onError = (e) => { console.error(e); },
-} = {}) {
-  if (!resp.ok || !resp.body) {
-    const text = await resp.text().catch(() => "");
-    throw new Error(`OpenAI error ${resp.status}: ${text}`);
-  }
-
-  const reader = resp.body.getReader();
-  const decoder = new TextDecoder();
-  let buffer = "";
-
-  try {
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-      const parts = buffer.split("\n\n");
-      buffer = parts.pop() ?? "";
-
-      for (const part of parts) {
-        const lines = part.split("\n");
-        let event = null;
-        let dataStr = null;
-        for (const line of lines) {
-          if (line.startsWith("event:")) event = line.slice(6).trim();
-          if (line.startsWith("data:"))  dataStr = line.slice(5).trim();
-        }
-        if (!dataStr) continue;
-        if (dataStr === "[DONE]") { onDone(); return; }
-
-        let payload;
-        try { payload = JSON.parse(dataStr); } catch { continue; }
-
-        if (payload.type === "response.output_text.delta" && typeof payload.delta === "string") {
-          onDelta(payload.delta);
-        }
-        if (payload.type === "response.completed") {
-          onDone(payload);
-          return;
-        }
-        if (payload.type === "response.error") {
-          onError(new Error(payload.error?.message || "Unknown streaming error"));
-          return;
-        }
-      }
-    }
-    onDone();
-  } catch (e) {
-    onError(e);
-  }
-}
-
  
 // Initializes note generation functionality, including prompt slot handling and event listeners.
 function initNoteGeneration() {
