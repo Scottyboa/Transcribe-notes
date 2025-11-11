@@ -119,61 +119,59 @@ All headings should be plain text with a colon, like 'Bakgrunn:'.`.trim();
   const finalPromptText = promptText + "\n\n" + baseInstruction;
   
   try {
-    // Non-streaming single-shot call to Responses API with GPT-5
-    const resp = await fetch("https://api.openai.com/v1/responses", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + apiKey
       },
       body: JSON.stringify({
-        model: "gpt-5",
-        input: [
-          {
-            role: "system",
-            content: [{ type: "input_text", text: finalPromptText }]
-          },
-          {
-            role: "user",
-            content: [{ type: "input_text", text: transcriptionText }]
-          }
+        model: "chatgpt-4o-latest",
+        messages: [
+          { role: "system", content: finalPromptText },
+          { role: "user", content: transcriptionText }
         ],
-        text: {
-          verbosity: "medium"   // optional tuning knob; can adjust "low" / "high"
-        },
-        reasoning: {
-          effort: "minimal"     // optional; controls how much reasoning depth GPT-5 applies
-        }
+        temperature: 0.2,
+        stream: true,
+        store: false
       })
     });
+        const reader    = response.body.getReader();
+    const decoder   = new TextDecoder("utf-8");
+    // buffer for incomplete SSE events
+    let   sseBuffer = "";
+    let   done      = false;
 
-    if (!resp.ok) {
-      // Surface API error details if available
-      let errText = "";
-      try { errText = await resp.text(); } catch {}
-      throw new Error("OpenAI HTTP " + resp.status + (errText ? (": " + errText) : ""));
+    while (!done) {
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+
+      // — start streaming parse —
+      // decode with stream:true to preserve partial UTF-8 codepoints
+      const chunkText = decoder.decode(value, { stream: true });
+      sseBuffer += chunkText;
+
+      // extract all full SSE events terminated by "\n\n"
+      let boundary;
+      while ((boundary = sseBuffer.indexOf("\n\n")) !== -1) {
+        const event = sseBuffer.slice(0, boundary).trim();
+        sseBuffer = sseBuffer.slice(boundary + 2);
+
+        if (!event.startsWith("data: ")) continue;
+        const payload = event.replace(/^data: /, "");
+        if (payload === "[DONE]") { done = true; break; }
+
+        try {
+          const parsed    = JSON.parse(payload);
+          const textChunk = parsed.choices[0].delta?.content || "";
+          generatedNoteField.value += textChunk;
+          autoResize(generatedNoteField);
+        } catch (err) {
+          console.error("Malformed SSE JSON, skipping:", err, payload);
+        }
+      }
+      // — end streaming parse —
     }
-
-    const data = await resp.json();
-    // Prefer convenience field; fall back to assembling from parts
-    let fullText = "";
-    if (typeof data.output_text === "string") {
-      fullText = data.output_text;
-    } else if (Array.isArray(data.output)) {
-      fullText = data.output
-        .map(part => {
-          // common shapes: {type:"output_text", text:"..."} or {content:[{type:"output_text", text:"..."}]}
-          if (typeof part.text === "string") return part.text;
-          if (Array.isArray(part.content)) {
-            return part.content.map(c => (typeof c.text === "string" ? c.text : "")).join("");
-          }
-          return "";
-        })
-        .join("");
-    }
-
-    generatedNoteField.value = fullText || "";
-    autoResize(generatedNoteField);
 
     clearInterval(noteTimerInterval);
     if (noteTimerElement) {
