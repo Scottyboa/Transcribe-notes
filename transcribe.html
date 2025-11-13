@@ -263,6 +263,28 @@
       min-height: 200px;
       resize: vertical; /* user can resize manually */
     }
+
+    /* Title and Badge Styling */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px; /* space between title and badge */
+    }
+
+    .section-title h3 {
+      margin: 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding-left: 4px;     /* a small gap from title text */
+      font-size: 16px;       /* same as body text size */
+      line-height: 1.2;
+      color: #000;           /* black font */
+      background: none;      /* remove green pill background */
+      border-radius: 0;
+      white-space: nowrap;
+    }
     /* Button Styles */
     button {
       background-color: #5a9;
@@ -422,7 +444,10 @@
       <!-- Note Generation & Custom Prompt -->
       <div class="bottom-half">
         <div class="column">
-          <h3 id="noteGenerationTitle">Note Generation</h3>
+          <div class="section-title">
+            <h3 id="noteGenerationTitle">Note Generation</h3>
+            <span class="badge" id="gptBadge" aria-label="New model">(New GPT-5)</span>
+          </div>
           <button id="generateNoteButton">Generate Note</button>
           <div id="noteTimer" class="timer">Note Generation Timer: 0 sec</div>
           <textarea id="generatedNote" placeholder="Generated note will appear here..."></textarea>
