@@ -6,28 +6,7 @@
 <script src="path/to/your/recording.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <!-- 1) Load Google’s Funding Choices library -->
- <script async src="https://fundingchoicesmessages.google.com/i/pub-3747901131960450?ers=1"></script>
-
- <!-- 2) Immediately signal that Funding Choices is running -->
- <script>
-    (function() {
-      function signalGooglefcPresent() {
-        if (!window.frames['googlefcPresent']) {
-          if (document.body) {
-            const iframe = document.createElement('iframe');
-            iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
-            iframe.style.display = 'none';
-            iframe.name = 'googlefcPresent';
-            document.body.appendChild(iframe);
-          } else {
-            setTimeout(signalGooglefcPresent, 0);
-          }
-        }
-      }
-      signalGooglefcPresent();
-    })();
-  </script>  <title id="page-title-transcribe">Transcribe Notes – AI Medical Transcription & Clinical Notes for Doctors</title>
+<title id="page-title-transcribe">Transcribe Notes – AI Medical Transcription & Clinical Notes for Doctors</title>
   <!-- Meta description for crawlers -->
   <meta name="description"
         content="Secure, AI-powered medical transcription and clinical note generation for healthcare professionals. Ideal for documenting hypertension, diabetes, COPD, and medication regimens." />
@@ -605,4 +584,5 @@
 </script>
 </body>
 </html>
+
 
