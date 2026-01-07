@@ -10,7 +10,11 @@ export const indexTranslations = {
   guideButton: "Guide API – Mode d'emploi",
   securityButton: "Sécurité",
   aboutButton: "À propos",
-  adRevenueMessage: "Comme ce site est gratuit et financé uniquement par la publicité, veuillez accepter les publicités personnalisées afin de soutenir le service.",
+  adRevenueMessage: `Nouvelle version disponible :
+Une nouvelle version de l’application est maintenant disponible. Vous pouvez toujours utiliser les mêmes fonctionnalités qu’auparavant avec une clé API OpenAI pour la transcription (parole en texte) et la génération de notes.
+
+Plus de modèles et une meilleure confidentialité :
+Dans la nouvelle version, vous pouvez également choisir parmi plusieurs autres modèles de transcription et de génération de notes, y compris des options 100 % conformes au RGPD.`,
   securityModalHeading: "Confidentialité",
 securityModalText: 
 `<strong>Confidentialité et Traitement des données</strong><br><br>
