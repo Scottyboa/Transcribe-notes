@@ -10,8 +10,12 @@ export const indexTranslations = {
   guideButton: "API-guide – Slik bruker du den",
   securityButton: "Sikkerhet",
   aboutButton: "Om",
-  adRevenueMessage: "Siden dette nettstedet er gratis å bruke og utelukkende finansieres av annonseinntekter, setter vi stor pris på om du godtar annonser for å støtte tjenesten.",
-  
+ adRevenueMessage: `Ny versjon tilgjengelig:
+En ny versjon av appen er nå tilgjengelig. Du kan fortsatt bruke de samme funksjonene som før med OpenAI API-nøkkel for tale-til-tekst og notatgenerering.
+
+Flere modeller og bedre personvern:
+I den nye versjonen kan du også velge mellom en rekke andre tale-til-tekst- og notatgenereringsmodeller, inkludert alternativer som er 100 % GDPR-kompatible.`,
+    
   securityModalHeading: "Personvern",
   securityModalText: `
 <strong>Personvern og Databehandling</strong><br><br>
