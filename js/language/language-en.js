@@ -8,7 +8,11 @@ export const indexTranslations = {
   guideButton: "API guide - How to use",
   securityButton: "Security",
   aboutButton: "About",
-  adRevenueMessage: "As this website is free to use and relies solely on ad revenue, please consent to ads to help support the service.",
+  adRevenueMessage: `New version available:
+A new version of the app is now available. You can still use the same features as before with an OpenAI API key for speech-to-text and note generation.
+
+More models and better privacy:
+In the new version, you can also choose from a range of other speech-to-text and note-generation models, including options that are 100% GDPR-compliant.`,
   securityModalHeading: "Privacy",
 securityModalText: `
 <strong>Privacy and Data Processing</strong><br><br>
