@@ -10,7 +10,11 @@ export const indexTranslations = {
   guideButton: "API-Anleitung – So nutzen Sie es",
   securityButton: "Sicherheit",
   aboutButton: "Über",
-  adRevenueMessage: "Da diese Website kostenlos genutzt werden kann und ausschließlich auf Werbeeinnahmen angewiesen ist, stimmen Sie bitte personalisierter Werbung zu, um den Dienst zu unterstützen.",
+  adRevenueMessage: `Neue Version verfügbar:
+Eine neue Version der App ist jetzt verfügbar. Du kannst weiterhin dieselben Funktionen wie zuvor mit einem OpenAI-API-Schlüssel für Sprache-zu-Text und die Notizgenerierung nutzen.
+
+Mehr Modelle und besserer Datenschutz:
+In der neuen Version kannst du außerdem aus einer Reihe weiterer Modelle für Sprache-zu-Text und Notizgenerierung wählen, einschließlich Optionen, die zu 100 % DSGVO-konform sind.`,
   securityModalHeading: "Datenschutz",
 securityModalText: 
 `<strong>Datenschutz und Datenverarbeitung</strong><br><br>
