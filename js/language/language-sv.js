@@ -10,7 +10,11 @@ export const indexTranslations = {
   guideButton: "Hur du använder",
   securityButton: "Integritet",
   aboutButton: "Om",
-  adRevenueMessage: "Eftersom denna webbplats är gratis att använda och enbart finansieras genom annonsintäkter, vänligen godkänn annonser för att stödja tjänsten.",
+  adRevenueMessage: `Ny version tillgänglig:
+En ny version av appen finns nu tillgänglig. Du kan fortfarande använda samma funktioner som tidigare med OpenAI API-nyckel för tal-till-text och anteckningsgenerering.
+
+Fler modeller och bättre integritet:
+I den nya versionen kan du också välja mellan en rad andra modeller för tal-till-text och anteckningsgenerering, inklusive alternativ som är 100 % GDPR-kompatibla.`,
 
 securityModalHeading: "Integritet",
 securityModalText: `
