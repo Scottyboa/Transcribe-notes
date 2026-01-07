@@ -10,7 +10,11 @@ export const indexTranslations = {
   guideButton: "Guida API - Come utilizzare",
   securityButton: "Sicurezza",
   aboutButton: "Informazioni",
-  adRevenueMessage: "Poiché questo sito è gratuito e si basa esclusivamente sui ricavi pubblicitari, ti preghiamo di acconsentire alla visualizzazione di annunci personalizzati per sostenere il servizio.",
+  adRevenueMessage: `Nuova versione disponibile:
+Una nuova versione dell’app è ora disponibile. Puoi continuare a utilizzare le stesse funzionalità di prima con la chiave API OpenAI per la conversione da voce a testo e la generazione di note.
+
+Più modelli e migliore privacy:
+Nella nuova versione puoi anche scegliere tra una serie di altri modelli per la conversione da voce a testo e la generazione di note, inclusi opzioni conformi al GDPR al 100%.`,
   securityModalHeading: "Privacy",
 securityModalText: 
 `<strong>Privacy e Trattamento dei Dati</strong><br><br>
