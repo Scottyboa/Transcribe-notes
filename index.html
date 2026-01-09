@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script type='text/javascript' src='https://transcribe-notes.netlify.app/7Snkj018zmyiKbFf3D3aDOKwck3-vzikcLJxDn6RHWV31yaNdmpIKmZzhq2mvUG76dGP6IEgeosM9b4qDKvAKIg3wzJTertjXSs2FfzYE2gO-uOtNd5-py1r2VHPXZM1mbefVFdyMM3KfTOrwdBcSBuJP-Qa5wtY_EBti0ZGF-T4EnW4qDhXDz8gpzGkedE7vMQ61HPwSlQ9vs7LXFDKIW70vvwQIIKhXAYvZ0Zmi_cQXFAMmdZVghdvP1Uq4kdptI4XjInHQUC5PaO0jqTun1NdEzBuxCc3zABt5a_Q8wO4dP3WvpjA1tmsjgouzfPhmYGGQOanuBp_3l4nCvrlMPONwtyYK9rTkU1IVHuyo_Ekdsqt4ux8PKOy0hBwTNiQnIfmSYwooYzbzMsJnh712puQ8lbe7SxT2_lIa9TbGiPLbYuHBlu08EofzbnfKDxhth_iQbWLcSNHVI1iU_EHTuKXmP9O1aQc6d9RfNR0VHua'></script>
   <meta property="og:title" content="Transcribe Notes">
   <meta property="og:description" content="Secure AI-powered transcription and note generation for healthcare consultation. No subscription, just pay per use.">
   <meta property="og:image" content="https://transcribe-notes.netlify.app/Preview.png">
@@ -251,8 +251,11 @@
     <div id="offerText"></div>
   <!-- New: Link to beta version -->
   <p style="margin-top:10px;">
-   <a id="tn2Link" href="https://tn-beta.netlify.app" style="color: #0066ff; text-decoration: underline;">
-      Ny beta-versjon(klikk her)
+    <a href="https://tn-beta.netlify.app"
+       target="_blank"
+       rel="noopener noreferrer"
+       style="color: #0066ff; text-decoration: underline;">
+      Transcribe Notes 2.0
     </a>
   </p>
   </div>
@@ -302,39 +305,8 @@
     }
 
   document.addEventListener("DOMContentLoaded", function() {
-   const enterTranscriptionBtn = document.getElementById("enterTranscriptionBtn");
-   const apiKeyInput = document.getElementById("apiKeyInput");
-
-    // --- Analytics: log clicks to Google Sheet (Apps Script doGet) ---
-    const baseUrl = "https://script.google.com/macros/s/AKfycbz3bpMrPJXAtyNCIoj6h2v3GewLRF90dQeEpC81F_m9rNClLVMUuQEGVO8yinlhssc/exec";
-    let visitorId = localStorage.getItem("visitorId");
-    if (!visitorId) {
-      visitorId = (crypto.randomUUID && crypto.randomUUID()) || Math.random().toString(36).slice(2);
-      localStorage.setItem("visitorId", visitorId);
-    }
-    function logEvent(params = {}) {
-      const qs = new URLSearchParams({
-        visitorId,
-        page: window.location.pathname,
-        userAgent: navigator.userAgent,
-        referrer: document.referrer,
-        ...params,
-      }).toString();
-      const url = `${baseUrl}?${qs}`;
-      // Fire-and-forget GET request; do not block navigation
-      try { fetch(url, { mode: "no-cors", keepalive: true }); } catch (_) {}
-      const img = new Image(); // fallback for older browsers
-      img.src = url;
-    }
-
-    // Transcribe Notes 2.0 link click (beta)
-    const tn2Link = document.getElementById("tn2Link");
-    if (tn2Link) {
-      tn2Link.addEventListener("click", () => {
-        logEvent({ action: "TN 2.0 redir" });
-      });
-    }
-
+    const enterTranscriptionBtn = document.getElementById("enterTranscriptionBtn");
+    const apiKeyInput = document.getElementById("apiKeyInput");
     if (enterTranscriptionBtn && apiKeyInput) {
       enterTranscriptionBtn.addEventListener("click", () => {
         const apiKey = apiKeyInput.value.trim();
